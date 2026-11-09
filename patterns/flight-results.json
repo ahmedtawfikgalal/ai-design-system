@@ -1,0 +1,91 @@
+{
+  "$schema": "../schemas/pattern.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "flight-results",
+  "name": "Flight Results",
+  "kind": "page",
+  "description": "Search summary with Modify, a ±3-day date strip, and the list of flight result cards with expandable fare options.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Card structure: A · unverified. Fare family names: Official.",
+    "confidence": "inferred",
+    "mixed": true
+  },
+  "structure": "[Search summary bar: DXB → LHR · 12 Dec · 1 adult · Economy   [Modify]]\n[Date strip: ±3 days with lowest fare per day]                  ← A · unverified (\"lowest price preview per day\")\n[Results list]\n  [FlightResultCard ×n]\n     [Origin: time / IATA / city] [FlightPath: duration · stops] [Destination: time / IATA / city]\n     [AircraftBadge] [from-price]   [Select ▼]\n     [FareOptions (expanded): Economy Saver | Flex | Flex Plus | … ]",
+  "regions": [
+    {
+      "name": "Search summary bar",
+      "description": "Route, date, passengers, cabin and a Modify action (Button ghost) that opens the FlightSearchWidget overlay.",
+      "components": [
+        "button",
+        "flight-search-widget"
+      ]
+    },
+    {
+      "name": "Date strip",
+      "description": "±3 days with the lowest fare per day.",
+      "components": [
+        "date-strip"
+      ],
+      "source": {
+        "tag": "A · unverified (\"lowest price preview per day\")",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "Results list",
+      "description": "FlightResultCard ×n, each with FlightSegment, AircraftBadge, from-price and Select ▼ → FareOptions.",
+      "components": [
+        "flight-result-card",
+        "fare-options",
+        "flight-segment",
+        "badge",
+        "price-display"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "sm",
+      "behavior": "Cards stack and the fare options open below the card.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "breakpoint": "md+",
+      "behavior": "The card is horizontal.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "rules": [
+    "Fare family names (Official): Saver, Flex, Flex Plus for Economy; Special, Saver, Flex, Flex Plus for Business; First. File A's names (\"Economy Special\", \"Economy Flex\"…) are not used.",
+    "Choosing a fare dispatches SELECT_FARE (booking-state)."
+  ],
+  "patterns": [
+    "booking-state"
+  ],
+  "sources": [
+    {
+      "doc": "patterns",
+      "section": "pattern-2--flight-results"
+    },
+    {
+      "doc": "inventory",
+      "section": "fareoptions-fare-matrix"
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "seat-map",
+  "name": "SeatMap",
+  "category": "seat-selection",
+  "description": "The seat map for one segment (one physical flight), drawn from aircraft-configuration data, with a selection panel, a legend and a list-view alternative.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Layouts: A · unverified. Seat types and fees: Official. Interaction, pricing responsibility and accessibility: Rec (D16, D17, D18).",
+    "confidence": "inferred",
+    "mixed": true,
+    "decisions": [
+      "D16",
+      "D17",
+      "D18"
+    ]
+  },
+  "props": [
+    {
+      "name": "segmentId",
+      "type": "string",
+      "required": true,
+      "description": "The flight this map belongs to. One SeatMap per segment."
+    },
+    {
+      "name": "cabinLayout",
+      "type": "{ rows: { number, exit?, wing?, seats: (SeatData | 'aisle' | 'gap')[] }[] }",
+      "required": true,
+      "description": "From aircraft-configuration data. Examples (A · unverified): A380 Economy 3-4-3, 777 Business 1-2-1 / 2-3-2, A380 First 1-1-1."
+    },
+    {
+      "name": "seatPrices",
+      "type": "Record<seatId, Record<passengerId, Money | 'included'>>",
+      "required": true,
+      "description": "From the seat-map API. The server applies fare, Skywards tier and child rules. Never computed on the client."
+    },
+    {
+      "name": "passengers",
+      "type": "Passenger[]",
+      "required": true,
+      "description": "Passengers who need a seat (lap infants excluded)."
+    },
+    {
+      "name": "activePassengerId",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "selections",
+      "type": "Record<passengerId, seatId | null>",
+      "required": true,
+      "description": "seats[segmentId] from the booking state."
+    },
+    {
+      "name": "previewSeatId",
+      "type": "string | null",
+      "description": "The seat shown in the selection panel."
+    },
+    {
+      "name": "onPreview",
+      "type": "(seatId: string) => void",
+      "description": "Tap or click. Updates the selection panel only."
+    },
+    {
+      "name": "onConfirm",
+      "type": "(seatId: string) => void",
+      "description": "Selection panel \"Confirm seat\". Dispatches SELECT_SEAT with segmentId and re-quotes."
+    }
+  ],
+  "states": [
+    {
+      "name": "seat conflict",
+      "visual": "The server rejects SELECT_SEAT because the seat was just taken: the seat switches to occupied in place and availability refreshes; the selection panel stays open with an inline warning (\"34K was just taken. Choose another seat.\") and no Confirm button; the passenger's previous seat (if any) stays selected.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "interaction": [
+    "The legend is shown above the map, so types and prices are known before any tap.",
+    "Tap previews a seat; Confirm seat (in the selection panel) commits it after the server accepts it.",
+    "Prices are never shown only on hover.",
+    "A connecting journey has one seat map per flight, shown as tabs."
+  ],
+  "accessibility": {
+    "pattern": "Grid",
+    "requirements": [
+      "role=\"grid\", named e.g. \"Seat map, Emirates EK1, Dubai to London, Economy\". Each cabin row is role=\"row\" with a row header (the row number). Aisles and gaps are empty cells hidden from screen readers.",
+      "Exit rows and wings are given in the row header (\"Row 34, exit row\").",
+      "Offer a list view (\"Choose from a list\") that shows available seats grouped by type and price, with filters.",
+      "The map may pan and zoom on small screens, but must not trap the user in the pan gesture."
+    ],
+    "keyboard": [
+      "One tab stop for the whole map (roving tabindex).",
+      "Arrow keys move between seats and skip aisles. Home / End go to the first or last seat in the row. Page Up / Page Down move 5 rows.",
+      "Enter or Space on an available seat previews it.",
+      "Tab from the map goes to the selection panel and its Confirm seat button.",
+      "After confirmation, focus returns to the seat, now announced as \"selected\".",
+      "In Arabic, Left and Right follow the visual direction."
+    ],
+    "announcements": [
+      "Preview (polite): \"34K previewed, Extra Legroom, USD 45. Press Tab to confirm.\"",
+      "Conflict (assertive): \"34K was just taken. Choose another seat.\" Focus moves to the message; tabbing back returns to the nearest available seat."
+    ],
+    "wcag": [
+      "2.1.1",
+      "2.4.3",
+      "4.1.2",
+      "4.1.3",
+      "1.4.10"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "lg+",
+      "behavior": "Split screen: map + selection panel (the panel takes the booking sidebar column; the total moves to the top of the panel).",
+      "source": {
+        "tag": "A · unverified (split screen); sidebar handling: Rec",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    },
+    {
+      "breakpoint": "below-lg",
+      "behavior": "Full-screen overlay; the selection panel is a bottom sheet.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "rtl": [
+    "The grid mirrors with the page; arrow keys follow the visual direction."
+  ],
+  "composes": [
+    "seat",
+    "text",
+    "seat-legend",
+    "overlay",
+    "button"
+  ],
+  "rules": [
+    "Seat layouts are never hardcoded in components; they come from aircraft-configuration data.",
+    "Official notes: Preferred seats are at the front of the cabin and on some A380 upper decks. Twin seats are rows of two at the back of 777s and on some A380 upper decks. Extra Legroom seats are at exit rows.",
+    "Row numbers use Text caption."
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "seatmap"
+    },
+    {
+      "doc": "states",
+      "section": "seat"
+    },
+    {
+      "doc": "states",
+      "section": "when-the-seat-is-taken-by-someone-else"
+    },
+    {
+      "doc": "accessibility",
+      "section": "seat--seatmap"
+    },
+    {
+      "doc": "patterns",
+      "section": "pattern-4--seat-selection"
+    },
+    {
+      "doc": "state-architecture",
+      "section": "actions"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "The selection panel and the list view are described but not specified as components (no props or states).",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "seatmap"
+        },
+        {
+          "doc": "accessibility",
+          "section": "seat--seatmap"
+        }
+      ]
+    },
+    {
+      "description": "inventory.md has an empty duplicated prop-table header before the SeatMap prop table (formatting only).",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "seatmap"
+        }
+      ]
+    },
+    {
+      "description": "No seat-map or seat-selection API contract is defined; only the client responsibilities are.",
+      "refs": [
+        {
+          "doc": "state-architecture",
+          "section": "derived-values-client-side-display-logic-only"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "date-field",
+  "name": "DateField",
+  "layer": "composite",
+  "category": "input",
+  "inDesignSystem": true,
+  "description": "A date or date-range picker: a read-only TextField trigger that opens a calendar dialog, with an optional per-day fare slot.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec; single/range by trip type and lowest-fare-per-day slot: A · unverified",
+    "confidence": "proposed",
+    "mixed": true,
+    "decisions": [
+      "D15"
+    ]
+  },
+  "props": [
+    {
+      "name": "mode",
+      "type": "'single' | 'range'",
+      "required": true,
+      "description": "One-way uses single; return uses range.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "value",
+      "type": "ISODate | [ISODate, ISODate]",
+      "required": true,
+      "description": "'YYYY-MM-DD' strings, local to the departure airport. Not JS Date, which carries a time zone and can shift the day by one."
+    },
+    {
+      "name": "onChange",
+      "type": "(value: ISODate | [ISODate, ISODate]) => void",
+      "required": true
+    },
+    {
+      "name": "min",
+      "type": "ISODate",
+      "description": "Booking window start."
+    },
+    {
+      "name": "max",
+      "type": "ISODate",
+      "description": "Booking window end."
+    },
+    {
+      "name": "months",
+      "type": "1 | 2",
+      "description": "2 on lg and up, 1 on smaller screens."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "required": true,
+      "description": "Month and weekday names, and the first day of the week. Arabic: Gregorian calendar, Latin digits (D15)."
+    },
+    {
+      "name": "renderDayMeta",
+      "type": "(date: ISODate) => ReactNode | null",
+      "description": "Slot for the lowest fare per day. The feature layer passes in PriceDisplay size=\"sm\".",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "getDayMetaLabel",
+      "type": "(date: ISODate) => string | null",
+      "description": "Text version of the day meta for screen readers, e.g. \"from USD 899\"."
+    }
+  ],
+  "states": [
+    {
+      "name": "default",
+      "appliesTo": "day cell",
+      "visual": "body-md; fare meta in caption --color-text-subtle.",
+      "tokens": [
+        "--color-text-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "today",
+      "appliesTo": "day cell",
+      "visual": "1px --color-border-strong ring.",
+      "tokens": [
+        "--color-border-strong"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "hover",
+      "appliesTo": "day cell",
+      "visual": "--color-bg-subtle.",
+      "tokens": [
+        "--color-bg-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "selected",
+      "appliesTo": "day cell (single, range start or end)",
+      "visual": "--color-action-primary fill, --color-text-on-brand.",
+      "tokens": [
+        "--color-action-primary",
+        "--color-text-on-brand"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "in-range",
+      "appliesTo": "day cell",
+      "visual": "--color-bg-brand-subtle.",
+      "tokens": [
+        "--color-bg-brand-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "lowest-fare",
+      "appliesTo": "day cell",
+      "visual": "Fare meta in --color-text-success.",
+      "tokens": [
+        "--color-text-success"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "disabled",
+      "appliesTo": "day cell (past, outside the window)",
+      "visual": "--color-text-disabled, not clickable.",
+      "tokens": [
+        "--color-text-disabled"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "accessibility": {
+    "pattern": "Date picker dialog",
+    "requirements": [
+      "Trigger: a button showing the chosen date(s), named e.g. \"Departure date, 12 December 2026\".",
+      "The calendar opens in a dialog containing one grid per month. Each day is a gridcell with a button.",
+      "Each day's name is the full date plus its state and fare: \"Friday 12 December 2026, selected, from USD 899\" (getDayMetaLabel).",
+      "Day cells are at least 44×44.",
+      "Recommended: also accept a typed date in the locale format. Not required for AA, because the grid is fully keyboard operable."
+    ],
+    "keyboard": [
+      "Arrows move by day or week.",
+      "Page Up / Page Down move by month.",
+      "Home / End go to the start or end of the week.",
+      "Enter selects. Escape closes.",
+      "In Arabic, Left and Right follow the visual direction."
+    ],
+    "announcements": [
+      "Range mode: after the start date, the dialog announces \"Select return date\"."
+    ],
+    "wcag": [
+      "2.1.1",
+      "2.5.8",
+      "4.1.2"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "lg+",
+      "behavior": "Two months side by side."
+    },
+    {
+      "breakpoint": "below-lg",
+      "behavior": "One month."
+    }
+  ],
+  "rtl": [
+    "Gregorian calendar; week start from Intl.Locale(...).getWeekInfo() (Monday for ar-AE). Never hardcode it.",
+    "Latin digits; month and weekday names from Intl.DateTimeFormat with the page locale.",
+    "The grid mirrors; arrow keys follow the visual direction."
+  ],
+  "composes": [
+    "text-field",
+    "overlay",
+    "price-display"
+  ],
+  "tokens": [
+    "--color-action-primary",
+    "--color-text-on-brand",
+    "--color-bg-brand-subtle",
+    "--color-border-strong",
+    "--color-text-disabled",
+    "--color-text-subtle",
+    "--color-text-success",
+    "--color-bg-subtle",
+    "--body-md-size",
+    "--caption-size"
+  ],
+  "sources": [
+    {
+      "doc": "tier-2-composites",
+      "section": "datefield"
+    },
+    {
+      "doc": "states",
+      "section": "datefield-day-cell"
+    },
+    {
+      "doc": "accessibility",
+      "section": "datefield"
+    },
+    {
+      "doc": "rtl-and-arabic",
+      "section": "4-numbers-dates-prices"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "The 44×44 day-cell minimum has no token.",
+      "refs": [
+        {
+          "doc": "tier-2-composites",
+          "section": "datefield"
+        }
+      ]
+    }
+  ]
+}

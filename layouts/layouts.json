@@ -1,0 +1,340 @@
+{
+  "$schema": "../schemas/manifest.schema.json#/$defs/layouts",
+  "schemaVersion": "1.0.0",
+  "description": "Breakpoints, grid, containers and per-breakpoint adaptations. Mobile-first; media queries use em so layouts follow the user's default font size. Pixel values assume the 16px default.",
+  "breakpoints": [
+    {
+      "id": "sm",
+      "minWidth": "0",
+      "range": "0 – 767px (designs start at 320px)",
+      "columns": 4,
+      "gutter": "16px",
+      "pageMargin": "16px",
+      "contentWidth": "fluid",
+      "source": {
+        "tag": "A · unverified (range, columns). Rec (gutter, margin).",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    },
+    {
+      "id": "md",
+      "minWidth": "48em",
+      "range": "768 – 1023px",
+      "columns": 8,
+      "gutter": "24px",
+      "pageMargin": "32px",
+      "contentWidth": "fluid",
+      "source": {
+        "tag": "A · unverified. Rec.",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    },
+    {
+      "id": "lg",
+      "minWidth": "64em",
+      "range": "1024 – 1439px",
+      "columns": 12,
+      "gutter": "24px",
+      "pageMargin": "40px",
+      "contentWidth": "fluid, up to 1280px",
+      "source": {
+        "tag": "A · unverified. Rec.",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    },
+    {
+      "id": "xl",
+      "minWidth": "90em",
+      "range": "1440px+",
+      "columns": 12,
+      "gutter": "32px",
+      "pageMargin": "80px minimum; grows on wider screens",
+      "contentWidth": "1280px, centred",
+      "source": {
+        "tag": "A · unverified. Max width: Rec · approved over Live ~1400px.",
+        "confidence": "inferred",
+        "mixed": true,
+        "approved": true,
+        "decisions": [
+          "D12",
+          "D22"
+        ]
+      }
+    }
+  ],
+  "containers": [
+    {
+      "token": "--container-max",
+      "value": "1280px (80rem) of content; the container adds --page-margin on each side",
+      "source": {
+        "tag": "A · unverified, Rec · approved (D12)",
+        "confidence": "inferred",
+        "mixed": true,
+        "approved": true,
+        "decisions": [
+          "D12"
+        ]
+      }
+    },
+    {
+      "token": "--container-narrow",
+      "value": "640px (40rem)",
+      "use": "Long-form text, single-column forms",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "grid": {
+    "tokens": {
+      "columns": "--grid-columns",
+      "gutter": "--grid-gutter",
+      "pageMargin": "--page-margin"
+    },
+    "layoutStrategyCss": "/* Mobile base */\n.container {\n  box-sizing: border-box;\n  padding-inline: var(--page-margin);\n  margin-inline: auto;\n  max-width: calc(var(--container-max) + 2 * var(--page-margin));   /* content never exceeds 1280px */\n}\n.grid      { display: grid; grid-template-columns: repeat(var(--grid-columns), 1fr); column-gap: var(--grid-gutter); }\n.booking   { display: block; }\n\n/* md — tokens.css switches --grid-columns to 8, gutter 24, margin 32 */\n@media (min-width: 48em) { }\n\n/* lg — 12 columns, margin 40, persistent summary sidebar */\n@media (min-width: 64em) {\n  .booking { display: grid; grid-template-columns: 8fr 4fr; column-gap: var(--grid-gutter); }\n  .booking__summary { position: sticky; top: calc(48px + var(--space-6)); align-self: start; }\n}\n\n/* xl — gutter 32, margin 80 (tokens only) */\n@media (min-width: 90em) { }",
+    "columnMaths": [
+      {
+        "breakpoint": "sm",
+        "viewport": "375px",
+        "content": "343px",
+        "column": "(343 − 3×16) / 4 ≈ 73.8px"
+      },
+      {
+        "breakpoint": "md",
+        "viewport": "768px",
+        "content": "704px",
+        "column": "(704 − 7×24) / 8 = 67px"
+      },
+      {
+        "breakpoint": "lg",
+        "viewport": "1024px",
+        "content": "944px",
+        "column": "(944 − 11×24) / 12 ≈ 56.7px. Sidebar (4 cols) ≈ 299px."
+      },
+      {
+        "breakpoint": "lg",
+        "viewport": "1360px+",
+        "content": "1280px",
+        "column": "(1280 − 11×24) / 12 ≈ 84.7px"
+      },
+      {
+        "breakpoint": "xl",
+        "viewport": "1440px",
+        "content": "1280px",
+        "column": "(1280 − 11×32) / 12 ≈ 77.3px"
+      }
+    ]
+  },
+  "controlHeights": {
+    "tokens": [
+      "--control-height-sm",
+      "--control-height-md",
+      "--control-height-lg"
+    ],
+    "values": "40 / 48 / 56px",
+    "source": {
+      "tag": "Rec · approved (D23)",
+      "confidence": "proposed",
+      "approved": true,
+      "decisions": [
+        "D23"
+      ]
+    }
+  },
+  "adaptations": [
+    {
+      "from": "sm",
+      "to": "md",
+      "element": "Global nav",
+      "before": "Black bar (Live), menu behind a toggle",
+      "after": "Slide-over menu (A)"
+    },
+    {
+      "from": "sm",
+      "to": "md",
+      "element": "Flight search widget",
+      "before": "Opens as a full-screen overlay",
+      "after": "Inline, fields wrap in 2 rows (Rec)"
+    },
+    {
+      "from": "sm",
+      "to": "md",
+      "element": "Flight result cards",
+      "before": "Stacked vertically; fare matrix below the card",
+      "after": "Horizontal layout; condensed flight-path bar"
+    },
+    {
+      "from": "sm",
+      "to": "md",
+      "element": "Destination grid",
+      "before": "1 column",
+      "after": "2 columns"
+    },
+    {
+      "from": "sm",
+      "to": "md",
+      "element": "Booking CTA",
+      "before": "Sticky bottom action bar (--elevation-1-up)",
+      "after": "Sticky bottom action bar (Rec)"
+    },
+    {
+      "from": "sm",
+      "to": "md",
+      "element": "Seat map",
+      "before": "Full-screen overlay",
+      "after": "Full-screen overlay (Rec)"
+    },
+    {
+      "from": "md",
+      "to": "lg",
+      "element": "Global nav",
+      "before": "Slide-over menu",
+      "after": "All menu items visible"
+    },
+    {
+      "from": "md",
+      "to": "lg",
+      "element": "Flight search widget",
+      "before": "2 rows",
+      "after": "Expanded single-row search bar"
+    },
+    {
+      "from": "md",
+      "to": "lg",
+      "element": "Destination grid",
+      "before": "2 columns",
+      "after": "4 columns (Live: 4 columns on desktop)"
+    },
+    {
+      "from": "md",
+      "to": "lg",
+      "element": "Seat map",
+      "before": "Full-screen overlay",
+      "after": "Split screen: map + selection details"
+    },
+    {
+      "from": "md",
+      "to": "lg",
+      "element": "Booking flow",
+      "before": "Summary at the bottom of the step, plus the sticky CTA bar",
+      "after": "Persistent sticky summary sidebar (8 / 4 columns). Moved here from xl (D21)."
+    },
+    {
+      "from": "md",
+      "to": "lg",
+      "element": "display-xl hero type",
+      "before": "Off (uses display-lg)",
+      "after": "On"
+    },
+    {
+      "from": "lg",
+      "to": "xl",
+      "element": "Grid gutter",
+      "before": "24px",
+      "after": "32px"
+    },
+    {
+      "from": "lg",
+      "to": "xl",
+      "element": "Page margin",
+      "before": "40px",
+      "after": "80px minimum, then centred"
+    }
+  ],
+  "adaptationsSource": {
+    "tag": "A · unverified unless tagged otherwise in the entry",
+    "confidence": "inferred"
+  },
+  "surfaceLayers": [
+    {
+      "layer": 0,
+      "name": "Page",
+      "rule": "#FFFFFF (alternate sections #F6F6F6), no shadow",
+      "tokens": [
+        "--color-bg-page",
+        "--color-bg-subtle"
+      ]
+    },
+    {
+      "layer": 1,
+      "name": "Card",
+      "rule": "#FFFFFF + 1px #D8D8D8 border, no shadow",
+      "tokens": [
+        "--color-bg-surface",
+        "--color-border-subtle",
+        "--elevation-0"
+      ]
+    },
+    {
+      "layer": 2,
+      "name": "Sticky",
+      "rule": "Header (black), summary aside, CTA bar",
+      "tokens": [
+        "--elevation-1",
+        "--elevation-1-up"
+      ]
+    },
+    {
+      "layer": 3,
+      "name": "Menus",
+      "rule": "Dropdowns, hovered cards",
+      "tokens": [
+        "--elevation-2"
+      ]
+    },
+    {
+      "layer": 4,
+      "name": "Popovers",
+      "rule": "Date and passenger pickers",
+      "tokens": [
+        "--elevation-3"
+      ]
+    },
+    {
+      "layer": 5,
+      "name": "Modals",
+      "rule": "Over --color-overlay-scrim",
+      "tokens": [
+        "--elevation-4",
+        "--color-overlay-scrim"
+      ]
+    }
+  ],
+  "surfaceLayersDiagram": "Layer 0 — Page:     #FFFFFF  (alternate sections #F6F6F6)\nLayer 1 — Card:     #FFFFFF + 1px #D8D8D8 border, no shadow\nLayer 2 — Sticky:   header (black), summary aside, CTA bar → --elevation-1\nLayer 3 — Menus:    --elevation-2\nLayer 4 — Popovers: --elevation-3\nLayer 5 — Modals:   --elevation-4 over --color-overlay-scrim",
+  "notes": [
+    "There is no breakpoint between 320px and 768px. Large phones (~430px) use the sm layout.",
+    "File A's breakpoints are unverified. Replace them if live-site CSS is captured later (Official gap: \"Inspect the live site's CSS\").",
+    "The sticky summary sidebar first appears at lg (1024px). Below that, the summary is a collapsible block plus the sticky CTA bar.",
+    "At lg the sidebar is about 300px wide, so BookingSummary uses FlightSegment density=\"compact\" there.",
+    "On the seat step, the seat selection panel takes the sidebar column, and the booking total moves to the top of that panel.",
+    "Official: Emirates designs mobile-first, and over 60% of web traffic was mobile (2020)."
+  ],
+  "ambiguities": [
+    {
+      "description": "No z-index scale exists for sticky header, CTA bar, popovers and modals; only elevation (shadow) layers are defined.",
+      "refs": [
+        {
+          "doc": "shadows",
+          "section": "surface-depth-model"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "doc": "breakpoints"
+    },
+    {
+      "doc": "patterns",
+      "section": "surface-layering-model"
+    },
+    {
+      "doc": "shadows",
+      "section": "surface-depth-model"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "seat-legend",
+  "name": "SeatLegend",
+  "category": "seat-selection",
+  "description": "Shown above the seat map: one row per seat type with its glyph and the price range for the active passenger on this flight, then the statuses.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Content and order documented; no props."
+    ]
+  },
+  "provenance": {
+    "tag": "Rec (D18)",
+    "confidence": "proposed",
+    "decisions": [
+      "D18"
+    ]
+  },
+  "rules": [
+    "One row per type: static Seat + type name + price range for the active passenger (\"Preferred · from USD 15\", or \"Included\").",
+    "Then the statuses: Selected, Occupied, Unavailable.",
+    "Each type shows its glyph (Preferred star, Extra Legroom arrows-vertical, Twin users).",
+    "Prices come from the seat-map API."
+  ],
+  "composes": [
+    "seat",
+    "text",
+    "price-display"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "seatlegend"
+    },
+    {
+      "doc": "states",
+      "section": "how-the-price-is-shown-works-without-hover"
+    }
+  ]
+}

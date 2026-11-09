@@ -1,0 +1,182 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "segmented-control",
+  "name": "SegmentedControl",
+  "layer": "composite",
+  "category": "input",
+  "inDesignSystem": true,
+  "description": "A group of 2–4 options that behaves as a radio group. Used for the trip-type selector \"Return / One way / Multi-city\" and view toggles.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec; trip-type options: A · unverified",
+    "confidence": "proposed",
+    "mixed": true
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "description": "Accessible name of the group, e.g. \"Trip type\"."
+    },
+    {
+      "name": "options",
+      "type": "{ value, label, icon? }[]",
+      "required": true,
+      "description": "2–4 options."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": true,
+      "description": "Controlled."
+    },
+    {
+      "name": "onChange",
+      "type": "(value: string) => void",
+      "required": true,
+      "description": "Controlled."
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md'",
+      "description": "32 / 40px."
+    },
+    {
+      "name": "tone",
+      "type": "'default' | 'inverse'",
+      "description": "inverse for use on photography or black."
+    }
+  ],
+  "states": [
+    {
+      "name": "default",
+      "appliesTo": "unselected segment",
+      "visual": "Transparent, --color-text-subtle.",
+      "tokens": [
+        "--color-text-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "hover",
+      "visual": "--color-text-default.",
+      "tokens": [
+        "--color-text-default"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "selected",
+      "visual": "--color-bg-surface, --color-text-strong, 2px bottom bar in --color-action-primary (mirrors the nav indicator).",
+      "tokens": [
+        "--color-bg-surface",
+        "--color-text-strong",
+        "--color-action-primary"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "focus-visible",
+      "visual": "Focus ring (--focus-ring-*).",
+      "tokens": [
+        "--focus-ring-color",
+        "--focus-ring-width",
+        "--focus-ring-offset"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "disabled",
+      "visual": "--color-text-disabled.",
+      "tokens": [
+        "--color-text-disabled"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "accessibility": {
+    "pattern": "Radio Group",
+    "requirements": [
+      "role=\"radiogroup\" named by label; each segment is role=\"radio\" with aria-checked.",
+      "One tab stop."
+    ],
+    "keyboard": [
+      "Arrow keys move and select (APG radio group).",
+      "In Arabic, Left and Right follow the visual direction."
+    ],
+    "wcag": [
+      "4.1.2",
+      "2.1.1"
+    ]
+  },
+  "rtl": [
+    "Segments flow in reading order; arrow keys follow the visual direction."
+  ],
+  "composes": [
+    "button"
+  ],
+  "tokens": [
+    "--color-bg-muted",
+    "--color-bg-surface",
+    "--color-text-subtle",
+    "--color-text-default",
+    "--color-text-strong",
+    "--color-text-disabled",
+    "--color-action-primary",
+    "--radius-control",
+    "--space-0-5",
+    "--focus-ring-color",
+    "--focus-ring-width",
+    "--focus-ring-offset"
+  ],
+  "rules": [
+    "Container --color-bg-muted, --radius-control, padding --space-0-5."
+  ],
+  "sources": [
+    {
+      "doc": "tier-2-composites",
+      "section": "segmentedcontrol"
+    },
+    {
+      "doc": "states",
+      "section": "segmentedcontrol"
+    },
+    {
+      "doc": "accessibility",
+      "section": "segmentedcontrol"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "Sizes 32 / 40px are not on the control-height token scale (40 / 48 / 56); 32px has no token.",
+      "refs": [
+        {
+          "doc": "tier-2-composites",
+          "section": "segmentedcontrol"
+        }
+      ]
+    }
+  ]
+}

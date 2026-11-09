@@ -1,0 +1,114 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "flight-search-widget",
+  "name": "FlightSearchWidget",
+  "category": "flight-search",
+  "description": "The flight search form: trip type, From / To with swap, dates, passengers and cabin, and the Search flights button. Used in the home hero and the \"Modify search\" overlay on results.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Props, composition and responsive layouts documented; no dedicated states or accessibility section (inherits from its parts)."
+    ]
+  },
+  "provenance": {
+    "tag": "A · unverified (search widget not captured from the live site)",
+    "confidence": "inferred"
+  },
+  "props": [
+    {
+      "name": "defaultTripType",
+      "type": "'return' | 'one-way' | 'multi-city'"
+    },
+    {
+      "name": "initialSearch",
+      "type": "BookingState['search'] | null",
+      "description": "Prefill when modifying a search."
+    },
+    {
+      "name": "layout",
+      "type": "'bar' | 'stacked' | 'overlay'",
+      "description": "bar on lg+, stacked on md, overlay (full screen) on sm."
+    },
+    {
+      "name": "onSubmit",
+      "type": "(search) => void",
+      "description": "Dispatches SET_SEARCH."
+    }
+  ],
+  "interaction": [
+    "Trip type drives which fields show: one-way uses DateField single, return uses range.",
+    "Multi-city repeats the From / To / Date row for each journey. The journey limit comes from config.",
+    "Swap button (⇄) between From and To: Button variant=\"secondary\" size=\"sm\" with icon arrows-left-right (A · unverified)."
+  ],
+  "responsive": [
+    {
+      "breakpoint": "sm",
+      "behavior": "Collapses to a single \"Search flights\" field that opens a full-screen overlay.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "breakpoint": "md",
+      "behavior": "Inline, fields wrap in 2 rows.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "breakpoint": "lg+",
+      "behavior": "Expanded single-row search bar.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "composes": [
+    "segmented-control",
+    "combobox",
+    "button",
+    "date-field",
+    "passenger-selector",
+    "overlay",
+    "card"
+  ],
+  "tokens": [
+    "--space-4",
+    "--space-2",
+    "--space-3",
+    "--elevation-3",
+    "--control-height-lg"
+  ],
+  "rules": [
+    "Trip-type control → fields gap --space-4. Gap between fields --space-2 on desktop (one bar) and --space-3 on mobile (stacked).",
+    "In the home hero it sits in a Card with --elevation-3, overlapping the bottom of the hero.",
+    "Search button: Button variant=\"primary\" size=\"lg\" (\"Search flights\"); fields use TextField size lg so they line up (D23)."
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "flightsearchwidget"
+    },
+    {
+      "doc": "patterns",
+      "section": "pattern-1--home--search-hero"
+    },
+    {
+      "doc": "breakpoints",
+      "section": "what-changes-per-breakpoint"
+    },
+    {
+      "doc": "spacing",
+      "section": "flight-search-widget"
+    }
+  ]
+}

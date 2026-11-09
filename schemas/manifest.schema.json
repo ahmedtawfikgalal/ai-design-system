@@ -1,0 +1,526 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fly-emirates-design-spec.invalid/schemas/manifest.schema.json",
+  "title": "Package manifest (and the index, layout and reference files it points to)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "name",
+    "version",
+    "description",
+    "disclaimer",
+    "vocabulary",
+    "resources",
+    "counts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "$ref": "common.defs.json#/$defs/schemaVersion"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+"
+    },
+    "description": {
+      "type": "string"
+    },
+    "disclaimer": {
+      "type": "string"
+    },
+    "vocabulary": {
+      "type": "object",
+      "required": [
+        "confidence",
+        "sourceTags",
+        "status",
+        "layers"
+      ],
+      "properties": {
+        "confidence": {
+          "type": "object"
+        },
+        "sourceTags": {
+          "type": "object"
+        },
+        "status": {
+          "type": "object"
+        },
+        "layers": {
+          "type": "object"
+        }
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "path",
+          "mediaType",
+          "description"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "common.defs.json#/$defs/id"
+          },
+          "path": {
+            "type": "string"
+          },
+          "mediaType": {
+            "enum": [
+              "application/json",
+              "text/css",
+              "text/markdown",
+              "application/schema+json",
+              "font/woff2",
+              "text/plain"
+            ]
+          },
+          "schema": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "pathTemplate": {
+            "type": "string",
+            "description": "For collections: path with {id} placeholder"
+          }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "retrieval": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notImplemented": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "componentIndex": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "components",
+        "aliases",
+        "notComponents"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "$ref": "common.defs.json#/$defs/schemaVersion"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "layer",
+              "category",
+              "inDesignSystem",
+              "status",
+              "path",
+              "summary"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "common.defs.json#/$defs/id"
+              },
+              "name": {
+                "type": "string"
+              },
+              "layer": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "inDesignSystem": {
+                "type": "boolean"
+              },
+              "status": {
+                "$ref": "common.defs.json#/$defs/specStatus"
+              },
+              "confidence": {
+                "$ref": "common.defs.json#/$defs/confidence"
+              },
+              "path": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "composes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "usedBy": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "patterns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tokenCount": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "target",
+              "reason"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "target": {
+                "$ref": "common.defs.json#/$defs/id"
+              },
+              "preset": {
+                "$ref": "common.defs.json#/$defs/id"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "notComponents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "reason"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "source": {
+                "$ref": "common.defs.json#/$defs/sourceRef"
+              }
+            }
+          }
+        }
+      }
+    },
+    "patternIndex": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "patterns"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "$ref": "common.defs.json#/$defs/schemaVersion"
+        },
+        "patterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "kind",
+              "status",
+              "path",
+              "summary",
+              "components"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "common.defs.json#/$defs/id"
+              },
+              "name": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "status": {
+                "$ref": "common.defs.json#/$defs/specStatus"
+              },
+              "path": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "components": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "patterns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "layouts": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "breakpoints",
+        "containers",
+        "grid",
+        "adaptations",
+        "surfaceLayers",
+        "sources"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "$ref": "common.defs.json#/$defs/schemaVersion"
+        },
+        "breakpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "minWidth",
+              "columns",
+              "source"
+            ]
+          }
+        },
+        "containers": {
+          "type": "array"
+        },
+        "grid": {
+          "type": "object"
+        },
+        "adaptations": {
+          "type": "array"
+        },
+        "surfaceLayers": {
+          "type": "array"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "common.defs.json#/$defs/sourceRef"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "documents",
+        "sourceTags",
+        "decisions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "$ref": "common.defs.json#/$defs/schemaVersion"
+        },
+        "note": {
+          "type": "string"
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "path",
+              "title",
+              "kind",
+              "sha256"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "common.defs.json#/$defs/id"
+              },
+              "path": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "specification",
+                  "token-documentation",
+                  "token-source",
+                  "research",
+                  "decision-log",
+                  "audit"
+                ]
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "sourceTags": {
+          "type": "object"
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "text",
+              "status"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^D[0-9]+$"
+              },
+              "text": {
+                "type": "string"
+              },
+              "status": {
+                "const": "agreed"
+              },
+              "date": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tokenValues": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "tokens"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "$comment": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "$ref": "common.defs.json#/$defs/schemaVersion"
+        },
+        "tokens": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.defs.json#/$defs/cssVar"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "value",
+              "confidence"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "resolved": {
+                "type": "string"
+              },
+              "md": {
+                "type": "string"
+              },
+              "lg": {
+                "type": "string"
+              },
+              "xl": {
+                "type": "string"
+              },
+              "ar": {
+                "type": "string"
+              },
+              "confidence": {
+                "$ref": "common.defs.json#/$defs/confidence"
+              },
+              "modeConfidence": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "common.defs.json#/$defs/confidence"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

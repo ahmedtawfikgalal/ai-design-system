@@ -1,0 +1,353 @@
+{
+  "$schema": "../schemas/manifest.schema.json#/$defs/sources",
+  "schemaVersion": "1.0.0",
+  "note": "Provenance for every spec in this package. Paths are relative to the repository root and are NOT shipped in the npm package. sha256 values record the exact document versions this package was generated from; `npm run check` reports drift.",
+  "documents": [
+    {
+      "id": "overview",
+      "path": "design-system/proposal/overview.md",
+      "title": "Overview, source hierarchy and decision log",
+      "kind": "decision-log",
+      "sha256": "e0074bccb5c693161f643468a902a796af0c57adb24ff4caf43d73293ff27180"
+    },
+    {
+      "id": "scope-boundaries",
+      "path": "design-system/proposal/scope-boundaries.md",
+      "title": "Scope boundaries (design system vs feature layer)",
+      "kind": "specification",
+      "sha256": "a3dd735edbbafcc3bdd4d06b0268f1e4fa6a001e14f959ddd498f93f7917bcde"
+    },
+    {
+      "id": "tier-1-primitives",
+      "path": "design-system/proposal/tier-1-primitives.md",
+      "title": "Tier 1 primitives",
+      "kind": "specification",
+      "sha256": "0c3a7a98162a19ae05f07ebe557b506cfaec2eba9422cabe18d06e23e49e39ef"
+    },
+    {
+      "id": "tier-2-composites",
+      "path": "design-system/proposal/tier-2-composites.md",
+      "title": "Tier 2 composites",
+      "kind": "specification",
+      "sha256": "ee10109a513f522373fcb929275785f10bf3708134778e00e842ebffd888d324"
+    },
+    {
+      "id": "state-architecture",
+      "path": "design-system/proposal/state-architecture.md",
+      "title": "Booking state architecture",
+      "kind": "specification",
+      "sha256": "fedeec6d2cd22ab12132b653f28450af5ef6a4f42459c90580f63d81602dd410"
+    },
+    {
+      "id": "inventory",
+      "path": "design-system/components/inventory.md",
+      "title": "Component inventory (feature layer)",
+      "kind": "specification",
+      "sha256": "b80714bc8c34bb0d5f22d80c110c44e39c558bd74948e7fe1d2e2a91525a921b"
+    },
+    {
+      "id": "states",
+      "path": "design-system/components/states.md",
+      "title": "Component states",
+      "kind": "specification",
+      "sha256": "308afc23883be5c0e7c944fb65eef5dd8b55a0c715fea862763be58d18e34141"
+    },
+    {
+      "id": "accessibility",
+      "path": "design-system/components/accessibility.md",
+      "title": "Accessibility",
+      "kind": "specification",
+      "sha256": "4437e0ea19e8438106a8aeec1290515d4992835fcf1eda4753584070213aea05"
+    },
+    {
+      "id": "breakpoints",
+      "path": "design-system/layout/breakpoints.md",
+      "title": "Breakpoints, grid and containers",
+      "kind": "specification",
+      "sha256": "86da3d988244cfc461ef7a69602e43b7560d1dadc9dc4886c856855c0c2b80c1"
+    },
+    {
+      "id": "patterns",
+      "path": "design-system/layout/patterns.md",
+      "title": "Layout patterns",
+      "kind": "specification",
+      "sha256": "84e88ca485f8b0cdafd1aa486b5113536ad15b263d0ae2a940d6e2bcbd27d660"
+    },
+    {
+      "id": "rtl-and-arabic",
+      "path": "design-system/layout/rtl-and-arabic.md",
+      "title": "Right-to-left and Arabic",
+      "kind": "specification",
+      "sha256": "7f51ca70c756295520d730d0e9942c3b8ee8cb82e3eefd19bb637dcaf7995dae"
+    },
+    {
+      "id": "colors",
+      "path": "design-system/tokens/colors.md",
+      "title": "Colour tokens",
+      "kind": "token-documentation",
+      "sha256": "4dfd8ad0a4aa927641c2d5c6ca52862fa2f04f9f7c33138d51f336d67bc220d1"
+    },
+    {
+      "id": "typography",
+      "path": "design-system/tokens/typography.md",
+      "title": "Typography tokens",
+      "kind": "token-documentation",
+      "sha256": "76ef62e904e03704cd835e548b06ade949703678bfda33a2739178ab60f2629f"
+    },
+    {
+      "id": "spacing",
+      "path": "design-system/tokens/spacing.md",
+      "title": "Spacing tokens",
+      "kind": "token-documentation",
+      "sha256": "d0bc630d58c4e2985b2d6b3ab9590fe28d3624a6d4ca1c3c759f34313be8ce21"
+    },
+    {
+      "id": "border-radius",
+      "path": "design-system/tokens/border-radius.md",
+      "title": "Border radius and widths",
+      "kind": "token-documentation",
+      "sha256": "4920bd9bcfbaa734ef1dd41696a1efff2a81cdf117d690994894194d75d4ad0a"
+    },
+    {
+      "id": "shadows",
+      "path": "design-system/tokens/shadows.md",
+      "title": "Shadows (elevation)",
+      "kind": "token-documentation",
+      "sha256": "7740370a803463e6fbe24b571868a6c2c83825c05053381b247b0725626f59ea"
+    },
+    {
+      "id": "iconography",
+      "path": "design-system/tokens/iconography.md",
+      "title": "Iconography",
+      "kind": "token-documentation",
+      "sha256": "475cc5161ea06c811087a6e0f56d4702687f2e522b9ab87a3509112e61374054"
+    },
+    {
+      "id": "tokens-readme",
+      "path": "design-system/tokens/README.md",
+      "title": "How tokens are built",
+      "kind": "token-documentation",
+      "sha256": "1bd1e352fd116440a2f9d0719e8abfebc7982995b7319ee6b12bba0526161323"
+    },
+    {
+      "id": "tokens-json",
+      "path": "design-system/tokens/tokens.json",
+      "title": "Token source (W3C DTCG)",
+      "kind": "token-source",
+      "sha256": "d0233dd68e24efcc446af8ef083fecd7ac5ed6f6219917825b6f071306b3fe56"
+    },
+    {
+      "id": "tokens-css",
+      "path": "design-system/tokens/tokens.css",
+      "title": "Generated CSS custom properties",
+      "kind": "token-source",
+      "sha256": "0e68e946aab4277626eda5f93d1429482e5474e1ad11fbe37cdbfe5412eb1b89"
+    },
+    {
+      "id": "fonts-css",
+      "path": "design-system/tokens/fonts.css",
+      "title": "Arabic @font-face",
+      "kind": "token-source",
+      "sha256": "d5280f332cc5c4b89c11c4df80e3e6cc0426542a0afb4972e7ecda35d1948007"
+    },
+    {
+      "id": "research-live",
+      "path": "design-system/media/emirates-brand-research.md",
+      "title": "Research: live-site extraction and Official sources (\"Live\", \"Official\")",
+      "kind": "research",
+      "sha256": "a4f54c995a071309ba493ba6479252dfad0b1b3e0d40ab49f7d096687a21382d"
+    },
+    {
+      "id": "research-file-a",
+      "path": "design-system/media/emirates_brand_design_system_research.md",
+      "title": "Research: File A, cites no sources (\"A · unverified\")",
+      "kind": "research",
+      "sha256": "aee66e1fb97fcdf7c73b89ed4b70b83f7267eb9f13848e91fa275b84c07e79a6",
+      "note": "Cites no sources. Every value taken from it is tagged \"A · unverified\" (confidence: inferred)."
+    },
+    {
+      "id": "audit",
+      "path": "01-audit-and-open-decisions.md",
+      "title": "Audit and open decisions (pre-system)",
+      "kind": "audit",
+      "sha256": "c04eff7510701fbb7678b532317609b1a2b7a8302b43062c7970ecce7c9d669d",
+      "note": "Pre-system working document. Superseded by design-system/; listed for provenance only."
+    },
+    {
+      "id": "foundations-draft",
+      "path": "02-foundations.md",
+      "title": "Foundations draft (pre-system)",
+      "kind": "audit",
+      "sha256": "430ad1015b3b2d707b0656bce488e9758dd5803100f748e96a3df3697644cb07",
+      "note": "Pre-system working document. Superseded by design-system/; listed for provenance only."
+    }
+  ],
+  "sourceTags": {
+    "Official": {
+      "confidence": "official",
+      "meaning": "Emirates' own sources: emirates.com, the Media Centre, Emirates staff."
+    },
+    "Live": {
+      "confidence": "observed",
+      "meaning": "Values a third party read from the live emirates.com code."
+    },
+    "A · unverified": {
+      "confidence": "inferred",
+      "meaning": "File A, a research document that cites no sources. Unverified; it only fills gaps."
+    },
+    "Rec": {
+      "confidence": "proposed",
+      "meaning": "A design-system recommendation where no source exists."
+    },
+    "Rec · approved": {
+      "confidence": "proposed",
+      "meaning": "A recommendation explicitly approved over a Live value (approved: true)."
+    }
+  },
+  "decisions": [
+    {
+      "id": "D1",
+      "text": "Live values win over File A. File A values stay marked unverified.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D2",
+      "text": "Primary red `#D71921` (Live)",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D3",
+      "text": "Gold `#C5A059` / bronze `#997D4B` accepted as unverified; fills and borders only",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D4",
+      "text": "Neutrals built around the Live greys, plus a 3:1 border shade",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D5",
+      "text": "Keep terracotta and cream (Live); drop green `#00732F`",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D6",
+      "text": "Status colours: File A's hues plus info blue and shades; never brand red",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D7",
+      "text": "Fonts: Helvetica Neue stack. The Emirates fonts are reserved until licensed.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D8",
+      "text": "Live type sizes; body weight 400 (Rec · approved)",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D9",
+      "text": "4px spacing base",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D10",
+      "text": "Radius 0 / 2 / 4 / 8 / 16 / pill; controls 4px (Rec · approved)",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D11",
+      "text": "Flat by default; shadows on hover, sticky elements and overlays only",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D12",
+      "text": "File A breakpoints (unverified); max width 1280px (Rec · approved)",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D13",
+      "text": "Phosphor Icons, Regular weight",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D14",
+      "text": "Components and patterns are written in full. Most values are unverified or Rec, because the sources have no hover, focus or disabled states and no search or seat-map specs.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D15",
+      "text": "Arabic and RTL are first-class. Logical CSS only; Noto Sans Arabic for Arabic text; no letter spacing or uppercase in Arabic; Latin digits; directional icons mirror. See [RTL & Arabic](../layout/rtl-and-arabic.md).",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D16",
+      "text": "The server owns every price. The client displays a server quote and never calculates fares, fees or totals. Payment sends the quote id.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D17",
+      "text": "Fares belong to a **journey**; seats belong to a **segment** (one physical flight). Passenger ids are stable for the whole booking.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D18",
+      "text": "Each seat type has its own outline colour **and** glyph, every outline ≥ 3:1. Preferred and Extra Legroom no longer share gold. Seat prices are never shown only on hover: legend first, then tap to preview, then confirm.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D19",
+      "text": "Accessibility target is WCAG 2.2 AA. Every interactive component follows an APG pattern, specified in [accessibility](../components/accessibility.md).",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D20",
+      "text": "Focus is a black ring (white on dark), never red. Red = action and selection; crimson = error. Inline links are always underlined. The selected premium card uses a bronze border plus a check icon.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D21",
+      "text": "The booking summary sidebar appears from `lg` (1024px), not `xl`.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D22",
+      "text": "Sizes in rem, media queries in em. px only for borders, radii and shadows. The xl page margin is 80px and content stops at 1280px with no jump.",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D23",
+      "text": "One control height scale for buttons and fields: 40 / 48 / 56. The default field is 48px (Live 40px), and the large button is 56px (Live 60px).",
+      "status": "agreed",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "D24",
+      "text": "Type: `heading-3` is bold (Live regular). `label-caps` is 12/16 with 0.08em tracking (Live 10/12, 0.4em). Premium button gets its own pressed shade (hover `#B08F52`, pressed bronze).",
+      "status": "agreed",
+      "date": "2026-11-09"
+    }
+  ]
+}

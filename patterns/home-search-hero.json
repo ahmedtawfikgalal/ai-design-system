@@ -1,0 +1,110 @@
+{
+  "$schema": "../schemas/pattern.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "home-search-hero",
+  "name": "Home / Search Hero",
+  "kind": "page",
+  "description": "The home page: full-bleed hero with headline and the flight search widget overlapping its bottom, then destinations, cabin highlights and a promo panel.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Live (hero headline: Heroic-Medium 120px). Search widget: A · unverified. Section order: Rec.",
+    "confidence": "observed",
+    "mixed": true,
+    "decisions": [
+      "D7"
+    ]
+  },
+  "structure": "[Hero: full-bleed photo, --radius-none]\n  [display-xl / display-lg headline on --color-overlay-image gradient]\n  [FlightSearchWidget — Card, --elevation-3, overlaps the bottom of the hero]\n[Section: DestinationGrid]\n[Section: Cabin highlights — CabinFeatureCard ×4]\n[PromoPanel — cream, --radius-panel]\n\nFlightSearchWidget:\n[SegmentedControl: Return | One way | Multi-city]\n[From ⇄ To] [Departure – Return dates] [Passengers & Cabin] [Search →]",
+  "regions": [
+    {
+      "name": "Hero",
+      "description": "Full-bleed photo, --radius-none. display-xl / display-lg headline on the --color-overlay-image gradient. Heroic-Medium falls back to the base stack (D7).",
+      "components": [
+        "hero-banner"
+      ],
+      "tokens": [
+        "--radius-none",
+        "--color-overlay-image"
+      ],
+      "source": {
+        "tag": "Live",
+        "confidence": "observed"
+      }
+    },
+    {
+      "name": "Flight search",
+      "description": "FlightSearchWidget in a Card with --elevation-3, overlapping the bottom of the hero. Trip type, From ⇄ To, dates, passengers & cabin, Search.",
+      "components": [
+        "flight-search-widget"
+      ],
+      "tokens": [
+        "--elevation-3"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "DestinationGrid",
+      "description": "See the destination-grid pattern.",
+      "components": [
+        "destination-card"
+      ]
+    },
+    {
+      "name": "Cabin highlights",
+      "description": "CabinFeatureCard ×4.",
+      "components": [
+        "cabin-feature-card"
+      ]
+    },
+    {
+      "name": "PromoPanel",
+      "description": "Cream, --radius-panel.",
+      "components": [
+        "promo-panel"
+      ],
+      "tokens": [
+        "--radius-panel"
+      ],
+      "source": {
+        "tag": "Live",
+        "confidence": "observed"
+      }
+    }
+  ],
+  "patterns": [
+    "destination-grid",
+    "page-shell"
+  ],
+  "responsive": [
+    {
+      "breakpoint": "sm",
+      "behavior": "The search widget collapses to a single \"Search flights\" field that opens a full-screen overlay.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "breakpoint": "lg+",
+      "behavior": "display-xl headline; below lg it uses display-lg."
+    }
+  ],
+  "sources": [
+    {
+      "doc": "patterns",
+      "section": "pattern-1--home--search-hero"
+    },
+    {
+      "doc": "inventory",
+      "section": "flightsearchwidget"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "icon",
+  "name": "Icon",
+  "layer": "primitive",
+  "category": "display",
+  "inDesignSystem": true,
+  "description": "A wrapper for Phosphor SVGs (Regular weight; Fill only for selected or active states).",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec (D13)",
+    "confidence": "proposed",
+    "decisions": [
+      "D13",
+      "D15"
+    ]
+  },
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "description": "Phosphor name (airplane-takeoff) or a custom registry key (aircraft-a380)."
+    },
+    {
+      "name": "size",
+      "type": "'xs' | 'sm' | 'md' | 'lg'",
+      "default": "sm",
+      "description": "16 / 20 / 24 / 32px (--icon-size-xs … lg)."
+    },
+    {
+      "name": "weight",
+      "type": "'regular' | 'fill'",
+      "default": "regular",
+      "description": "Use fill only for the selected or active state."
+    },
+    {
+      "name": "color",
+      "type": "semantic icon token",
+      "default": "currentColor"
+    },
+    {
+      "name": "label",
+      "type": "string | null",
+      "default": null,
+      "description": "When set, the SVG gets role=\"img\" and this aria-label. When null, the SVG gets aria-hidden=\"true\"."
+    },
+    {
+      "name": "mirror",
+      "type": "'auto' | 'never'",
+      "default": "auto",
+      "description": "auto flips the icon horizontally in right-to-left pages if its name is on the mirror list."
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "Decorative by default (aria-hidden). Standalone meaningful icons get label → role=\"img\" + aria-label.",
+      "Icons used as the only signal must meet 3:1 contrast."
+    ],
+    "wcag": [
+      "1.1.1",
+      "1.4.11"
+    ]
+  },
+  "rtl": [
+    "mirror=\"auto\" flips direction-of-travel icons (arrow-left/right, caret-left/right, airplane-takeoff/landing/in-flight/tilt, sign-in/out, arrow-u-up-left, list) in RTL. Objects, time, checkmarks and vertical carets never mirror. Full list: foundations/icons.md."
+  ],
+  "tokens": [
+    "--icon-size-xs",
+    "--icon-size-sm",
+    "--icon-size-md",
+    "--icon-size-lg",
+    "--color-icon-default",
+    "--color-icon-subtle",
+    "--color-icon-inverse",
+    "--color-icon-brand",
+    "--color-icon-premium",
+    "--color-icon-success",
+    "--color-icon-warning",
+    "--color-icon-error",
+    "--color-icon-info"
+  ],
+  "rules": [
+    "Library: @phosphor-icons/core (checked at v2.1.1), MIT. Do not use Thin, Light, Bold or Duotone weights.",
+    "Custom icons use the same 256-unit grid, 16-unit stroke, round caps and joins. The Emirates logo is not an icon."
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "icon"
+    },
+    {
+      "doc": "iconography"
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "card",
+  "name": "Card",
+  "layer": "primitive",
+  "category": "surface",
+  "inDesignSystem": true,
+  "description": "A surface container. Replaces the standard container, the cream promo panel and the premium container.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Live (default border, 20px padding, warm cream panel, 8px radius), A · unverified (premium, hover shadow), Rec (states)",
+    "confidence": "observed",
+    "mixed": true,
+    "decisions": [
+      "D11",
+      "D20"
+    ]
+  },
+  "variants": [
+    {
+      "name": "default",
+      "description": "White + --color-border-subtle.",
+      "tokens": [
+        "--color-bg-surface",
+        "--color-border-subtle"
+      ],
+      "source": {
+        "tag": "Live",
+        "confidence": "observed"
+      }
+    },
+    {
+      "name": "subtle",
+      "description": "--color-bg-subtle, no border.",
+      "tokens": [
+        "--color-bg-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "warm",
+      "description": "--color-bg-accent-warm, radius 0, no border (cream panel).",
+      "tokens": [
+        "--color-bg-accent-warm",
+        "--radius-panel"
+      ],
+      "source": {
+        "tag": "Live (cream panel)",
+        "confidence": "observed"
+      }
+    },
+    {
+      "name": "premium",
+      "description": "White + --color-border-premium (gold) at rest.",
+      "tokens": [
+        "--color-bg-surface",
+        "--color-border-premium"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "'default' | 'subtle' | 'warm' | 'premium'",
+      "default": "default"
+    },
+    {
+      "name": "padding",
+      "type": "'none' | 'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "sm --space-4 · md --space-5 (Live 20px) · lg --space-6."
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "default": false,
+      "description": "Adds --elevation-2 on hover and a focus ring. Only valid with as=\"a\" or as=\"button\", and only when the card contains no other buttons or links (no nested interactive elements)."
+    },
+    {
+      "name": "selected",
+      "type": "boolean",
+      "default": false,
+      "description": "2px --color-action-primary border (or --color-border-premium-strong, bronze, on premium) plus a check-circle icon in the top end corner."
+    },
+    {
+      "name": "as",
+      "type": "'div' | 'article' | 'section' | 'a' | 'button'",
+      "default": "div"
+    }
+  ],
+  "states": [
+    {
+      "name": "default",
+      "visual": "White, 1px --color-border-subtle, --elevation-0.",
+      "tokens": [
+        "--color-border-subtle",
+        "--elevation-0"
+      ],
+      "source": {
+        "tag": "Live",
+        "confidence": "observed"
+      }
+    },
+    {
+      "name": "hover",
+      "appliesTo": "interactive",
+      "visual": "--elevation-2.",
+      "tokens": [
+        "--elevation-2"
+      ],
+      "source": {
+        "tag": "A · unverified (shadow value)",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "focus-visible",
+      "appliesTo": "interactive",
+      "visual": "Focus ring (--focus-ring-*).",
+      "tokens": [
+        "--focus-ring-color",
+        "--focus-ring-width",
+        "--focus-ring-offset"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "selected",
+      "visual": "2px --color-action-primary border + check-circle icon (Fill, --color-icon-brand) in the top end corner. The icon means selection doesn't rely on colour alone.",
+      "tokens": [
+        "--color-action-primary",
+        "--border-width-2",
+        "--color-icon-brand"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed",
+        "decisions": [
+          "D20"
+        ]
+      }
+    },
+    {
+      "name": "selected",
+      "appliesTo": "premium",
+      "visual": "2px --color-border-premium-strong border (bronze, 3.90:1) + check-circle icon (Fill, --color-icon-premium). Replaces File A's gold #C5A059 border, which is only 2.46:1. The resting premium card keeps its gold border.",
+      "tokens": [
+        "--color-border-premium-strong",
+        "--border-width-2",
+        "--color-icon-premium"
+      ],
+      "source": {
+        "tag": "Rec. Replaces File A's gold border",
+        "confidence": "proposed",
+        "mixed": true,
+        "decisions": [
+          "D20"
+        ]
+      }
+    },
+    {
+      "name": "disabled",
+      "appliesTo": "sold-out fare",
+      "visual": "--color-bg-subtle fill, content in --color-text-disabled, \"Sold out\" Badge neutral.",
+      "tokens": [
+        "--color-bg-subtle",
+        "--color-text-disabled"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "interactive only with as=\"a\" or as=\"button\" and no nested interactive content.",
+      "Selection is shown by border width + check icon, not colour alone."
+    ],
+    "wcag": [
+      "1.4.1",
+      "1.4.11",
+      "2.4.7"
+    ]
+  },
+  "rtl": [
+    "The selected check icon sits in the top end corner (top-left in Arabic)."
+  ],
+  "composes": [
+    "icon"
+  ],
+  "tokens": [
+    "--color-bg-surface",
+    "--color-border-subtle",
+    "--color-bg-subtle",
+    "--color-bg-accent-warm",
+    "--color-border-premium",
+    "--color-border-premium-strong",
+    "--color-action-primary",
+    "--color-icon-brand",
+    "--color-icon-premium",
+    "--color-text-disabled",
+    "--radius-card",
+    "--radius-panel",
+    "--border-width-1",
+    "--border-width-2",
+    "--elevation-0",
+    "--elevation-2",
+    "--space-4",
+    "--space-5",
+    "--space-6",
+    "--focus-ring-color",
+    "--focus-ring-width",
+    "--focus-ring-offset"
+  ],
+  "rules": [
+    "Radius --radius-card (8px), --border-width-1, --elevation-0 at rest (flat by default, D11).",
+    "Selection swaps the border; it never adds a shadow and never changes the radius."
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "card"
+    },
+    {
+      "doc": "states",
+      "section": "card-interactive"
+    },
+    {
+      "doc": "shadows",
+      "section": "selection-state--border-not-shadow"
+    },
+    {
+      "doc": "border-radius",
+      "section": "notes"
+    }
+  ]
+}

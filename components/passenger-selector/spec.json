@@ -1,0 +1,124 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "passenger-selector",
+  "name": "PassengerSelector",
+  "category": "flight-search",
+  "description": "Passenger counters per age band plus cabin choice, inside the search widget.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Props and composition documented; states and accessibility come from Counter and Overlay."
+    ]
+  },
+  "provenance": {
+    "tag": "A · unverified (counter with +/−, three passenger categories); four cabins: Official",
+    "confidence": "inferred",
+    "mixed": true
+  },
+  "props": [
+    {
+      "name": "ageBands",
+      "type": "{ key, label, description, min, max }[]",
+      "required": true,
+      "description": "From config. The sources conflict on child age (File A 2–11, Official seat rule 2–12). Do not hardcode."
+    },
+    {
+      "name": "counts",
+      "type": "Record<key, number>",
+      "required": true
+    },
+    {
+      "name": "cabin",
+      "type": "'economy' | 'premium-economy' | 'business' | 'first'",
+      "required": true,
+      "description": "Official: four cabins. File A omits Premium Economy.",
+      "source": {
+        "tag": "Official",
+        "confidence": "official"
+      }
+    },
+    {
+      "name": "infantSeating",
+      "type": "'lap' | 'seat' (per infant)",
+      "source": {
+        "tag": "A · unverified (\"in seat or on lap\")",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "onAdd",
+      "type": "(typeKey: string) => void",
+      "description": "Dispatches ADD_PASSENGER."
+    },
+    {
+      "name": "onRemove",
+      "type": "(typeKey: string) => void",
+      "description": "Dispatches REMOVE_PASSENGER. Removes the most recently added passenger of that type, so earlier passengers keep their ids and seats."
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "lg+",
+      "behavior": "Overlay type=\"popover\"."
+    },
+    {
+      "breakpoint": "sm",
+      "behavior": "Overlay type=\"sheet\"."
+    }
+  ],
+  "composes": [
+    "counter",
+    "segmented-control",
+    "combobox",
+    "button",
+    "overlay"
+  ],
+  "rules": [
+    "Passenger counts change through add and remove, never by setting a count (rebuilding the array would give everyone new ids and drop their seats)."
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "passengerselector"
+    },
+    {
+      "doc": "state-architecture",
+      "section": "actions"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "Child age band: File A says 2–11, the Official seat-fee rule says 2–12. Must come from config.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "passengerselector"
+        }
+      ]
+    },
+    {
+      "description": "Cabin uses \"SegmentedControl or Combobox\"; the choice is not decided.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "passengerselector"
+        }
+      ]
+    },
+    {
+      "description": "The popover/sheet breakpoints are given as lg+ and sm; md is not stated.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "passengerselector"
+        }
+      ]
+    }
+  ]
+}

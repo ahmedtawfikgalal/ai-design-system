@@ -1,0 +1,48 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "cabin-feature-card",
+  "name": "CabinFeatureCard",
+  "category": "content",
+  "description": "A cabin amenity card: large icon, heading and short text.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Composition only."
+    ]
+  },
+  "provenance": {
+    "tag": "Card design: Rec. Cabin descriptions (First, Business, Premium Economy, Economy): Official.",
+    "confidence": "proposed",
+    "mixed": true
+  },
+  "rules": [
+    "Card + Icon size=\"lg\" + heading-3 + body-sm.",
+    "First Class uses Card variant=\"premium\"."
+  ],
+  "composes": [
+    "card",
+    "icon",
+    "text"
+  ],
+  "tokens": [
+    "--icon-size-lg",
+    "--heading-3-size",
+    "--body-sm-size"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "cabinfeaturecard"
+    },
+    {
+      "doc": "patterns",
+      "section": "pattern-6--cabin-experience-page"
+    }
+  ]
+}

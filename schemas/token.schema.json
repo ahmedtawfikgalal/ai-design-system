@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fly-emirates-design-spec.invalid/schemas/token.schema.json",
+  "title": "Design tokens: W3C DTCG format with Fly Emirates extensions",
+  "description": "Groups nest; a node with $value is a token. Extensions: com.flyemirates.css (exact CSS output), com.flyemirates.modes (breakpoint and Arabic values), com.flyemirates.source (attribution), com.flyemirates.usedBy (component ids).",
+  "type": "object",
+  "required": ["$extensions"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "$description": { "type": "string" },
+    "$extensions": {
+      "type": "object",
+      "required": ["com.flyemirates.package"],
+      "properties": {
+        "com.flyemirates.package": {
+          "type": "object",
+          "required": ["schemaVersion", "tokenCount", "generatedFrom"],
+          "properties": {
+            "schemaVersion": { "$ref": "common.defs.json#/$defs/schemaVersion" },
+            "tokenCount": { "type": "integer", "minimum": 1 },
+            "generatedFrom": { "type": "array", "items": { "type": "string" } },
+            "modes": { "type": "object" }
+          }
+        }
+      }
+    }
+  },
+  "patternProperties": { "^[a-z0-9][a-z0-9-]*$": { "$ref": "#/$defs/node" } },
+  "additionalProperties": false,
+  "$defs": {
+    "node": {
+      "if": { "type": "object", "required": ["$value"] },
+      "then": { "$ref": "#/$defs/token" },
+      "else": { "$ref": "#/$defs/group" }
+    },
+    "group": {
+      "type": "object",
+      "properties": { "$description": { "type": "string" } },
+      "patternProperties": { "^[a-z0-9][a-z0-9-]*$": { "$ref": "#/$defs/node" } },
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "ref": { "type": "string", "pattern": "^\\{[a-z0-9-]+(\\.[a-z0-9-]+)*\\}$" },
+    "dimension": { "type": "string", "pattern": "^-?[0-9.]+(px|rem|em)$" },
+    "modeValues": {
+      "type": "object",
+      "propertyNames": { "enum": ["md", "lg", "xl", "ar"] }
+    },
+    "token": {
+      "type": "object",
+      "required": ["$type", "$value", "$extensions"],
+      "additionalProperties": false,
+      "properties": {
+        "$type": { "enum": ["color", "dimension", "fontFamily", "fontWeight", "number", "shadow", "textCase"] },
+        "$value": true,
+        "$description": { "type": "string" },
+        "$extensions": {
+          "type": "object",
+          "required": ["com.flyemirates.css", "com.flyemirates.source"],
+          "additionalProperties": false,
+          "properties": {
+            "com.flyemirates.css": {
+              "type": "object",
+              "required": ["name", "value"],
+              "additionalProperties": false,
+              "properties": {
+                "name": { "$ref": "common.defs.json#/$defs/cssVar" },
+                "value": { "type": "string" },
+                "modes": { "allOf": [{ "$ref": "#/$defs/modeValues" }], "additionalProperties": { "type": "string" } }
+              }
+            },
+            "com.flyemirates.modes": { "$ref": "#/$defs/modeValues" },
+            "com.flyemirates.source": { "$ref": "common.defs.json#/$defs/source" },
+            "com.flyemirates.usedBy": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/id" }, "uniqueItems": true }
+          }
+        }
+      },
+      "allOf": [
+        { "if": { "properties": { "$type": { "const": "color" } } },
+          "then": { "properties": { "$value": { "type": "string" } } } },
+        { "if": { "properties": { "$type": { "const": "dimension" } } },
+          "then": { "properties": { "$value": { "anyOf": [{ "$ref": "#/$defs/dimension" }, { "$ref": "#/$defs/ref" }] } } } },
+        { "if": { "properties": { "$type": { "const": "fontFamily" } } },
+          "then": { "properties": { "$value": { "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "array", "items": { "type": "string" }, "minItems": 1 }] } } } },
+        { "if": { "properties": { "$type": { "const": "fontWeight" } } },
+          "then": { "properties": { "$value": { "anyOf": [{ "type": "integer", "minimum": 1, "maximum": 1000 }, { "$ref": "#/$defs/ref" }] } } } },
+        { "if": { "properties": { "$type": { "const": "number" } } },
+          "then": { "properties": { "$value": { "anyOf": [{ "type": "number" }, { "$ref": "#/$defs/ref" }] } } } },
+        { "if": { "properties": { "$type": { "const": "shadow" } } },
+          "then": { "properties": { "$value": { "anyOf": [
+            { "type": "array", "maxItems": 0 },
+            { "type": "object", "required": ["color", "offsetX", "offsetY", "blur", "spread"] }
+          ] } } } },
+        { "if": { "properties": { "$type": { "const": "textCase" } } },
+          "then": { "properties": { "$value": { "enum": ["uppercase", "lowercase", "capitalize", "none"] } } } }
+      ]
+    }
+  }
+}

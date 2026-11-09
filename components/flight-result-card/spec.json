@@ -1,0 +1,143 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "flight-result-card",
+  "name": "FlightResultCard",
+  "category": "flight-results",
+  "description": "One flight option in the results list: segments, aircraft, from-price, and the expandable fare options.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Props, composition and a composition example documented; no dedicated states section."
+    ]
+  },
+  "provenance": {
+    "tag": "A · unverified. No official spec exists (Official research: \"cannot verify any official spec for flight cards\").",
+    "confidence": "inferred",
+    "mixed": true
+  },
+  "props": [
+    {
+      "name": "segments",
+      "type": "FlightSegment[]",
+      "required": true,
+      "description": "One or more segments (flights) in this journey, with connections."
+    },
+    {
+      "name": "aircraft",
+      "type": "string",
+      "description": "E.g. \"Airbus A380-800\", \"Boeing 777-300ER\" (Official: fleet types)."
+    },
+    {
+      "name": "fromPrice",
+      "type": "Money",
+      "required": true,
+      "description": "Lowest fare, from the offer data."
+    },
+    {
+      "name": "fares",
+      "type": "Fare[]",
+      "required": true,
+      "description": "Shown in FareOptions when expanded."
+    },
+    {
+      "name": "selectedFareId",
+      "type": "string | null"
+    },
+    {
+      "name": "onSelectFare",
+      "type": "function",
+      "description": "Dispatches SELECT_FARE."
+    }
+  ],
+  "interaction": [
+    "\"Select ▼\" Accordion expands the fare options.",
+    "Choosing a fare dispatches SELECT_FARE { journeyId, offerId, fareId }; the chosen fare card shows \"Selected\" text plus the selected border and check icon instead of the Choose button."
+  ],
+  "accessibility": {
+    "requirements": [
+      "The card is an article named by a summary (e.g. \"Emirates EK1, Dubai to London, 08:40\").",
+      "The outer card is not interactive: it contains its own buttons, and an interactive card wrapping other controls would nest interactive elements.",
+      "Choose buttons are actions with a specific name (\"Choose Economy Flex, USD 899\"), not aria-pressed toggles."
+    ],
+    "wcag": [
+      "4.1.2",
+      "1.3.1"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "sm",
+      "behavior": "Stacked vertically; fare options open below the card.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "breakpoint": "md+",
+      "behavior": "Horizontal layout; condensed flight-path bar.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "composes": [
+    "card",
+    "flight-segment",
+    "badge",
+    "price-display",
+    "accordion",
+    "fare-options",
+    "button",
+    "text"
+  ],
+  "tokens": [
+    "--space-6",
+    "--space-1",
+    "--space-4"
+  ],
+  "rules": [
+    "All prices come from the offer data returned by the server.",
+    "Column gap --space-6; time → IATA → city stack gap --space-1; card → fare matrix gap --space-4."
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "flightresultcard"
+    },
+    {
+      "doc": "tier-2-composites",
+      "section": "composition-example--flightresultcard-feature-layer"
+    },
+    {
+      "doc": "patterns",
+      "section": "pattern-2--flight-results"
+    },
+    {
+      "doc": "spacing",
+      "section": "flight-result-card"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "inventory.md lists \"Card interactive\" in the composition, but tier-2-composites.md (later decision) says the outer card is NOT interactive because it contains buttons. The non-interactive version is the current rule.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "flightresultcard"
+        },
+        {
+          "doc": "tier-2-composites",
+          "section": "composition-example--flightresultcard-feature-layer"
+        }
+      ]
+    }
+  ]
+}

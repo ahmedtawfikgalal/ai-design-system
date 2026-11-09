@@ -1,0 +1,146 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "accordion",
+  "name": "Accordion",
+  "layer": "composite",
+  "category": "display",
+  "inDesignSystem": true,
+  "description": "A disclosure section with a heading button. Used for FAQs, baggage rules and the \"Select ▼\" fare-options expansion on result cards.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec",
+    "confidence": "proposed"
+  },
+  "props": [
+    {
+      "name": "heading",
+      "type": "ReactNode",
+      "required": true
+    },
+    {
+      "name": "headingLevel",
+      "type": "2 | 3 | 4 | 5 | 6",
+      "default": 3
+    },
+    {
+      "name": "leadingIcon",
+      "type": "IconName | null",
+      "default": null
+    },
+    {
+      "name": "trailingContent",
+      "type": "ReactNode | null",
+      "default": null
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "Controlled open state."
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "description": "Uncontrolled initial state."
+    },
+    {
+      "name": "onToggle",
+      "type": "(open: boolean) => void"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false
+    }
+  ],
+  "states": [
+    {
+      "name": "collapsed",
+      "visual": "Chevron caret-down.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "expanded",
+      "visual": "Chevron caret-up; content visible.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "hover",
+      "visual": "Heading --color-text-strong.",
+      "tokens": [
+        "--color-text-strong"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "disabled",
+      "visual": "Heading --color-text-disabled, cannot open.",
+      "tokens": [
+        "--color-text-disabled"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "accessibility": {
+    "pattern": "Accordion",
+    "requirements": [
+      "Header: <hN> (from headingLevel) containing a <button aria-expanded aria-controls>.",
+      "Panel: role=\"region\" named by the header, used only when there are 6 or fewer accordions on the page.",
+      "The chevron is aria-hidden."
+    ],
+    "keyboard": [
+      "Enter and Space toggle."
+    ],
+    "wcag": [
+      "4.1.2",
+      "1.3.1"
+    ]
+  },
+  "composes": [
+    "icon",
+    "text"
+  ],
+  "tokens": [
+    "--space-4",
+    "--space-5",
+    "--icon-size-sm",
+    "--color-icon-default",
+    "--color-border-subtle",
+    "--color-text-strong",
+    "--color-text-disabled"
+  ],
+  "rules": [
+    "Header padding --space-4 × --space-5; chevron --icon-size-sm --color-icon-default; bottom border --color-border-subtle. Background is set by the surrounding container."
+  ],
+  "sources": [
+    {
+      "doc": "tier-2-composites",
+      "section": "accordion"
+    },
+    {
+      "doc": "states",
+      "section": "accordion"
+    },
+    {
+      "doc": "accessibility",
+      "section": "accordion"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+/*
+ * Fly Emirates Design System — fonts
+ * Load together with tokens.css.
+ *
+ * "EK Arabic" is an alias limited to Arabic code points (unicode-range), so Latin text on an
+ * Arabic page (IATA codes, times, English names) still renders in the Latin stack, even when a
+ * local fallback is used (Geeza Pro, Segoe UI and Tahoma all contain Latin letters too).
+ * Files: Arabic subset of Noto Sans Arabic (SIL Open Font License), copied into ./fonts by
+ * `npm run build:tokens` from @fontsource/noto-sans-arabic.
+ * The Latin stack (Helvetica Neue → Arial) uses installed system fonts; nothing to load.
+ */
+
+@font-face {
+  font-family: "EK Arabic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/noto-sans-arabic-arabic-400-normal.woff2") format("woff2"),
+       local("Geeza Pro"), local("Segoe UI"), local("Tahoma");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: "EK Arabic";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/noto-sans-arabic-arabic-500-normal.woff2") format("woff2"),
+       local("Geeza Pro"), local("Segoe UI"), local("Tahoma");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: "EK Arabic";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/noto-sans-arabic-arabic-700-normal.woff2") format("woff2"),
+       local("Geeza Pro Bold"), local("Segoe UI Bold"), local("Tahoma Bold");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}

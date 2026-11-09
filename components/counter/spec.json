@@ -1,0 +1,185 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "counter",
+  "name": "Counter",
+  "layer": "composite",
+  "category": "input",
+  "inDesignSystem": true,
+  "description": "A stepper for passengers, bags or any quantity. It holds no state of its own; the parent owns the value.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec",
+    "confidence": "proposed"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "description": "E.g. \"Adults\"."
+    },
+    {
+      "name": "description",
+      "type": "string | null",
+      "default": null,
+      "description": "E.g. \"Age 12+\". The text comes from config. File A says children are 2–11; the Official seat-fee rule says 2–12."
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "default": 0,
+      "description": "The decrement button disables at this limit."
+    },
+    {
+      "name": "max",
+      "type": "number | null",
+      "default": null,
+      "description": "The increment button disables at this limit."
+    },
+    {
+      "name": "onChange",
+      "type": "(next: number) => void",
+      "required": true
+    },
+    {
+      "name": "decrementLabel",
+      "type": "string",
+      "required": true,
+      "description": "Accessible name for the icon-only minus button, e.g. \"Remove adult\"."
+    },
+    {
+      "name": "incrementLabel",
+      "type": "string",
+      "required": true,
+      "description": "Accessible name for the icon-only plus button, e.g. \"Add adult\"."
+    }
+  ],
+  "states": [
+    {
+      "name": "default",
+      "visual": "Both buttons enabled, ghost variant, --color-icon-default.",
+      "tokens": [
+        "--color-icon-default"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "at-min",
+      "visual": "Minus disabled (--color-text-disabled).",
+      "tokens": [
+        "--color-text-disabled"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "at-max",
+      "visual": "Plus disabled. Limits come from config, e.g. maximum total passengers or infants.",
+      "tokens": [
+        "--color-text-disabled"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "focus-visible",
+      "visual": "Focus ring on the focused button.",
+      "tokens": [
+        "--focus-ring-color",
+        "--focus-ring-width",
+        "--focus-ring-offset"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "A group (role=\"group\", named by label) containing: a decrement Button, the value, an increment Button.",
+      "Buttons are named by decrementLabel / incrementLabel.",
+      "At a limit, the button is disabled and the reason is given in the description when it's a business rule, e.g. \"Maximum 9 passengers per booking\"."
+    ],
+    "announcements": [
+      "The value is in an aria-live=\"polite\" element, so a change is announced: \"2 adults\"."
+    ],
+    "wcag": [
+      "4.1.2",
+      "4.1.3"
+    ]
+  },
+  "composes": [
+    "button",
+    "text"
+  ],
+  "tokens": [
+    "--color-icon-default",
+    "--color-text-disabled",
+    "--heading-3-size",
+    "--space-3",
+    "--control-height-sm",
+    "--focus-ring-color",
+    "--focus-ring-width",
+    "--focus-ring-offset"
+  ],
+  "rules": [
+    "Buttons 40×40 (Button size sm, iconOnly minus / plus, ghost); value heading-3 with tabular numerals; row padding --space-3; divider between rows."
+  ],
+  "sources": [
+    {
+      "doc": "tier-2-composites",
+      "section": "counter"
+    },
+    {
+      "doc": "states",
+      "section": "counter"
+    },
+    {
+      "doc": "accessibility",
+      "section": "counter"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "In tier-2-composites.md the decrementLabel / incrementLabel row is separated from the Counter prop table by a blank line, so Markdown renders it as a separate table. It is treated here as part of the prop table.",
+      "refs": [
+        {
+          "doc": "tier-2-composites",
+          "section": "counter"
+        }
+      ]
+    },
+    {
+      "description": "Child age band conflicts between sources (File A 2–11, Official seat rule 2–12); the description text must come from config.",
+      "refs": [
+        {
+          "doc": "tier-2-composites",
+          "section": "counter"
+        },
+        {
+          "doc": "inventory",
+          "section": "passengerselector"
+        }
+      ]
+    }
+  ]
+}

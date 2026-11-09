@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "date-strip",
+  "name": "DateStrip",
+  "category": "flight-results",
+  "description": "A horizontal row of ±3 days around the searched date, each showing the date and the lowest fare.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "One-sentence description only; no props, states or accessibility."
+    ]
+  },
+  "provenance": {
+    "tag": "A · unverified (\"lowest price preview per day\")",
+    "confidence": "inferred"
+  },
+  "rules": [
+    "Each day shows the date and the lowest fare (PriceDisplay size=\"sm\").",
+    "It reuses SegmentedControl styling with a Card per day."
+  ],
+  "composes": [
+    "price-display",
+    "card",
+    "segmented-control"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "datestrip"
+    },
+    {
+      "doc": "patterns",
+      "section": "pattern-2--flight-results"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "\"Reuses SegmentedControl styling with a Card per day\" does not say whether it behaves as a radio group (SegmentedControl) or a list of links/buttons; keyboard and accessibility behaviour are unspecified.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "datestrip"
+        }
+      ]
+    }
+  ]
+}

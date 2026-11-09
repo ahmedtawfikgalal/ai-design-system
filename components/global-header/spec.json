@@ -1,0 +1,220 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "global-header",
+  "name": "GlobalHeader",
+  "category": "global-chrome",
+  "description": "The black site header bar: logo, primary navigation, region / language / currency selectors and Skywards login.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Props, layout and nav-link states documented; no accessibility section beyond the nav-link focus state."
+    ]
+  },
+  "provenance": {
+    "tag": "Live (black bar, 48px, white 14px links). File A's white 80px header is not used (D1). Nav items, active indicator and utility selectors: A · unverified.",
+    "confidence": "observed",
+    "mixed": true,
+    "decisions": [
+      "D1"
+    ]
+  },
+  "props": [
+    {
+      "name": "items",
+      "type": "{ label, href, active }[]",
+      "required": true,
+      "description": "\"Book, Manage, Where We Fly, Experience, Skywards\".",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "region",
+      "type": "string",
+      "description": "Opens a Combobox in an Overlay."
+    },
+    {
+      "name": "language",
+      "type": "string",
+      "description": "Opens a Combobox in an Overlay."
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "description": "Opens a Combobox in an Overlay."
+    },
+    {
+      "name": "skywardsUser",
+      "type": "object | null",
+      "description": "Login Button variant=\"inverse\" size=\"sm\", or a member menu."
+    }
+  ],
+  "states": [
+    {
+      "name": "default",
+      "appliesTo": "nav link",
+      "visual": "body-sm (14px) --color-text-inverse on black.",
+      "tokens": [
+        "--color-text-inverse",
+        "--color-bg-inverse"
+      ],
+      "source": {
+        "tag": "Live",
+        "confidence": "observed"
+      }
+    },
+    {
+      "name": "hover",
+      "appliesTo": "nav link",
+      "visual": "Underline, or a 3px --neutral-600 bottom bar.",
+      "tokens": [
+        "--neutral-600",
+        "--border-width-3"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "active",
+      "appliesTo": "nav link (current section)",
+      "visual": "3px --color-action-primary bottom bar (--border-width-3).",
+      "tokens": [
+        "--color-action-primary",
+        "--border-width-3"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "focus-visible",
+      "appliesTo": "nav link",
+      "visual": "Focus ring in --focus-ring-color-inverse (white).",
+      "tokens": [
+        "--focus-ring-color-inverse",
+        "--focus-ring-width",
+        "--focus-ring-offset"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "scrolled",
+      "visual": "--elevation-1.",
+      "tokens": [
+        "--elevation-1"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "sm",
+      "behavior": "Black bar, menu behind a toggle.",
+      "source": {
+        "tag": "Live (black bar)",
+        "confidence": "observed"
+      }
+    },
+    {
+      "breakpoint": "md",
+      "behavior": "Slide-over menu (drawer).",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "breakpoint": "lg+",
+      "behavior": "All menu items visible."
+    }
+  ],
+  "rtl": [
+    "The logo moves to the right and the utility selectors to the left."
+  ],
+  "composes": [
+    "button",
+    "combobox",
+    "overlay",
+    "divider",
+    "text"
+  ],
+  "tokens": [
+    "--color-bg-inverse",
+    "--color-text-inverse",
+    "--color-action-primary",
+    "--border-width-3",
+    "--neutral-600",
+    "--elevation-1",
+    "--body-sm-size",
+    "--focus-ring-color-inverse",
+    "--focus-ring-width",
+    "--focus-ring-offset"
+  ],
+  "rules": [
+    "Layout: [Logo (bilingual lockup)] [Primary nav links] [Region/Language] [Currency] [Skywards login].",
+    "Height 48px (Live), sticky.",
+    "The logo is a brand asset (emirates-logo-badge.svg), not a component."
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "globalheader"
+    },
+    {
+      "doc": "states",
+      "section": "global-nav-link"
+    },
+    {
+      "doc": "patterns",
+      "section": "globalheader-layout"
+    },
+    {
+      "doc": "breakpoints",
+      "section": "what-changes-per-breakpoint"
+    },
+    {
+      "doc": "rtl-and-arabic",
+      "section": "2-layout-logical-css-only"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "The 48px header height has no token; the booking summary's sticky offset hardcodes it (calc(48px + --space-6)).",
+      "refs": [
+        {
+          "doc": "patterns",
+          "section": "page-shell"
+        },
+        {
+          "doc": "breakpoints",
+          "section": "layout-strategy-mobile-first"
+        }
+      ]
+    },
+    {
+      "description": "The hover state uses the primitive --neutral-600 directly; no semantic token exists for it.",
+      "refs": [
+        {
+          "doc": "states",
+          "section": "global-nav-link"
+        }
+      ]
+    }
+  ]
+}

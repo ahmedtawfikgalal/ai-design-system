@@ -1,0 +1,237 @@
+{
+  "$schema": "../schemas/pattern.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "booking-state",
+  "name": "Booking State Model",
+  "kind": "state-model",
+  "description": "Feature-layer state shared by results, passengers, seat map, summary and CTA bar: one client state object for selections, and a server-owned quote for every price.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec (D16, D17). Cash+Miles and four cabins: Official; trip types and lap infants: A · unverified.",
+    "confidence": "proposed",
+    "mixed": true,
+    "decisions": [
+      "D16",
+      "D17"
+    ]
+  },
+  "components": [
+    "flight-search-widget",
+    "passenger-selector",
+    "flight-result-card",
+    "fare-options",
+    "seat-map",
+    "booking-summary",
+    "sticky-cta-bar",
+    "counter",
+    "seat",
+    "price-display"
+  ],
+  "rules": [
+    "One client state object for selections. Every component reads from it; none owns the data. Components dispatch actions; only the state layer writes.",
+    "The server owns every price (D16). The client never calculates a fare, seat fee, tax or total. It sends selections to the server and displays the quote that comes back.",
+    "Fares belong to a journey; seats belong to a segment (one physical flight) (D17). Seats are keyed by segment, never by journey.",
+    "Passenger ids are stable for the whole booking. Counts change through add and remove, never by setting a count.",
+    "No component calculates a total. Feature containers read the state and pass plain props down to design-system components, which stay stateless.",
+    "Payment always sends quote.id; the server refuses an expired or mismatched quote.",
+    "Every quote request carries the page locale; the server returns lineItems[].label already translated."
+  ],
+  "stateModel": {
+    "domain": [
+      {
+        "term": "Journey",
+        "meaning": "One origin → destination trip, as searched",
+        "example": "DXB → JFK (outbound); JFK → DXB (return)",
+        "owns": "The fare (fare family, fare rules)"
+      },
+      {
+        "term": "Segment",
+        "meaning": "One physical flight inside a journey",
+        "example": "DXB → JFK nonstop = 1 segment. A journey with a connection = 2 segments.",
+        "owns": "The seat map and the seat"
+      }
+    ],
+    "overview": "bookingState\n  ├── search: { tripType, journeys[{ id, from, to, date }], cabin }\n  ├── passengers: Passenger[]                   ← stable ids; types from the configured age bands\n  ├── selections: Record<journeyId, { offerId, fareId, segmentIds[] } | null>\n  ├── seats: Record<segmentId, Record<passengerId, seatId | null>>\n  ├── payment: { currency, useMiles }\n  └── quote: Quote | null                       ← from the server; never computed",
+    "stateShapeTypeScript": "type PassengerType = string          // keys come from config (e.g. 'adult' | 'child' | 'infant'), not hardcoded\ntype ISODate = string                // 'YYYY-MM-DD', local to the departure airport. Never a JS Date.\ntype Money = { amountMinor: number; currency: string }   // minor units; currency exponent comes from ISO 4217 (JPY 0, USD 2, KWD 3)\n\ntype Passenger = {\n  id: string                         // stable for the whole booking; never regenerated\n  type: PassengerType\n  infantOnLap?: boolean              // A · unverified: infants \"in seat or on lap\". Lap infants need no seat.\n}\n\ntype BookingState = {\n  search: {\n    tripType: 'return' | 'one-way' | 'multi-city'                 // A · unverified\n    journeys: { id: string; from: string; to: string; date: ISODate }[]\n    cabin: 'economy' | 'premium-economy' | 'business' | 'first'   // Official: four cabins\n  }\n  passengers: Passenger[]\n  selections: Record<string, {       // journeyId →\n    offerId: string                  // the flight option chosen on results\n    fareId: string                   // the fare family chosen for it\n    segmentIds: string[]             // the flights in this journey, in order\n  } | null>\n  seats: Record<string, Record<string, string | null>>          // segmentId → passengerId → seatId\n  payment: { currency: string; useMiles: boolean }\n  quote: Quote | null\n  quoteStatus: 'idle' | 'pending' | 'fresh' | 'stale' | 'error'\n}\n\ntype Quote = {\n  id: string                         // sent back with the payment request; the server rejects a stale id\n  expiresAt: string                  // ISO timestamp\n  lineItems: { kind: 'fare' | 'tax' | 'seat' | 'extra'; label: string; ref?: string; amount: Money }[]   // label is localised by the server\n  total: Money\n  miles?: number                     // Cash+Miles (Official)\n}",
+    "componentBoundaries": "[bookingState]  ⇄  [pricing API]\n     ├── FlightResultCard / FareOptions (reads selections, dispatches SELECT_FARE)\n     ├── PassengerSelector              (reads passengers, dispatches ADD/REMOVE_PASSENGER)\n     ├── SeatMap                        (one per segment; reads seats[segmentId] + passengers, dispatches SELECT_SEAT)\n     ├── BookingSummary                 (reads selections + quote; renders quote.lineItems)\n     └── StickyCTABar                   (reads displayTotal + quoteStatus + canContinue)",
+    "actions": [
+      {
+        "name": "SET_SEARCH",
+        "trigger": "FlightSearchWidget",
+        "effect": "Replaces search; clears selections, seats, quote",
+        "then": "—"
+      },
+      {
+        "name": "ADD_PASSENGER / REMOVE_PASSENGER",
+        "trigger": "Counter in PassengerSelector",
+        "effect": "Adds a passenger with a new id, or removes one by id. Other passengers keep their ids, so their seats stay attached. Removing a passenger removes their seats on every segment.",
+        "then": "Re-quote"
+      },
+      {
+        "name": "SELECT_FARE",
+        "trigger": "Fare card \"Choose\"",
+        "effect": "Sets selections[journeyId] (offer, fare, segments). Clears seats for the old segments of that journey only, because the flights or cabin may have changed.",
+        "then": "Re-quote"
+      },
+      {
+        "name": "SELECT_SEAT",
+        "trigger": "Selection panel \"Confirm\" in SeatMap",
+        "effect": "Sends the seat to the server first. On success, sets seats[segmentId][passengerId].",
+        "then": "Re-quote"
+      },
+      {
+        "name": "SEAT_CONFLICT",
+        "trigger": "Server rejects SELECT_SEAT because the seat was just taken",
+        "effect": "Leaves seats unchanged (the passenger keeps any earlier seat). Marks the seat occupied in the cached seat map and refetches availability for that segment.",
+        "then": "Show the conflict message"
+      },
+      {
+        "name": "CLEAR_SEAT",
+        "trigger": "SeatMap / BookingSummary",
+        "effect": "Sets the seat to null",
+        "then": "Re-quote"
+      },
+      {
+        "name": "SET_PAYMENT_MODE",
+        "trigger": "Cash / Cash+Miles toggle",
+        "effect": "Updates payment.useMiles (Official: Cash+Miles exists)",
+        "then": "Re-quote"
+      },
+      {
+        "name": "QUOTE_RECEIVED / QUOTE_FAILED",
+        "trigger": "Pricing request",
+        "effect": "Sets quote and quoteStatus",
+        "then": "—"
+      }
+    ],
+    "requote": "Set quoteStatus: 'pending', send the current selections to the pricing endpoint, and store the response. If a newer request is already in flight, ignore older responses (compare a request counter).",
+    "derived": [
+      {
+        "value": "passengersNeedingSeat",
+        "from": "passengers without infantOnLap"
+      },
+      {
+        "value": "seatsRemaining(segmentId)",
+        "from": "passengersNeedingSeat − passengers with a seat on that segment"
+      },
+      {
+        "value": "canContinue(step)",
+        "from": "Step-specific completeness check (for example, every journey has a selection)"
+      },
+      {
+        "value": "displayTotal",
+        "from": "quote.total when quoteStatus is fresh; otherwise the previous total shown as updating"
+      }
+    ],
+    "notDerivedOnClient": [
+      "fare totals",
+      "seat fees",
+      "taxes",
+      "discounts",
+      "Skywards-tier benefits",
+      "the child seat discount",
+      "anything else with money in it"
+    ],
+    "serverAppliedSeatRules": {
+      "source": "Official",
+      "rules": [
+        "Economy Saver seats are paid.",
+        "Economy Flex includes free Regular seats.",
+        "Economy Flex Plus includes free Regular and Preferred seats.",
+        "Twin and Extra Legroom seats are always paid.",
+        "Business Special is free once check-in opens 48h before departure.",
+        "Skywards tier changes what is free.",
+        "Children get 50% off Regular and Preferred seats."
+      ]
+    },
+    "quoteLifecycle": [
+      {
+        "status": "pending",
+        "ui": "BookingSummary and StickyCTABar keep the previous total with a skeleton or \"Updating…\". The primary CTA waits."
+      },
+      {
+        "status": "fresh",
+        "ui": "Totals shown. CTA enabled (if canContinue)."
+      },
+      {
+        "status": "stale",
+        "ui": "expiresAt has passed. Re-quote before payment. If the price changed, show the old and new totals and ask the user to accept before paying."
+      },
+      {
+        "status": "error",
+        "ui": "Inline error with a retry button. The CTA stays disabled; the user's selections are kept."
+      }
+    ],
+    "implementationOptions": [
+      {
+        "option": "Server-held booking session (default)",
+        "when": "Most airline flows. The server stores the selections and the quote; the client mirrors them and refetches after each mutation."
+      },
+      {
+        "option": "React Context + useReducer or Zustand as the client mirror",
+        "when": "Either works for the client copy of the selections. Zustand helps when state must survive route changes."
+      }
+    ],
+    "notThis": [
+      "Not design-system state: Seat, Counter and PriceDisplay are stateless; the parent owns their values.",
+      "Not the Skywards account state (miles balance, tier).",
+      "Not the source of business rules or prices: fares, seat fees, age bands and their rules come from the API or config."
+    ]
+  },
+  "patterns": [
+    "booking-flow",
+    "seat-selection",
+    "flight-results"
+  ],
+  "sources": [
+    {
+      "doc": "state-architecture"
+    },
+    {
+      "doc": "overview",
+      "section": "decision-log-agreed-2026-11-09"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "No pricing, seat-map or booking-session API contract (endpoints, request/response formats) is defined. Only client responsibilities and the Quote type are. This package does not invent one.",
+      "refs": [
+        {
+          "doc": "state-architecture",
+          "section": "quote-lifecycle"
+        }
+      ]
+    },
+    {
+      "description": "BookingState.quoteStatus includes 'idle'; the BookingSummary and StickyCTABar prop types list only pending | fresh | stale | error.",
+      "refs": [
+        {
+          "doc": "state-architecture",
+          "section": "state-shape"
+        },
+        {
+          "doc": "inventory",
+          "section": "bookingsummary"
+        }
+      ]
+    },
+    {
+      "description": "The state model names the fare component FareOptionsMatrix; inventory.md names it FareOptions (component id fare-options).",
+      "refs": [
+        {
+          "doc": "state-architecture",
+          "section": "the-problem"
+        },
+        {
+          "doc": "inventory",
+          "section": "fareoptions-fare-matrix"
+        }
+      ]
+    }
+  ]
+}

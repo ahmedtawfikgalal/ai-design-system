@@ -1,0 +1,299 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "seat",
+  "name": "Seat",
+  "layer": "composite",
+  "category": "aviation",
+  "inDesignSystem": true,
+  "description": "One seat on any seat map (booking, check-in, Manage Booking). Each seat type has its own outline colour and glyph; tapping previews the seat, and committing happens in the selection panel.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec (D18): type outlines, glyphs and preview state; status visuals: A · unverified; seat types: Official",
+    "confidence": "proposed",
+    "mixed": true,
+    "decisions": [
+      "D18"
+    ]
+  },
+  "variants": [
+    {
+      "name": "regular",
+      "description": "--color-seat-bg fill, 1px --color-seat-regular outline (--neutral-500, 3.45:1), no glyph.",
+      "tokens": [
+        "--color-seat-bg",
+        "--color-seat-regular"
+      ],
+      "source": {
+        "tag": "Look: A · unverified (\"white with fine grey outline\"). Colour: Rec, raised from #A9A9A9 (2.35:1).",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    },
+    {
+      "name": "preferred",
+      "description": "--color-seat-bg fill, 2px --color-seat-preferred outline (--gold-600 bronze, 3.90:1), star glyph in --color-seat-preferred.",
+      "tokens": [
+        "--color-seat-bg",
+        "--color-seat-preferred"
+      ],
+      "source": {
+        "tag": "Gold family: A · unverified. Bronze shade and glyph: Rec.",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    },
+    {
+      "name": "extra-legroom",
+      "description": "--color-seat-bg fill, 2px --color-seat-extra-legroom outline (--neutral-800, 12.6:1), arrows-vertical glyph.",
+      "tokens": [
+        "--color-seat-bg",
+        "--color-seat-extra-legroom"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "twin",
+      "description": "--color-seat-bg fill, 2px --color-seat-twin outline (--terracotta-500, 5.00:1), users glyph.",
+      "tokens": [
+        "--color-seat-bg",
+        "--color-seat-twin"
+      ],
+      "source": {
+        "tag": "Rec. No source gives a Twin style.",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "props": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "description": "E.g. \"34K\"."
+    },
+    {
+      "name": "type",
+      "type": "'regular' | 'preferred' | 'twin' | 'extra-legroom'",
+      "required": true,
+      "description": "Official seat types. Each type has its own outline colour and glyph (D18).",
+      "source": {
+        "tag": "Official",
+        "confidence": "official"
+      }
+    },
+    {
+      "name": "status",
+      "type": "'available' | 'previewed' | 'selected' | 'occupied' | 'unavailable'",
+      "required": true,
+      "description": "previewed = tapped, shown in the selection panel, not yet confirmed."
+    },
+    {
+      "name": "accessibleLabel",
+      "type": "string",
+      "required": true,
+      "description": "The full spoken description, built and localised by the feature layer, e.g. \"34K, window, Extra Legroom, USD 45, available\". The seat itself shows no text."
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md'",
+      "description": "28 / 36px."
+    },
+    {
+      "name": "onPreview",
+      "type": "(id: string) => void",
+      "description": "Tap, click, Enter or Space. Opens the selection panel. Committing happens in the panel (\"Confirm seat\"), not on the seat."
+    }
+  ],
+  "states": [
+    {
+      "name": "available",
+      "visual": "Per type (see variants).",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "hover",
+      "appliesTo": "pointer only",
+      "visual": "--color-seat-hover-bg fill; outline and glyph unchanged.",
+      "tokens": [
+        "--color-seat-hover-bg"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "focus-visible",
+      "visual": "Focus ring (--focus-ring-*).",
+      "tokens": [
+        "--focus-ring-color",
+        "--focus-ring-width",
+        "--focus-ring-offset"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "previewed",
+      "visual": "--color-seat-hover-bg fill + 2px --color-seat-previewed (red) outline replacing the type outline; the type glyph switches to Fill weight. The selection panel shows this seat's details. Red, not black, so it stands out on Extra Legroom seats.",
+      "tokens": [
+        "--color-seat-hover-bg",
+        "--color-seat-previewed"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "selected",
+      "visual": "--color-seat-selected fill (red), white check icon (Fill weight) replaces the type glyph.",
+      "tokens": [
+        "--color-seat-selected"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "occupied",
+      "visual": "--color-seat-occupied-bg fill with a diagonal hatch (repeating-linear-gradient in --neutral-300). No outline, no glyph. Not clickable.",
+      "tokens": [
+        "--color-seat-occupied-bg",
+        "--neutral-300"
+      ],
+      "source": {
+        "tag": "A · unverified (light grey + cross-hatch). Colour remapped from #E2E2E6 to the Live neutral.",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    },
+    {
+      "name": "unavailable",
+      "appliesTo": "blocked, not sold",
+      "visual": "--color-bg-muted, x icon in --color-icon-subtle. Not clickable.",
+      "tokens": [
+        "--color-bg-muted",
+        "--color-icon-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "interaction": [
+    "Tap or click → previewed: the selection panel shows seat number, type, position, price for the active passenger and a Confirm seat button. Nothing is committed yet.",
+    "Confirm (in the panel) → selected, after the server accepts it.",
+    "Pointer hover may additionally show a price tooltip; it is never the only way to see the price.",
+    "The seat does not take a price. Prices come from the seat-map API per passenger and are shown in SeatLegend and the selection panel."
+  ],
+  "accessibility": {
+    "pattern": "Grid (cell of the SeatMap grid)",
+    "requirements": [
+      "A gridcell containing a <button> named by accessibleLabel.",
+      "Occupied seats are announced as \"34K, occupied\" and have aria-disabled=\"true\"; they stay in the grid so arrow keys can pass over them.",
+      "Seat type is never shown by colour alone: every type has a glyph.",
+      "size sm (28px) meets the 24px AA target minimum."
+    ],
+    "keyboard": [
+      "Enter or Space previews an available seat."
+    ],
+    "wcag": [
+      "1.4.1",
+      "1.4.11",
+      "2.5.8",
+      "4.1.2"
+    ]
+  },
+  "rtl": [
+    "Seat grid columns follow the cabin layout data; arrow keys follow the visual direction (handled by SeatMap)."
+  ],
+  "composes": [
+    "icon"
+  ],
+  "tokens": [
+    "--color-seat-bg",
+    "--color-seat-regular",
+    "--color-seat-preferred",
+    "--color-seat-extra-legroom",
+    "--color-seat-twin",
+    "--color-seat-hover-bg",
+    "--color-seat-previewed",
+    "--color-seat-selected",
+    "--color-seat-occupied-bg",
+    "--neutral-300",
+    "--color-bg-muted",
+    "--color-icon-subtle",
+    "--radius-xs",
+    "--border-width-1",
+    "--border-width-2",
+    "--icon-size-xs",
+    "--focus-ring-color",
+    "--focus-ring-width",
+    "--focus-ring-offset"
+  ],
+  "rules": [
+    "Radius --radius-xs (2px).",
+    "Seats never show price text.",
+    "At size sm (28px) the 16px glyph still fits inside a 2px outline.",
+    "Seat fees (Official, indicative USD): Regular 7–40, Preferred 15–100, Twin 20–135, Extra Legroom 30–260. They vary by route, season, fare and Skywards tier; the server supplies them. Never hardcode."
+  ],
+  "sources": [
+    {
+      "doc": "tier-2-composites",
+      "section": "seat"
+    },
+    {
+      "doc": "states",
+      "section": "seat"
+    },
+    {
+      "doc": "colors",
+      "section": "semantic--seat"
+    },
+    {
+      "doc": "accessibility",
+      "section": "seat--seatmap"
+    },
+    {
+      "doc": "border-radius",
+      "section": "applied-per-component"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "Seat sizes 28 / 36px have no tokens.",
+      "refs": [
+        {
+          "doc": "tier-2-composites",
+          "section": "seat"
+        }
+      ]
+    },
+    {
+      "description": "The occupied hatch uses the primitive --neutral-300 directly; no semantic token exists for it.",
+      "refs": [
+        {
+          "doc": "states",
+          "section": "status-applies-to-every-type"
+        }
+      ]
+    }
+  ]
+}

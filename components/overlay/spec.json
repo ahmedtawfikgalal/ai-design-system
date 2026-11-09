@@ -1,0 +1,183 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "overlay",
+  "name": "Overlay",
+  "layer": "primitive",
+  "category": "overlay",
+  "inDesignSystem": true,
+  "description": "One surface primitive for every layered UI element: popover, modal, drawer, bottom sheet and full-screen overlay.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec (all Overlay values); fullscreen for mobile search and seat map: A · unverified",
+    "confidence": "proposed",
+    "mixed": true
+  },
+  "variants": [
+    {
+      "name": "popover",
+      "description": "Radius --radius-card, --elevation-3, no scrim.",
+      "tokens": [
+        "--radius-card",
+        "--elevation-3"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "modal",
+      "description": "Radius --radius-overlay, --elevation-4, --color-overlay-scrim.",
+      "tokens": [
+        "--radius-overlay",
+        "--elevation-4",
+        "--color-overlay-scrim"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "drawer",
+      "description": "Radius 0, --elevation-4, --color-overlay-scrim.",
+      "tokens": [
+        "--radius-none",
+        "--elevation-4",
+        "--color-overlay-scrim"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "sheet",
+      "description": "--radius-overlay on the top corners only, --elevation-4, --color-overlay-scrim.",
+      "tokens": [
+        "--radius-overlay",
+        "--elevation-4",
+        "--color-overlay-scrim"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "fullscreen",
+      "description": "Radius 0, no elevation, no scrim. For mobile search and seat map.",
+      "tokens": [
+        "--radius-none"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "props": [
+    {
+      "name": "type",
+      "type": "'popover' | 'modal' | 'drawer' | 'sheet' | 'fullscreen'",
+      "default": "popover"
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": true,
+      "description": "Controlled."
+    },
+    {
+      "name": "onClose",
+      "type": "() => void",
+      "required": true,
+      "description": "Controlled."
+    },
+    {
+      "name": "anchor",
+      "type": "element ref | null",
+      "default": null,
+      "description": "For popover only."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "description": "heading-2. Required for modal, drawer, sheet and fullscreen, because it is the dialog's accessible name."
+    },
+    {
+      "name": "hideTitle",
+      "type": "boolean",
+      "default": false,
+      "description": "Keeps the title for screen readers only."
+    },
+    {
+      "name": "initialFocus",
+      "type": "element ref | null",
+      "default": null,
+      "description": "Where focus goes on open. Default: the first focusable element, or the title if there is none."
+    },
+    {
+      "name": "side",
+      "type": "'start' | 'end' | 'bottom'",
+      "default": "end",
+      "description": "For drawer and sheet. start / end follow the reading direction."
+    }
+  ],
+  "accessibility": {
+    "pattern": "Dialog (Modal); non-modal popover",
+    "requirements": [
+      "popover (non-modal): role depends on content (listbox for a combobox, dialog for the passenger picker). Escape closes. Clicking outside closes. Focus returns to the trigger. No focus trap.",
+      "modal, drawer, sheet, fullscreen: role=\"dialog\" + aria-modal=\"true\", named by title (aria-labelledby). On open, focus moves to initialFocus (or the first focusable element). Tab is trapped inside. The rest of the page is inert. Page scroll is locked. Escape and the close button both close. On close, focus returns to the element that opened it.",
+      "Every modal type has a visible close button (Button iconOnly=\"x\" label=\"Close\") at the top end corner.",
+      "Bottom sheets can be dragged closed, but the close button must still exist (dragging is never the only way)."
+    ],
+    "keyboard": [
+      "Escape closes",
+      "Tab cycles within modal types"
+    ],
+    "wcag": [
+      "2.1.2",
+      "2.4.3",
+      "2.5.7",
+      "4.1.2"
+    ]
+  },
+  "rtl": [
+    "side=\"end\" opens from the right in English and from the left in Arabic.",
+    "Slide-in transforms (translateX) are not logical: they need a [dir=\"rtl\"] override or must use inset-inline-*."
+  ],
+  "composes": [
+    "button",
+    "text"
+  ],
+  "tokens": [
+    "--radius-card",
+    "--radius-overlay",
+    "--radius-none",
+    "--elevation-3",
+    "--elevation-4",
+    "--color-overlay-scrim",
+    "--heading-2-size"
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "overlay"
+    },
+    {
+      "doc": "accessibility",
+      "section": "overlay"
+    },
+    {
+      "doc": "rtl-and-arabic",
+      "section": "2-layout-logical-css-only"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "divider",
+  "name": "Divider",
+  "layer": "primitive",
+  "category": "surface",
+  "inDesignSystem": true,
+  "description": "A separator line, optionally with a label-caps section label.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Props documented; no states or accessibility section in the sources."
+    ]
+  },
+  "provenance": {
+    "tag": "Rec; accent tone colour: Live (terracotta)",
+    "confidence": "proposed",
+    "mixed": true
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string | null",
+      "default": null,
+      "description": "label-caps label, --color-text-subtle."
+    },
+    {
+      "name": "orientation",
+      "type": "'horizontal' | 'vertical'",
+      "default": "horizontal",
+      "description": "Vertical between header utility items."
+    },
+    {
+      "name": "tone",
+      "type": "'subtle' | 'accent' | 'inverse'",
+      "default": "subtle",
+      "description": "--color-border-subtle · --color-border-accent (terracotta, Live) · --neutral-700 on black."
+    },
+    {
+      "name": "spacing",
+      "type": "'sm' | 'md'",
+      "default": "md",
+      "description": "--space-2 / --space-4."
+    }
+  ],
+  "tokens": [
+    "--color-border-subtle",
+    "--color-border-accent",
+    "--neutral-700",
+    "--color-text-subtle",
+    "--space-2",
+    "--space-4",
+    "--border-width-1"
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "divider"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "The inverse tone uses the primitive --neutral-700 directly, although components are meant to consume semantic tokens only. No semantic token exists for it.",
+      "refs": [
+        {
+          "doc": "tier-1-primitives",
+          "section": "divider"
+        }
+      ]
+    },
+    {
+      "description": "Divider border width is not stated; --border-width-1 (\"all default borders … dividers\") is assumed from border-radius.md.",
+      "refs": [
+        {
+          "doc": "border-radius",
+          "section": "border-widths"
+        }
+      ]
+    }
+  ]
+}

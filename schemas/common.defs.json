@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fly-emirates-design-spec.invalid/schemas/common.defs.json",
+  "title": "Shared definitions",
+  "$defs": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "cssVar": {
+      "type": "string",
+      "pattern": "^--[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "confidence": {
+      "description": "official = verified Emirates source; observed = read from a live Emirates experience; inferred = unverified third-party claim or interpretation (File A); proposed = design-system recommendation (Rec). unattributed = the source documents give no source for this value.",
+      "enum": [
+        "official",
+        "observed",
+        "inferred",
+        "proposed",
+        "unattributed"
+      ]
+    },
+    "sourceRef": {
+      "type": "object",
+      "required": [
+        "doc"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "doc": {
+          "$ref": "#/$defs/id",
+          "description": "Document id from references/sources.json"
+        },
+        "section": {
+          "type": "string",
+          "description": "Heading anchor inside that document (GitHub slug)"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "tag",
+        "confidence"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "tag": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Source tag exactly as written in the original document"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence",
+          "description": "Confidence of the base value (tokens: the :root value; other specs: the first-cited source)"
+        },
+        "mixed": {
+          "type": "boolean",
+          "description": "true when the tag cites more than one source; read `tag` for which part comes from where"
+        },
+        "approved": {
+          "type": "boolean",
+          "description": "true for 'Rec · approved': a recommendation explicitly approved over an observed value"
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^D[0-9]+$"
+          },
+          "uniqueItems": true
+        },
+        "refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceRef"
+          }
+        },
+        "modes": {
+          "type": "object",
+          "description": "Tokens only: confidence of breakpoint (md, lg, xl) or Arabic (ar) values that differ from the base value's confidence",
+          "propertyNames": {
+            "enum": [
+              "md",
+              "lg",
+              "xl",
+              "ar"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/confidence"
+          }
+        }
+      }
+    },
+    "ambiguity": {
+      "type": "object",
+      "required": [
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceRef"
+          }
+        }
+      }
+    },
+    "specStatus": {
+      "type": "object",
+      "required": [
+        "specification",
+        "designed",
+        "implemented",
+        "tested"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "specification": {
+          "enum": [
+            "complete",
+            "partial"
+          ],
+          "description": "complete = props, states and accessibility documented; partial = only a description or composition exists"
+        },
+        "designed": {
+          "type": "boolean",
+          "description": "A Figma (or equivalent) design exists"
+        },
+        "implemented": {
+          "type": "boolean",
+          "description": "Production code exists"
+        },
+        "tested": {
+          "type": "boolean",
+          "description": "Automated and accessibility tests exist"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responsiveRule": {
+      "type": "object",
+      "required": [
+        "breakpoint",
+        "behavior"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "breakpoint": {
+          "enum": [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "sm-md",
+            "md+",
+            "lg+",
+            "below-lg",
+            "all"
+          ]
+        },
+        "behavior": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "global-footer",
+  "name": "GlobalFooter",
+  "category": "global-chrome",
+  "description": "The black site footer with link columns.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Colours and typography only."
+    ]
+  },
+  "provenance": {
+    "tag": "Live (black, white 14px text)",
+    "confidence": "observed"
+  },
+  "rules": [
+    "Link columns use body-sm in --color-text-inverse, and Divider tone=\"inverse\" between groups.",
+    "Background --color-bg-inverse."
+  ],
+  "composes": [
+    "text",
+    "divider"
+  ],
+  "tokens": [
+    "--color-bg-inverse",
+    "--color-text-inverse",
+    "--body-sm-size"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "globalfooter"
+    },
+    {
+      "doc": "patterns",
+      "section": "page-shell"
+    }
+  ]
+}

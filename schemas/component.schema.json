@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fly-emirates-design-spec.invalid/schemas/component.schema.json",
+  "title": "Component specification",
+  "type": "object",
+  "required": ["schemaVersion", "id", "name", "layer", "category", "inDesignSystem", "description", "status", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "$ref": "common.defs.json#/$defs/schemaVersion" },
+    "id": { "$ref": "common.defs.json#/$defs/id" },
+    "name": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+    "aliases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "description": "Other names used for this component in the source documents" },
+    "layer": { "enum": ["primitive", "composite", "feature"], "description": "primitive = Tier 1, composite = Tier 2, feature = assembled in the product, not part of the published design system" },
+    "category": { "enum": ["action", "display", "input", "surface", "media", "typography", "overlay", "aviation", "flight-search", "flight-results", "seat-selection", "booking", "content", "global-chrome"] },
+    "inDesignSystem": { "type": "boolean", "description": "Decision from scope-boundaries.md: true only for Tier 1 and Tier 2" },
+    "description": { "type": "string" },
+    "status": { "$ref": "common.defs.json#/$defs/specStatus" },
+    "provenance": { "$ref": "common.defs.json#/$defs/source" },
+    "composes": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/id" }, "uniqueItems": true, "description": "Component ids this one is built from" },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "tokens": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/cssVar" } },
+          "source": { "$ref": "common.defs.json#/$defs/source" }
+        }
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string", "description": "TypeScript-style type expression, as written in the source" },
+          "required": { "type": "boolean" },
+          "default": { "description": "Default value as documented; omitted when none is documented" },
+          "description": { "type": "string" },
+          "source": { "$ref": "common.defs.json#/$defs/source" }
+        }
+      }
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "visual"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "appliesTo": { "type": "string", "description": "Variant, type or sub-part the state applies to" },
+          "visual": { "type": "string" },
+          "tokens": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/cssVar" } },
+          "source": { "$ref": "common.defs.json#/$defs/source" }
+        }
+      }
+    },
+    "presets": {
+      "type": "array",
+      "description": "Named configurations that the source documents treat as 'not a separate component'",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "common.defs.json#/$defs/id" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "props": { "type": "object" },
+          "source": { "$ref": "common.defs.json#/$defs/source" }
+        }
+      }
+    },
+    "interaction": { "type": "array", "items": { "type": "string" } },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pattern": { "type": "string", "description": "WAI-ARIA APG pattern name, when one applies" },
+        "requirements": { "type": "array", "items": { "type": "string" } },
+        "keyboard": { "type": "array", "items": { "type": "string" } },
+        "announcements": { "type": "array", "items": { "type": "string" } },
+        "wcag": { "type": "array", "items": { "type": "string", "pattern": "^[1-4]\\.[0-9]+\\.[0-9]+$" }, "uniqueItems": true }
+      }
+    },
+    "responsive": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/responsiveRule" } },
+    "rtl": { "type": "array", "items": { "type": "string" } },
+    "tokens": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/cssVar" }, "uniqueItems": true, "description": "Every design token the component consumes" },
+    "rules": { "type": "array", "items": { "type": "string" }, "description": "Normative usage rules" },
+    "sources": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/sourceRef" }, "minItems": 1 },
+    "ambiguities": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/ambiguity" } }
+  }
+}

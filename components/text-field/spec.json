@@ -1,0 +1,295 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "text-field",
+  "name": "TextField",
+  "layer": "primitive",
+  "category": "input",
+  "inDesignSystem": true,
+  "description": "A text input with a floating label. Also the trigger for Combobox and DateField.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Live and File A agree on the floating label; Rec (sizes, states, colours)",
+    "confidence": "observed",
+    "mixed": true,
+    "decisions": [
+      "D20",
+      "D23"
+    ]
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "description": "Sits inside the field at rest; moves up to caption (12px) on focus or when filled.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": true,
+      "description": "Controlled."
+    },
+    {
+      "name": "onChange",
+      "type": "(value: string) => void",
+      "required": true,
+      "description": "Controlled."
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "--control-height-sm/md/lg: 40 / 48 / 56, the same scale as Button. sm has no floating label (the label sits above the field). lg for the hero search. Live fields are 40px, too tight for a floating label, so md is 48px.",
+      "source": {
+        "tag": "Rec · approved (D23)",
+        "confidence": "proposed",
+        "approved": true,
+        "decisions": [
+          "D23"
+        ]
+      }
+    },
+    {
+      "name": "iconStart",
+      "type": "IconName | null",
+      "default": null,
+      "description": "E.g. airplane-takeoff in the From field."
+    },
+    {
+      "name": "helperText",
+      "type": "string | null",
+      "default": null,
+      "description": "caption below the field."
+    },
+    {
+      "name": "errorText",
+      "type": "string | null",
+      "default": null,
+      "description": "Replaces the helper and sets the error state."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": false,
+      "description": "Sets aria-required. Optional fields are marked \"(optional)\" in the label instead of marking required ones with *."
+    },
+    {
+      "name": "name / type / autoComplete / inputMode",
+      "type": "HTML attributes",
+      "description": "Passed through. Passenger forms need autoComplete (given-name, family-name, email, tel, bday) to meet WCAG 1.3.5."
+    },
+    {
+      "name": "dir",
+      "type": "'auto' | 'ltr' | 'rtl'",
+      "default": "auto",
+      "description": "ltr for email, phone, booking reference and passport number, even on Arabic pages."
+    }
+  ],
+  "states": [
+    {
+      "name": "default",
+      "appliesTo": "empty",
+      "visual": "1px --color-border-control, label inside the field in body-md --color-text-subtle.",
+      "tokens": [
+        "--color-border-control",
+        "--color-text-subtle"
+      ],
+      "source": {
+        "tag": "Floating label: Live + A · unverified. Border colour: Rec (D4).",
+        "confidence": "observed",
+        "mixed": true,
+        "decisions": [
+          "D4"
+        ]
+      }
+    },
+    {
+      "name": "hover",
+      "visual": "Border --color-border-strong.",
+      "tokens": [
+        "--color-border-strong"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "focus",
+      "visual": "2px --color-border-focus (black), drawn as the 1px border plus a 1px inset shadow so the field does not shift; label moves up to caption.",
+      "tokens": [
+        "--color-border-focus"
+      ],
+      "source": {
+        "tag": "Label: A · unverified. Colour: Rec, replaces File A's red (D20).",
+        "confidence": "inferred",
+        "mixed": true,
+        "decisions": [
+          "D20"
+        ]
+      }
+    },
+    {
+      "name": "filled",
+      "visual": "1px border; label stays up in caption; value in body-md --color-text-default.",
+      "tokens": [
+        "--color-text-default"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "error",
+      "visual": "2px --color-border-error (crimson); errorText in --color-text-error with icon warning-circle.",
+      "tokens": [
+        "--color-border-error",
+        "--color-text-error"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "error + focus",
+      "visual": "2px crimson border, plus the black focus ring outside it (--focus-ring-offset).",
+      "tokens": [
+        "--color-border-error",
+        "--focus-ring-color",
+        "--focus-ring-width",
+        "--focus-ring-offset"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "disabled",
+      "visual": "--color-bg-disabled fill, --color-text-disabled text, --color-border-subtle.",
+      "tokens": [
+        "--color-bg-disabled",
+        "--color-text-disabled",
+        "--color-border-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "read-only",
+      "visual": "No border, --color-bg-subtle.",
+      "tokens": [
+        "--color-bg-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "<label for> linked to the input. The floating label is a real <label>, never a placeholder.",
+      "helperText and errorText are linked with aria-describedby.",
+      "Error: aria-invalid=\"true\", the message starts with the error icon, and the text says how to fix it (\"Enter the name as shown on the passport\").",
+      "Form-level errors: on submit, move focus to an error summary at the top that links to each field.",
+      "required sets aria-required. autoComplete is set for personal data.",
+      "Focus is black and error is crimson; the error state also carries an icon and a message, so it never depends on colour."
+    ],
+    "wcag": [
+      "1.3.1",
+      "1.3.5",
+      "1.4.1",
+      "2.4.7",
+      "3.3.1",
+      "3.3.2",
+      "4.1.2"
+    ]
+  },
+  "rtl": [
+    "Text inputs follow the page direction (right-aligned in Arabic).",
+    "Email, phone, booking reference, passport number and card number inputs are always dir=\"ltr\".",
+    "Passenger names must be in Latin characters (passports, airline systems): say so in helper text and validate with a clear error, rather than silently rejecting Arabic input.",
+    "Error messages and helper text sit at the start edge."
+  ],
+  "composes": [
+    "icon",
+    "text"
+  ],
+  "tokens": [
+    "--color-bg-surface",
+    "--color-border-control",
+    "--color-border-strong",
+    "--color-border-focus",
+    "--color-border-error",
+    "--color-border-subtle",
+    "--color-text-default",
+    "--color-text-subtle",
+    "--color-text-error",
+    "--color-text-disabled",
+    "--color-bg-disabled",
+    "--color-bg-subtle",
+    "--radius-control",
+    "--border-width-1",
+    "--space-3",
+    "--space-0-5",
+    "--body-md-size",
+    "--caption-size",
+    "--control-height-sm",
+    "--control-height-md",
+    "--control-height-lg",
+    "--focus-ring-color",
+    "--focus-ring-width",
+    "--focus-ring-offset"
+  ],
+  "rules": [
+    "Background --color-bg-surface; border --border-width-1 --color-border-control; radius --radius-control; padding-inline --space-3; value body-md.",
+    "Floating label → value gap: --space-0-5 (2px)."
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "textfield"
+    },
+    {
+      "doc": "states",
+      "section": "textfield-and-combobox--datefield-triggers"
+    },
+    {
+      "doc": "accessibility",
+      "section": "textfield"
+    },
+    {
+      "doc": "rtl-and-arabic",
+      "section": "7-forms"
+    },
+    {
+      "doc": "spacing",
+      "section": "textfield"
+    }
+  ]
+}

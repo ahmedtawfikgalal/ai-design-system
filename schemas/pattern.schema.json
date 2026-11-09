@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fly-emirates-design-spec.invalid/schemas/pattern.schema.json",
+  "title": "Pattern specification (page pattern, flow or state model)",
+  "type": "object",
+  "required": ["schemaVersion", "id", "name", "kind", "description", "status", "provenance", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "$ref": "common.defs.json#/$defs/schemaVersion" },
+    "id": { "$ref": "common.defs.json#/$defs/id" },
+    "name": { "type": "string" },
+    "kind": { "enum": ["page", "flow", "section", "state-model"] },
+    "description": { "type": "string" },
+    "status": { "$ref": "common.defs.json#/$defs/specStatus" },
+    "provenance": { "$ref": "common.defs.json#/$defs/source" },
+    "structure": { "type": "string", "description": "Wireframe diagram exactly as drawn in the source document" },
+    "regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "components": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/id" } },
+          "tokens": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/cssVar" } },
+          "source": { "$ref": "common.defs.json#/$defs/source" }
+        }
+      }
+    },
+    "components": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/id" }, "uniqueItems": true },
+    "patterns": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/id" }, "uniqueItems": true, "description": "Related pattern ids" },
+    "tokens": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/cssVar" }, "uniqueItems": true },
+    "responsive": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/responsiveRule" } },
+    "rtl": { "type": "array", "items": { "type": "string" } },
+    "rules": { "type": "array", "items": { "type": "string" } },
+    "stateModel": { "type": "object", "description": "Only for kind = state-model: domain terms, state shape, actions, derived values and lifecycle, preserved from the source" },
+    "sources": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/sourceRef" }, "minItems": 1 },
+    "ambiguities": { "type": "array", "items": { "$ref": "common.defs.json#/$defs/ambiguity" } }
+  }
+}

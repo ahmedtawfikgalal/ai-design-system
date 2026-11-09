@@ -1,0 +1,119 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "flight-segment",
+  "name": "FlightSegment",
+  "layer": "composite",
+  "category": "aviation",
+  "inDesignSystem": true,
+  "description": "A single flight segment (one physical flight): times, IATA codes, cities, duration, stops and optional aircraft. Appears in results, booking summary, Manage Booking and check-in.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Structure: A · unverified; 24px times: A · unverified; RTL and accessibility: Rec",
+    "confidence": "inferred",
+    "mixed": true,
+    "decisions": [
+      "D15",
+      "D17"
+    ]
+  },
+  "props": [
+    {
+      "name": "departure",
+      "type": "{ time, iata, city, dayOffset? }",
+      "required": true
+    },
+    {
+      "name": "arrival",
+      "type": "{ time, iata, city, dayOffset? }",
+      "required": true,
+      "description": "dayOffset shows \"+1\" next to the arrival time."
+    },
+    {
+      "name": "duration",
+      "type": "string",
+      "required": true,
+      "description": "\"7h 15m\"."
+    },
+    {
+      "name": "stops",
+      "type": "{ iata }[]",
+      "required": true,
+      "description": "An empty array means \"Direct\"."
+    },
+    {
+      "name": "aircraft",
+      "type": "string | null",
+      "description": "Shows Badge variant=\"neutral\"."
+    },
+    {
+      "name": "density",
+      "type": "'compact' | 'regular'",
+      "description": "compact for the booking summary and mobile."
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "The visual layout is not a sentence: render one visually hidden summary (\"Departs Dubai DXB 08:40. Arrives London Heathrow LHR 13:55, next day. 7 hours 15 minutes. Direct. Airbus A380.\") and mark the visual pieces aria-hidden.",
+      "Durations are written out for screen readers (\"7 hours 15 minutes\", not \"7h 15m\").",
+      "dayOffset \"+1\" is announced as \"next day\"."
+    ],
+    "wcag": [
+      "1.3.1",
+      "1.3.2"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "all",
+      "behavior": "density=\"compact\" in the booking summary (including the ~300px lg sidebar) and on mobile."
+    }
+  ],
+  "rtl": [
+    "The row follows the reading direction: in Arabic, departure is on the right and arrival on the left, and the airplane icon is mirrored to point left.",
+    "Times, IATA codes and flight numbers are wrapped in <bdi dir=\"ltr\"> so they never reorder."
+  ],
+  "composes": [
+    "text",
+    "icon",
+    "badge"
+  ],
+  "tokens": [
+    "--heading-1-size",
+    "--body-md-size",
+    "--body-sm-size",
+    "--caption-size",
+    "--color-text-subtle",
+    "--color-border-default",
+    "--space-2",
+    "--space-1",
+    "--space-6"
+  ],
+  "rules": [
+    "Times: heading-1 (24px, A · unverified) with tabular numerals. IATA codes: body-md 700. City: body-sm --color-text-subtle. Path line: 1px --color-border-default with --space-2 dots marking stops. Duration: caption.",
+    "Origin / path / destination column gap --space-6; time → IATA → city stack gap --space-1 (spacing.md, flight result card)."
+  ],
+  "sources": [
+    {
+      "doc": "tier-2-composites",
+      "section": "flightsegment"
+    },
+    {
+      "doc": "accessibility",
+      "section": "flightsegment"
+    },
+    {
+      "doc": "rtl-and-arabic",
+      "section": "5-mixed-direction-text-bidi"
+    },
+    {
+      "doc": "spacing",
+      "section": "flight-result-card"
+    }
+  ]
+}

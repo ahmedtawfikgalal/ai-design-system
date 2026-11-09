@@ -1,0 +1,205 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "combobox",
+  "name": "Combobox",
+  "layer": "composite",
+  "category": "input",
+  "inDesignSystem": true,
+  "description": "A typeahead input with a listbox popup. Used for airport search, country and currency.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec; airport option content: A · unverified",
+    "confidence": "proposed",
+    "mixed": true
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "description": "\"From\", \"To\"."
+    },
+    {
+      "name": "query",
+      "type": "string",
+      "required": true,
+      "description": "Typeahead input (controlled)."
+    },
+    {
+      "name": "onQueryChange",
+      "type": "(query: string) => void",
+      "required": true
+    },
+    {
+      "name": "options",
+      "type": "T[]",
+      "required": true,
+      "description": "Filtering happens in the feature layer."
+    },
+    {
+      "name": "renderOption",
+      "type": "(option: T) => ReactNode",
+      "description": "Slot. The airport option shows bold IATA code, airport name, city and country (AirportOption).",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "getOptionLabel",
+      "type": "(option: T) => string",
+      "required": true,
+      "description": "Plain-text name of each option for screen readers and for the input value, e.g. \"Dubai International, DXB\". Required, because renderOption output is visual."
+    },
+    {
+      "name": "value",
+      "type": "T | null",
+      "required": true
+    },
+    {
+      "name": "onChange",
+      "type": "(value: T) => void",
+      "required": true
+    },
+    {
+      "name": "emptyText",
+      "type": "string",
+      "description": "\"No airports match\"."
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "description": "Shows skeleton rows and announces \"Loading\"."
+    }
+  ],
+  "states": [
+    {
+      "name": "default",
+      "appliesTo": "option",
+      "visual": "--color-bg-surface.",
+      "tokens": [
+        "--color-bg-surface"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "highlighted",
+      "appliesTo": "option (keyboard or hover)",
+      "visual": "--color-bg-subtle.",
+      "tokens": [
+        "--color-bg-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "selected",
+      "appliesTo": "option",
+      "visual": "check icon at the end, --color-icon-brand.",
+      "tokens": [
+        "--color-icon-brand"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "empty list",
+      "visual": "emptyText in body-sm --color-text-subtle.",
+      "tokens": [
+        "--color-text-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "loading",
+      "visual": "3 skeleton rows in --color-bg-muted.",
+      "tokens": [
+        "--color-bg-muted"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "trigger states",
+      "visual": "Same as TextField (default, hover, focus, filled, error, disabled).",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "accessibility": {
+    "pattern": "Combobox with listbox popup, list autocomplete",
+    "requirements": [
+      "Input: role=\"combobox\", aria-expanded, aria-controls (the listbox), aria-autocomplete=\"list\", aria-activedescendant (the highlighted option).",
+      "Popup: role=\"listbox\"; each option is role=\"option\" with aria-selected, named by getOptionLabel (\"Dubai International, DXB, Dubai, United Arab Emirates\").",
+      "Focus stays in the input the whole time."
+    ],
+    "keyboard": [
+      "Down / Up move the highlight.",
+      "Enter selects.",
+      "Escape closes, then clears on a second press.",
+      "Alt + Down opens without moving."
+    ],
+    "announcements": [
+      "A polite live region announces the result count after typing settles (\"5 airports\"), the empty state, and \"Loading\"."
+    ],
+    "wcag": [
+      "4.1.2",
+      "4.1.3",
+      "2.1.1"
+    ]
+  },
+  "composes": [
+    "text-field",
+    "overlay"
+  ],
+  "tokens": [
+    "--radius-card",
+    "--elevation-2",
+    "--space-3",
+    "--color-bg-surface",
+    "--color-bg-subtle",
+    "--color-bg-muted",
+    "--color-icon-brand",
+    "--color-text-subtle",
+    "--body-md-size",
+    "--body-sm-size"
+  ],
+  "rules": [
+    "Menu: --radius-card, --elevation-2. Option rows: --space-3 vertical padding. IATA code body-md 700.",
+    "The swap button (⇄ between From and To) is a feature-layer Button variant=\"secondary\" size=\"sm\" with icon arrows-left-right. It is not part of Combobox."
+  ],
+  "sources": [
+    {
+      "doc": "tier-2-composites",
+      "section": "combobox"
+    },
+    {
+      "doc": "states",
+      "section": "combobox-option"
+    },
+    {
+      "doc": "accessibility",
+      "section": "combobox"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "text",
+  "name": "Text",
+  "layer": "primitive",
+  "category": "typography",
+  "inDesignSystem": true,
+  "description": "The typography primitive. Maps a variant to the type tokens and a default HTML element.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec (component API); type values: see tokens",
+    "confidence": "proposed"
+  },
+  "props": [
+    {
+      "name": "as",
+      "type": "HTML tag",
+      "default": "inferred from variant",
+      "description": "Changes the HTML element without changing the style. Defaults: display-xl, display-lg → h1; display-md, heading-1 → h2; heading-2 → h3; heading-3 → h4; body-* → p; caption, label-caps → span."
+    },
+    {
+      "name": "variant",
+      "type": "'display-xl' | 'display-lg' | 'display-md' | 'heading-1' | 'heading-2' | 'heading-3' | 'body-lg' | 'body-md' | 'body-sm' | 'caption' | 'label-caps'",
+      "default": "body-md",
+      "description": "Maps to the type tokens."
+    },
+    {
+      "name": "color",
+      "type": "'default' | 'strong' | 'subtle' | 'disabled' | 'inverse' | 'brand' | 'link' | 'success' | 'warning' | 'error' | 'info' | 'on-brand' | 'on-premium'",
+      "default": "default",
+      "description": "Maps to --color-text-*."
+    },
+    {
+      "name": "numeric",
+      "type": "'tabular' | 'proportional'",
+      "default": "proportional",
+      "description": "Use tabular for times, prices and flight numbers."
+    },
+    {
+      "name": "strikethrough",
+      "type": "boolean",
+      "default": false,
+      "description": "For original prices."
+    },
+    {
+      "name": "truncate",
+      "type": "boolean | number",
+      "default": false,
+      "description": "true truncates to one line; a number clamps to that many lines."
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "md+",
+      "behavior": "Display and heading sizes switch to desktop values at 48em (tokens handle this)."
+    },
+    {
+      "breakpoint": "lg+",
+      "behavior": "display-xl turns on (120/112); below lg it renders as display-lg."
+    }
+  ],
+  "rtl": [
+    "Arabic: letter spacing 0, no uppercase, taller line heights for body-lg/md/sm, caption and label-caps (ar mode tokens)."
+  ],
+  "tokens": [
+    "--font-family-base",
+    "--font-family-display",
+    "--display-xl-size",
+    "--display-xl-line-height",
+    "--display-xl-weight",
+    "--display-xl-letter-spacing",
+    "--display-lg-size",
+    "--display-lg-line-height",
+    "--display-lg-weight",
+    "--display-md-size",
+    "--display-md-line-height",
+    "--display-md-weight",
+    "--heading-1-size",
+    "--heading-1-line-height",
+    "--heading-1-weight",
+    "--heading-2-size",
+    "--heading-2-line-height",
+    "--heading-2-weight",
+    "--heading-3-size",
+    "--heading-3-line-height",
+    "--heading-3-weight",
+    "--body-lg-size",
+    "--body-lg-line-height",
+    "--body-lg-weight",
+    "--body-md-size",
+    "--body-md-line-height",
+    "--body-md-weight",
+    "--body-sm-size",
+    "--body-sm-line-height",
+    "--body-sm-weight",
+    "--caption-size",
+    "--caption-line-height",
+    "--caption-weight",
+    "--label-caps-size",
+    "--label-caps-line-height",
+    "--label-caps-weight",
+    "--letter-spacing-wide",
+    "--letter-spacing-caps",
+    "--text-transform-caps",
+    "--color-text-default",
+    "--color-text-strong",
+    "--color-text-subtle",
+    "--color-text-disabled",
+    "--color-text-inverse",
+    "--color-text-brand",
+    "--color-text-link",
+    "--color-text-success",
+    "--color-text-warning",
+    "--color-text-error",
+    "--color-text-info",
+    "--color-text-on-brand",
+    "--color-text-on-premium"
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "text"
+    },
+    {
+      "doc": "typography",
+      "section": "type-scale"
+    }
+  ]
+}

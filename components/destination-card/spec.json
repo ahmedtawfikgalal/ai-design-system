@@ -1,0 +1,101 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "destination-card",
+  "name": "DestinationCard",
+  "category": "content",
+  "description": "A photo-first destination card: image with bottom gradient, city and country, \"Fares from\" price and a visual CTA. The whole card is one link.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Props documented; no states section."
+    ]
+  },
+  "provenance": {
+    "tag": "Live (photo-first, Emirates-Bold 22px heading, 8px radius, 4-column desktop grid) + A · unverified (4:3 / 16:9, gradient overlay, \"Fares from\" price, CTA)",
+    "confidence": "observed",
+    "mixed": true
+  },
+  "props": [
+    {
+      "name": "image",
+      "type": "{ src, alt }",
+      "required": true,
+      "description": "Media ratio=\"4:3\" overlay=\"bottom-gradient\"."
+    },
+    {
+      "name": "city",
+      "type": "string",
+      "required": true,
+      "description": "heading-2 (22px, Live size) in --color-text-inverse."
+    },
+    {
+      "name": "country",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "fromPrice",
+      "type": "Money",
+      "required": true,
+      "description": "PriceDisplay prefix=\"Fares from\"."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "required": true,
+      "description": "The whole card is the link. The CTA is visual only."
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "The whole card is one link (Card as=\"a\" interactive); the CTA is visual only and must not be a separate button or link."
+    ],
+    "wcag": [
+      "2.4.4",
+      "4.1.2"
+    ]
+  },
+  "composes": [
+    "card",
+    "media",
+    "text",
+    "price-display"
+  ],
+  "tokens": [
+    "--radius-card",
+    "--color-text-inverse",
+    "--heading-2-size",
+    "--color-overlay-image"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "destinationcard"
+    },
+    {
+      "doc": "patterns",
+      "section": "pattern-5--destination-grid"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "Live uses the proprietary Emirates-Bold font for the 22px heading; this system falls back to the Helvetica Neue stack (D7).",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "destinationcard"
+        },
+        {
+          "doc": "typography",
+          "section": "font-stack"
+        }
+      ]
+    }
+  ]
+}

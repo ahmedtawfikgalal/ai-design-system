@@ -1,0 +1,206 @@
+{
+  "$schema": "./schemas/manifest.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "@your-scope/fly-emirates-design-spec",
+  "version": "0.1.0",
+  "description": "Machine-readable specification of the Fly Emirates concept design system (unofficial, not endorsed by Emirates): design tokens, component and pattern specs, layout rules and JSON Schemas, structured for selective retrieval by tools and AI agents.",
+  "disclaimer": "Unofficial concept. Emirates brand guidelines are not public; the logo and typefaces are proprietary. Nothing here is endorsed by Emirates. Only values with confidence \"official\" come from Emirates sources; \"observed\" values were read from the live site by a third party; \"inferred\" values are unverified; \"proposed\" values are design-system recommendations.",
+  "vocabulary": {
+    "confidence": {
+      "official": "Directly supported by verified Emirates documentation.",
+      "observed": "Identified by inspecting an Emirates digital experience (the live website).",
+      "inferred": "Unverified third-party claim or interpretation (File A).",
+      "proposed": "A design-system recommendation (Rec). approved: true marks recommendations approved over an observed value.",
+      "unattributed": "The source documents give no source for this value (e.g. a mobile size in a row tagged only for desktop)."
+    },
+    "tokenConfidence": "For tokens, confidence is that of the base (:root) value; source.modes lists breakpoint or Arabic values whose confidence differs.",
+    "sourceTags": {
+      "Official": "official",
+      "Live": "observed",
+      "A · unverified": "inferred",
+      "Rec": "proposed",
+      "Rec · approved": "proposed"
+    },
+    "status": {
+      "specification": "complete = props, states and accessibility documented; partial = described but not fully specified.",
+      "designed": "A Figma or equivalent design exists. false for every component in this version.",
+      "implemented": "Production code exists. false for every component in this version.",
+      "tested": "Automated and accessibility tests exist. false for every component in this version."
+    },
+    "layers": {
+      "primitive": "Tier 1. Part of the design system.",
+      "composite": "Tier 2. Part of the design system.",
+      "feature": "Assembled in the product from design-system parts. Specified here for completeness; not part of the design system (scope-boundaries)."
+    }
+  },
+  "resources": [
+    {
+      "id": "manifest-schema",
+      "path": "schemas/manifest.schema.json",
+      "mediaType": "application/schema+json",
+      "description": "Schema for this manifest, the indexes, layouts and references."
+    },
+    {
+      "id": "token-schema",
+      "path": "schemas/token.schema.json",
+      "mediaType": "application/schema+json",
+      "description": "Schema for tokens/tokens.json."
+    },
+    {
+      "id": "component-schema",
+      "path": "schemas/component.schema.json",
+      "mediaType": "application/schema+json",
+      "description": "Schema for each component spec."
+    },
+    {
+      "id": "pattern-schema",
+      "path": "schemas/pattern.schema.json",
+      "mediaType": "application/schema+json",
+      "description": "Schema for each pattern spec."
+    },
+    {
+      "id": "common-schema",
+      "path": "schemas/common.defs.json",
+      "mediaType": "application/schema+json",
+      "description": "Shared definitions (source attribution, status, ids)."
+    },
+    {
+      "id": "tokens-json",
+      "path": "tokens/tokens.json",
+      "mediaType": "application/json",
+      "schema": "schemas/token.schema.json",
+      "description": "All design tokens: W3C DTCG values plus exact CSS output, breakpoint and Arabic values, attribution and component usage."
+    },
+    {
+      "id": "token-values",
+      "path": "tokens/values.json",
+      "mediaType": "application/json",
+      "schema": "schemas/manifest.schema.json#/$defs/tokenValues",
+      "description": "Compact lookup (one line per token): CSS name → value, resolved literal, breakpoint and Arabic values, confidence. Use this to resolve the tokens a spec lists without loading tokens.json."
+    },
+    {
+      "id": "tokens-css",
+      "path": "tokens/tokens.css",
+      "mediaType": "text/css",
+      "description": "CSS custom properties. Identical to design-system/tokens/tokens.css."
+    },
+    {
+      "id": "fonts-css",
+      "path": "tokens/fonts.css",
+      "mediaType": "text/css",
+      "description": "Arabic @font-face (\"EK Arabic\"). Load with tokens.css."
+    },
+    {
+      "id": "component-index",
+      "path": "components/index.json",
+      "mediaType": "application/json",
+      "schema": "schemas/manifest.schema.json#/$defs/componentIndex",
+      "description": "Every component with id, layer, status, relationships and path. Read this first, then fetch single specs."
+    },
+    {
+      "id": "component-spec",
+      "path": "components/{id}/spec.json",
+      "pathTemplate": "components/{id}/spec.json",
+      "mediaType": "application/json",
+      "schema": "schemas/component.schema.json",
+      "description": "One component specification."
+    },
+    {
+      "id": "pattern-index",
+      "path": "patterns/index.json",
+      "mediaType": "application/json",
+      "schema": "schemas/manifest.schema.json#/$defs/patternIndex",
+      "description": "Every page pattern, flow and state model."
+    },
+    {
+      "id": "pattern-spec",
+      "path": "patterns/{id}.json",
+      "pathTemplate": "patterns/{id}.json",
+      "mediaType": "application/json",
+      "schema": "schemas/pattern.schema.json",
+      "description": "One pattern specification."
+    },
+    {
+      "id": "layouts",
+      "path": "layouts/layouts.json",
+      "mediaType": "application/json",
+      "schema": "schemas/manifest.schema.json#/$defs/layouts",
+      "description": "Breakpoints, grid, containers, per-breakpoint adaptations, surface layers."
+    },
+    {
+      "id": "references",
+      "path": "references/sources.json",
+      "mediaType": "application/json",
+      "schema": "schemas/manifest.schema.json#/$defs/sources",
+      "description": "Source documents (with hashes), source-tag definitions and the decision log D1–D24."
+    },
+    {
+      "id": "foundation-color",
+      "path": "foundations/color.md",
+      "mediaType": "text/markdown",
+      "description": "Colour rules and hierarchy."
+    },
+    {
+      "id": "foundation-typography",
+      "path": "foundations/typography.md",
+      "mediaType": "text/markdown",
+      "description": "Type rules, scale and Arabic adjustments."
+    },
+    {
+      "id": "foundation-spacing",
+      "path": "foundations/spacing.md",
+      "mediaType": "text/markdown",
+      "description": "Spacing scale and units."
+    },
+    {
+      "id": "foundation-shapes",
+      "path": "foundations/shapes.md",
+      "mediaType": "text/markdown",
+      "description": "Radius, border widths, elevation and selection rules."
+    },
+    {
+      "id": "foundation-icons",
+      "path": "foundations/icons.md",
+      "mediaType": "text/markdown",
+      "description": "Icon set, sizes, aviation map and RTL mirroring."
+    },
+    {
+      "id": "accessibility-guidelines",
+      "path": "accessibility/guidelines.md",
+      "mediaType": "text/markdown",
+      "description": "WCAG 2.2 AA baseline and acceptance criteria. Component-specific rules are in each spec."
+    },
+    {
+      "id": "rtl-guidelines",
+      "path": "rtl/guidelines.md",
+      "mediaType": "text/markdown",
+      "description": "Right-to-left and Arabic rules."
+    },
+    {
+      "id": "changelog",
+      "path": "CHANGELOG.md",
+      "mediaType": "text/markdown",
+      "description": "Package changes."
+    }
+  ],
+  "counts": {
+    "tokens": 223,
+    "components": 34,
+    "componentsInDesignSystem": 17,
+    "featureComponents": 17,
+    "patterns": 8
+  },
+  "retrieval": [
+    "Start with manifest.json, then components/index.json or patterns/index.json.",
+    "Fetch one component with components/{id}/spec.json (package export: ./components/{id}).",
+    "Resolve the tokens a spec lists with tokens/values.json (small, keyed by CSS name). Load tokens/tokens.json only for full attribution, DTCG references and usedBy.",
+    "Check provenance before presenting a value as Emirates brand fact: only confidence \"official\" is an Emirates source."
+  ],
+  "notImplemented": [
+    "Figma designs (designed: false everywhere)",
+    "React/TypeScript components (implemented: false everywhere)",
+    "Storybook stories and automated tests (tested: false everywhere)",
+    "Pricing / seat-map / booking API contracts (the specs define client state and responsibilities only)",
+    "MCP server, CLI or code generators"
+  ]
+}

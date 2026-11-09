@@ -1,0 +1,89 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "fare-options",
+  "name": "FareOptions",
+  "aliases": [
+    "FareOptionsMatrix"
+  ],
+  "category": "flight-results",
+  "description": "The fare matrix shown when a flight result is expanded: one card per fare family with its price, inclusions and a Choose action.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Props and layout documented."
+    ]
+  },
+  "provenance": {
+    "tag": "Structure: A · unverified (expandable fare columns). Fare names: Official.",
+    "confidence": "inferred",
+    "mixed": true
+  },
+  "props": [
+    {
+      "name": "fares",
+      "type": "{ id, cabin, family, price, inclusions[] }[]",
+      "required": true,
+      "description": "family: Economy Saver / Flex / Flex Plus; Business Special / Saver / Flex / Flex Plus; Premium Economy; First (Official).",
+      "source": {
+        "tag": "Official (fare names)",
+        "confidence": "official"
+      }
+    },
+    {
+      "name": "selectedFareId",
+      "type": "string | null"
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "md+",
+      "behavior": "Horizontal columns."
+    },
+    {
+      "breakpoint": "sm",
+      "behavior": "Stacked cards."
+    }
+  ],
+  "composes": [
+    "card",
+    "price-display",
+    "button",
+    "text"
+  ],
+  "rules": [
+    "First Class uses Card variant=\"premium\" and Button variant=\"premium\".",
+    "File A's names (\"Economy Special\", \"Economy Flex\", \"Business Saver\", \"First Class\") are not used. \"Economy Special\" does not appear among the Official fare names.",
+    "Fare names come from fare data, never hardcoded."
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "fareoptions-fare-matrix"
+    },
+    {
+      "doc": "scope-boundaries",
+      "section": "decision-table"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "Named FareOptions in inventory.md and FareOptionsMatrix in overview.md, scope-boundaries.md and state-architecture.md. Same component.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "fareoptions-fare-matrix"
+        },
+        {
+          "doc": "scope-boundaries",
+          "section": "decision-table"
+        }
+      ]
+    }
+  ]
+}

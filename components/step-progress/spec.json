@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "step-progress",
+  "name": "StepProgress",
+  "category": "booking",
+  "description": "The booking step indicator: Flights · Passengers · Seats · Extras · Payment.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Step names and typography only."
+    ]
+  },
+  "provenance": {
+    "tag": "Rec. The step names are Rec; the Official sources only confirm that seat choice happens during booking.",
+    "confidence": "proposed",
+    "mixed": true
+  },
+  "responsive": [
+    {
+      "breakpoint": "lg+",
+      "behavior": "Step labels in label-caps."
+    },
+    {
+      "breakpoint": "below-lg",
+      "behavior": "\"Step 2 of 5\" in caption."
+    }
+  ],
+  "composes": [
+    "text"
+  ],
+  "tokens": [
+    "--label-caps-size",
+    "--caption-size"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "stepprogress"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "\"Desktop\" and \"mobile\" are not mapped to breakpoints; lg+ / below-lg is assumed from the booking-flow pattern.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "stepprogress"
+        }
+      ]
+    },
+    {
+      "description": "No accessibility behaviour (e.g. current-step semantics) is specified.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "stepprogress"
+        }
+      ]
+    }
+  ]
+}

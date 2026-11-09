@@ -1,0 +1,319 @@
+/*
+ * Fly Emirates Design System — tokens
+ * Unofficial concept; not endorsed by Emirates.
+ *
+ * GENERATED FILE — do not edit. Source: tokens/tokens.json (W3C DTCG).
+ * Rebuild with `npm run build:tokens`. Source tags for every value: tokens/*.md.
+ *
+ * Units: rem for type, spacing, icons, controls and containers (1rem = 16px by default);
+ *        px only for borders, radii, focus rings and shadows.
+ * Layers: primitives (--red-500) → semantic (--color-action-primary). Components use semantic tokens only.
+ * Fonts: also load tokens/fonts.css (Arabic @font-face).
+ */
+
+:root {
+  /* ===== 1. COLOR — PRIMITIVES ===== */
+  --red-50: #FDF1F2;
+  --red-100: #F9DFE0;
+  --red-200: #F3BABC;
+  --red-300: #EB8C90;
+  --red-400: #E15258;
+  --red-500: #D71921; /* Live */
+  --red-600: #B8141A; /* A · unverified */
+  --red-700: #961217;
+  --red-800: #760E12;
+  --red-900: #560A0D;
+  --gold-50: #F9F6EE;
+  --gold-100: #F3ECDE;
+  --gold-200: #E8D9BD;
+  --gold-400: #C5A059; /* A · unverified — never text */
+  --gold-500: #B08F52; /* Rec: premium hover; black text 6.9:1 — never text */
+  --gold-600: #997D4B; /* A · unverified — never text */
+  --terracotta-500: #AF5541; /* Live */
+  --terracotta-700: #8C4434;
+  --cream-100: #FEF8D5; /* Live */
+  --neutral-0: #FFFFFF; /* Live */
+  --neutral-50: #F6F6F6; /* Live */
+  --neutral-100: #EEEEEE;
+  --neutral-200: #D8D8D8; /* Live */
+  --neutral-300: #CCCCCC; /* Live */
+  --neutral-400: #A9A9A9; /* Live */
+  --neutral-500: #8A8A8A; /* 3:1 control border */
+  --neutral-600: #666666; /* Live */
+  --neutral-700: #4D4D4D;
+  --neutral-800: #333333; /* Live */
+  --neutral-900: #1A1A1A;
+  --neutral-1000: #000000; /* Live */
+  --green-50: #ECF5F0;
+  --green-600: #107C41; /* A · unverified */
+  --green-800: #0A512A;
+  --amber-50: #FCF4EB;
+  --amber-500: #D97706; /* A · unverified — not for text */
+  --amber-800: #8D4D04;
+  --crimson-50: #F9EDED;
+  --crimson-700: #B91C1C; /* A · unverified */
+  --crimson-900: #781212;
+  --blue-50: #EDF2F8;
+  --blue-600: #1F5FA8;
+  --blue-800: #143E6D;
+
+  /* ===== 1. COLOR — PRIMITIVES (alpha) ===== */
+  --black-alpha-6: rgba(0, 0, 0, 0.06);
+  --black-alpha-12: rgba(0, 0, 0, 0.12);
+  --black-alpha-16: rgba(0, 0, 0, 0.16);
+  --black-alpha-20: rgba(0, 0, 0, 0.20);
+  --black-alpha-50: rgba(0, 0, 0, 0.50);
+  --black-alpha-75: rgba(0, 0, 0, 0.75);
+
+  /* ===== 1. COLOR — SEMANTIC ===== */
+  --color-text-default: var(--neutral-800);
+  --color-text-strong: var(--neutral-1000);
+  --color-text-subtle: var(--neutral-600);
+  --color-text-disabled: var(--neutral-400);
+  --color-text-inverse: var(--neutral-0);
+  --color-text-brand: var(--red-500);
+  --color-text-link: var(--terracotta-500);
+  --color-text-link-hover: var(--terracotta-700);
+  --color-text-on-brand: var(--neutral-0);
+  --color-text-on-premium: var(--neutral-1000);
+  --color-text-success: var(--green-800);
+  --color-text-warning: var(--amber-800);
+  --color-text-error: var(--crimson-700);
+  --color-text-info: var(--blue-800);
+  --color-bg-page: var(--neutral-0);
+  --color-bg-surface: var(--neutral-0);
+  --color-bg-subtle: var(--neutral-50);
+  --color-bg-muted: var(--neutral-100);
+  --color-bg-inverse: var(--neutral-1000);
+  --color-bg-brand: var(--red-500);
+  --color-bg-brand-subtle: var(--red-50);
+  --color-bg-accent-warm: var(--cream-100);
+  --color-bg-premium: var(--gold-400);
+  --color-bg-premium-subtle: var(--gold-50);
+  --color-bg-disabled: var(--neutral-100);
+  --color-bg-success: var(--green-50);
+  --color-bg-warning: var(--amber-50);
+  --color-bg-error: var(--crimson-50);
+  --color-bg-info: var(--blue-50);
+  --color-overlay-scrim: var(--black-alpha-50);
+  --color-overlay-image: var(--black-alpha-75);
+  --color-border-subtle: var(--neutral-200);
+  --color-border-default: var(--neutral-400);
+  --color-border-control: var(--neutral-500);
+  --color-border-strong: var(--neutral-1000);
+  --color-border-focus: var(--neutral-1000); /* black, not red: red is action + selection, crimson is error */
+  --color-border-accent: var(--terracotta-500);
+  --color-border-premium: var(--gold-400);
+  --color-border-premium-strong: var(--gold-600);
+  --color-border-success: var(--green-600);
+  --color-border-warning: var(--amber-500);
+  --color-border-error: var(--crimson-700);
+  --color-border-info: var(--blue-600);
+  --color-action-primary: var(--red-500);
+  --color-action-primary-hover: var(--red-600);
+  --color-action-primary-pressed: var(--red-700);
+  --color-action-secondary: var(--neutral-0);
+  --color-action-secondary-hover: var(--neutral-50);
+  --color-action-secondary-text: var(--neutral-800);
+  --color-action-secondary-border: var(--neutral-400);
+  --color-action-premium: var(--gold-400);
+  --color-action-premium-hover: var(--gold-500);
+  --color-action-premium-pressed: var(--gold-600);
+  --color-action-disabled: var(--neutral-100);
+  --color-action-disabled-text: var(--neutral-400);
+  --color-icon-default: var(--neutral-800);
+  --color-icon-subtle: var(--neutral-600);
+  --color-icon-inverse: var(--neutral-0);
+  --color-icon-brand: var(--red-500);
+  --color-icon-premium: var(--gold-600);
+  --color-icon-success: var(--green-600);
+  --color-icon-warning: var(--amber-500);
+  --color-icon-error: var(--crimson-700);
+  --color-icon-info: var(--blue-600);
+  --color-seat-bg: var(--neutral-0);
+  --color-seat-regular: var(--neutral-500); /* 3.45:1 */
+  --color-seat-preferred: var(--gold-600); /* 3.90:1, glyph: star */
+  --color-seat-extra-legroom: var(--neutral-800); /* 12.6:1, glyph: arrows-vertical */
+  --color-seat-twin: var(--terracotta-500); /* 5.00:1, glyph: users */
+  --color-seat-hover-bg: var(--red-50);
+  --color-seat-previewed: var(--red-500); /* 2px outline while previewed; differs from every type outline */
+  --color-seat-selected: var(--red-500);
+  --color-seat-occupied-bg: var(--neutral-200);
+
+  /* ===== 1. COLOR — FOCUS RING ===== */
+  --focus-ring-color: var(--neutral-1000);
+  --focus-ring-color-inverse: var(--neutral-0); /* on black chrome and photography */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* ===== 2. TYPOGRAPHY ===== */
+  --font-family-latin: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-family-arabic: "EK Arabic", var(--font-family-latin);
+  --font-family-base: var(--font-family-latin); /* Latin by default; the ar mode switches it to the Arabic stack */
+  --font-family-display: var(--font-family-base); /* Reserved alternatives, add only if the proprietary Emirates fonts are licensed: Emirates-Bold (display), Heroic-Medium (hero). */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --letter-spacing-tight: -0.04em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.067em;
+  --letter-spacing-caps: 0.08em; /* ≈ 1px at 12px; Live 0.4em at 10px was too loose to read */
+  --text-transform-caps: uppercase; /* button-label, label-caps */
+
+  /* ===== 2. TYPOGRAPHY — ROLES (mobile values; larger screens below) ===== */
+  --display-xl-size: 2.25rem; /* hero falls back to display-lg below 1024px */
+  --display-xl-line-height: 2.5rem;
+  --display-xl-weight: 700;
+  --display-xl-letter-spacing: var(--letter-spacing-normal);
+  --display-lg-size: 2.25rem;
+  --display-lg-line-height: 2.5rem;
+  --display-lg-weight: 700;
+  --display-md-size: 1.5rem;
+  --display-md-line-height: 2rem;
+  --display-md-weight: 400;
+  --heading-1-size: 1.375rem;
+  --heading-1-line-height: 1.75rem;
+  --heading-1-weight: 700;
+  --heading-2-size: 1.25rem;
+  --heading-2-line-height: 1.75rem;
+  --heading-2-weight: 700;
+  --heading-3-size: 1.125rem;
+  --heading-3-line-height: 1.75rem;
+  --heading-3-weight: 700; /* Live 400; raised so heading-3 differs from body-lg */
+  --body-lg-size: 1.125rem;
+  --body-lg-line-height: 1.75rem;
+  --body-lg-weight: 400;
+  --body-md-size: 1rem;
+  --body-md-line-height: 1.5rem;
+  --body-md-weight: 400;
+  --body-sm-size: 0.875rem;
+  --body-sm-line-height: 1.25rem;
+  --body-sm-weight: 400;
+  --caption-size: 0.75rem;
+  --caption-line-height: 1rem;
+  --caption-weight: 500;
+  --label-caps-size: 0.75rem;
+  --label-caps-line-height: 1rem;
+  --label-caps-weight: 700;
+  --button-label-size: 1rem;
+  --button-label-line-height: 1.5rem;
+  --button-label-weight: 700;
+
+  /* ===== 3. SPACING (4px base) ===== */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-0-5: 0.125rem;
+
+  /* ===== 4. LAYOUT ===== */
+  --grid-columns: 4;
+  --grid-gutter: var(--space-4);
+  --page-margin: var(--space-4); /* Space on each side of the container: 16 / 32 / 40 / 80px (sm / md / lg / xl). From xl, wider screens add auto margins. */
+  --container-max: 80rem; /* max CONTENT width; the container adds --page-margin on each side */
+  --container-narrow: 40rem;
+
+  /* ===== 4. LAYOUT — CONTROL HEIGHTS ===== */
+  --control-height-sm: 2.5rem;
+  --control-height-md: 3rem;
+  --control-height-lg: 3.5rem;
+
+  /* ===== 5. SHAPE & DEPTH ===== */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+  --radius-control: var(--radius-sm);
+  --radius-card: var(--radius-md);
+  --radius-panel: var(--radius-none);
+  --radius-badge: var(--radius-pill);
+  --radius-overlay: var(--radius-lg);
+  --elevation-0: none;
+  --elevation-1: 0 4px 16px var(--black-alpha-6);
+  --elevation-2: 0 8px 24px var(--black-alpha-12);
+  --elevation-3: 0 12px 32px var(--black-alpha-16);
+  --elevation-4: 0 24px 48px var(--black-alpha-20);
+  --elevation-1-up: 0 -4px 16px var(--black-alpha-6);
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-3: 3px;
+
+  /* ===== 6. ICONOGRAPHY (Phosphor Regular) ===== */
+  --icon-size-xs: 1rem;
+  --icon-size-sm: 1.25rem;
+  --icon-size-md: 1.5rem;
+  --icon-size-lg: 2rem;
+}
+
+@media (min-width: 48em) {
+  :root {
+    --display-xl-size: 3.125rem; /* hero falls back to display-lg below 1024px */
+    --display-xl-line-height: 3.5rem;
+    --display-lg-size: 3.125rem;
+    --display-lg-line-height: 3.5rem;
+    --display-md-size: 1.875rem;
+    --display-md-line-height: 2.25rem;
+    --heading-1-size: 1.5rem;
+    --heading-1-line-height: 1.75rem;
+    --heading-2-size: 1.375rem;
+    --heading-2-line-height: 1.75rem;
+    --heading-3-size: 1.125rem;
+    --heading-3-line-height: 1.75rem;
+    --grid-columns: 8;
+    --grid-gutter: var(--space-6);
+    --page-margin: var(--space-8); /* Space on each side of the container: 16 / 32 / 40 / 80px (sm / md / lg / xl). From xl, wider screens add auto margins. */
+  }
+}
+
+@media (min-width: 64em) {
+  :root {
+    --display-xl-size: 7.5rem; /* hero falls back to display-lg below 1024px */
+    --display-xl-line-height: 7rem;
+    --display-xl-weight: 400;
+    --display-xl-letter-spacing: var(--letter-spacing-tight);
+    --grid-columns: 12;
+    --grid-gutter: var(--space-6);
+    --page-margin: var(--space-10); /* Space on each side of the container: 16 / 32 / 40 / 80px (sm / md / lg / xl). From xl, wider screens add auto margins. */
+  }
+}
+
+@media (min-width: 90em) {
+  :root {
+    --grid-gutter: var(--space-8);
+    --page-margin: var(--space-20); /* Space on each side of the container: 16 / 32 / 40 / 80px (sm / md / lg / xl). From xl, wider screens add auto margins. */
+  }
+}
+
+/* ===== 7. ARABIC (D15) =====
+ * Arabic pages (<html lang="ar" dir="rtl">) and Arabic islands inside other pages ([lang="ar"]).
+ * :root:lang(ar) outranks the breakpoint blocks above, so `ar` values apply at every width.
+ * Tokens that reference an Arabic value are repeated here so they recompute inside islands.
+ * Layout direction comes from dir="rtl" + logical CSS properties, not from tokens.
+ */
+:root:lang(ar), [lang|="ar"] {
+  --font-family-base: var(--font-family-arabic); /* Latin by default; the ar mode switches it to the Arabic stack */
+  --font-family-display: var(--font-family-base); /* Reserved alternatives, add only if the proprietary Emirates fonts are licensed: Emirates-Bold (display), Heroic-Medium (hero). */
+  --letter-spacing-tight: 0;
+  --letter-spacing-wide: 0;
+  --letter-spacing-caps: 0; /* ≈ 1px at 12px; Live 0.4em at 10px was too loose to read */
+  --text-transform-caps: none; /* button-label, label-caps */
+  --display-xl-letter-spacing: 0;
+  --body-lg-line-height: 2rem;
+  --body-md-line-height: 1.75rem;
+  --body-sm-line-height: 1.5rem;
+  --caption-line-height: 1.25rem;
+  --label-caps-line-height: 1.25rem;
+}

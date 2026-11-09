@@ -1,0 +1,123 @@
+{
+  "$schema": "../schemas/pattern.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "booking-flow",
+  "name": "Booking Flow",
+  "kind": "flow",
+  "description": "The step layout for passengers → seats → extras → payment: step header, step content, and the booking summary as a sticky sidebar (lg+) or a collapsible block plus sticky CTA bar (below lg).",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "A · unverified (persistent summary sidebar; sticky bottom CTA bar). Sidebar moved from xl to lg: Rec (D21).",
+    "confidence": "inferred",
+    "mixed": true,
+    "decisions": [
+      "D21"
+    ]
+  },
+  "structure": "lg and up (≥ 1024px):\n[Step header: progress (Flights · Passengers · Seats · Extras · Payment)]\n[Grid 12 cols]\n  [Main: 8 cols — current step content]\n  [Aside: 4 cols — BookingSummary, sticky, --elevation-1]      ← A · unverified (persistent summary sidebar; A puts it at xl, moved to lg per D21)\n\nsm – md (< 1024px):\n[Step header]\n[Main: current step content]\n[BookingSummary — collapsible block]\n[StickyCTABar — bottom: total price + primary Button]           ← A · unverified (sticky bottom CTA bar)",
+  "regions": [
+    {
+      "name": "Step header",
+      "description": "Progress: Flights · Passengers · Seats · Extras · Payment.",
+      "components": [
+        "step-progress"
+      ]
+    },
+    {
+      "name": "Main",
+      "description": "Current step content. 8 of 12 columns on lg+.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "Aside (lg+)",
+      "description": "BookingSummary, sticky, --elevation-1, 4 of 12 columns. Sticky offset: 48px header + --space-6.",
+      "components": [
+        "booking-summary"
+      ],
+      "tokens": [
+        "--elevation-1",
+        "--space-6",
+        "--grid-gutter"
+      ],
+      "source": {
+        "tag": "A · unverified (A puts it at xl, moved to lg per D21)",
+        "confidence": "inferred",
+        "mixed": true,
+        "decisions": [
+          "D21"
+        ]
+      }
+    },
+    {
+      "name": "Summary block + StickyCTABar (below lg)",
+      "description": "Collapsible BookingSummary after the content, and the StickyCTABar at the bottom: --color-bg-surface, --elevation-1-up, padding --space-3 / --space-4, safe-area inset.",
+      "components": [
+        "booking-summary",
+        "sticky-cta-bar"
+      ],
+      "tokens": [
+        "--color-bg-surface",
+        "--elevation-1-up",
+        "--space-3",
+        "--space-4"
+      ],
+      "source": {
+        "tag": "A · unverified (sticky bottom CTA bar)",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "lg+",
+      "behavior": "8 / 4 column split of the 12-column grid; gap is the grid gutter."
+    },
+    {
+      "breakpoint": "below-lg",
+      "behavior": "Single column; summary collapsible; StickyCTABar."
+    }
+  ],
+  "rtl": [
+    "The sidebar moves to the left in Arabic."
+  ],
+  "rules": [
+    "On the seat step, the seat selection panel takes the sidebar column and the booking total moves to the top of that panel. Three columns (map, panel, summary) never appear side by side."
+  ],
+  "patterns": [
+    "booking-state",
+    "seat-selection"
+  ],
+  "sources": [
+    {
+      "doc": "patterns",
+      "section": "pattern-3--booking-flow-passengers--seats--extras--payment"
+    },
+    {
+      "doc": "breakpoints",
+      "section": "notes"
+    },
+    {
+      "doc": "inventory",
+      "section": "stepprogress"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "The 48px header height in the sticky offset has no token.",
+      "refs": [
+        {
+          "doc": "patterns",
+          "section": "pattern-3--booking-flow-passengers--seats--extras--payment"
+        }
+      ]
+    }
+  ]
+}

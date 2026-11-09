@@ -1,0 +1,1034 @@
+{
+  "$schema": "../schemas/manifest.schema.json#/$defs/componentIndex",
+  "schemaVersion": "1.0.0",
+  "components": [
+    {
+      "id": "badge",
+      "name": "Badge",
+      "layer": "primitive",
+      "category": "display",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "inferred",
+      "path": "components/badge/spec.json",
+      "summary": "A compact label that is not interactive.",
+      "usedBy": [
+        "flight-result-card",
+        "flight-segment"
+      ],
+      "patterns": [
+        "flight-results"
+      ],
+      "tokenCount": 25
+    },
+    {
+      "id": "button",
+      "name": "Button",
+      "layer": "primitive",
+      "category": "action",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "observed",
+      "path": "components/button/spec.json",
+      "summary": "The single action primitive.",
+      "usedBy": [
+        "counter",
+        "fare-options",
+        "flight-result-card",
+        "flight-search-widget",
+        "global-header",
+        "overlay",
+        "passenger-selector",
+        "promo-panel",
+        "seat-map",
+        "segmented-control",
+        "sticky-cta-bar"
+      ],
+      "patterns": [
+        "flight-results",
+        "seat-selection"
+      ],
+      "tokenCount": 36
+    },
+    {
+      "id": "card",
+      "name": "Card",
+      "layer": "primitive",
+      "category": "surface",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "observed",
+      "path": "components/card/spec.json",
+      "summary": "A surface container.",
+      "composes": [
+        "icon"
+      ],
+      "usedBy": [
+        "booking-summary",
+        "cabin-feature-card",
+        "date-strip",
+        "destination-card",
+        "fare-options",
+        "flight-result-card",
+        "flight-search-widget",
+        "promo-panel"
+      ],
+      "tokenCount": 22
+    },
+    {
+      "id": "divider",
+      "name": "Divider",
+      "layer": "primitive",
+      "category": "surface",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Props documented; no states or accessibility section in the sources."
+        ]
+      },
+      "confidence": "proposed",
+      "path": "components/divider/spec.json",
+      "summary": "A separator line, optionally with a label-caps section label.",
+      "usedBy": [
+        "booking-summary",
+        "global-footer",
+        "global-header"
+      ],
+      "tokenCount": 7
+    },
+    {
+      "id": "icon",
+      "name": "Icon",
+      "layer": "primitive",
+      "category": "display",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/icon/spec.json",
+      "summary": "A wrapper for Phosphor SVGs (Regular weight; Fill only for selected or active states).",
+      "usedBy": [
+        "accordion",
+        "cabin-feature-card",
+        "card",
+        "flight-segment",
+        "seat",
+        "text-field"
+      ],
+      "tokenCount": 13
+    },
+    {
+      "id": "media",
+      "name": "Media",
+      "layer": "primitive",
+      "category": "media",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Props documented; no states section (not interactive)."
+        ]
+      },
+      "confidence": "inferred",
+      "path": "components/media/spec.json",
+      "summary": "A fixed-ratio image container with an optional bottom gradient overlay.",
+      "usedBy": [
+        "destination-card",
+        "hero-banner"
+      ],
+      "patterns": [
+        "cabin-experience"
+      ],
+      "tokenCount": 3
+    },
+    {
+      "id": "overlay",
+      "name": "Overlay",
+      "layer": "primitive",
+      "category": "overlay",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/overlay/spec.json",
+      "summary": "One surface primitive for every layered UI element: popover, modal, drawer, bottom sheet and full-screen overlay.",
+      "composes": [
+        "button",
+        "text"
+      ],
+      "usedBy": [
+        "combobox",
+        "date-field",
+        "flight-search-widget",
+        "global-header",
+        "passenger-selector",
+        "seat-map"
+      ],
+      "patterns": [
+        "seat-selection"
+      ],
+      "tokenCount": 7
+    },
+    {
+      "id": "text",
+      "name": "Text",
+      "layer": "primitive",
+      "category": "typography",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/text/spec.json",
+      "summary": "The typography primitive.",
+      "usedBy": [
+        "accordion",
+        "airport-option",
+        "booking-summary",
+        "cabin-feature-card",
+        "counter",
+        "destination-card",
+        "fare-options",
+        "flight-result-card",
+        "flight-segment",
+        "global-footer",
+        "global-header",
+        "hero-banner",
+        "overlay",
+        "price-display",
+        "promo-panel",
+        "seat-legend",
+        "seat-map",
+        "step-progress",
+        "sticky-cta-bar",
+        "text-field"
+      ],
+      "patterns": [
+        "cabin-experience"
+      ],
+      "tokenCount": 52
+    },
+    {
+      "id": "text-field",
+      "name": "TextField",
+      "layer": "primitive",
+      "category": "input",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "observed",
+      "path": "components/text-field/spec.json",
+      "summary": "A text input with a floating label.",
+      "composes": [
+        "icon",
+        "text"
+      ],
+      "usedBy": [
+        "combobox",
+        "date-field"
+      ],
+      "tokenCount": 24
+    },
+    {
+      "id": "accordion",
+      "name": "Accordion",
+      "layer": "composite",
+      "category": "display",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/accordion/spec.json",
+      "summary": "A disclosure section with a heading button.",
+      "composes": [
+        "icon",
+        "text"
+      ],
+      "usedBy": [
+        "flight-result-card"
+      ],
+      "tokenCount": 7
+    },
+    {
+      "id": "combobox",
+      "name": "Combobox",
+      "layer": "composite",
+      "category": "input",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/combobox/spec.json",
+      "summary": "A typeahead input with a listbox popup.",
+      "composes": [
+        "text-field",
+        "overlay"
+      ],
+      "usedBy": [
+        "flight-search-widget",
+        "global-header",
+        "passenger-selector"
+      ],
+      "tokenCount": 10
+    },
+    {
+      "id": "counter",
+      "name": "Counter",
+      "layer": "composite",
+      "category": "input",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/counter/spec.json",
+      "summary": "A stepper for passengers, bags or any quantity.",
+      "composes": [
+        "button",
+        "text"
+      ],
+      "usedBy": [
+        "passenger-selector"
+      ],
+      "patterns": [
+        "booking-state"
+      ],
+      "tokenCount": 8
+    },
+    {
+      "id": "date-field",
+      "name": "DateField",
+      "layer": "composite",
+      "category": "input",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/date-field/spec.json",
+      "summary": "A date or date-range picker: a read-only TextField trigger that opens a calendar dialog, with an optional per-day fare slot.",
+      "composes": [
+        "text-field",
+        "overlay",
+        "price-display"
+      ],
+      "usedBy": [
+        "flight-search-widget"
+      ],
+      "tokenCount": 10
+    },
+    {
+      "id": "flight-segment",
+      "name": "FlightSegment",
+      "layer": "composite",
+      "category": "aviation",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "inferred",
+      "path": "components/flight-segment/spec.json",
+      "summary": "A single flight segment (one physical flight): times, IATA codes, cities, duration, stops and optional aircraft.",
+      "composes": [
+        "text",
+        "icon",
+        "badge"
+      ],
+      "usedBy": [
+        "booking-summary",
+        "flight-result-card"
+      ],
+      "patterns": [
+        "flight-results"
+      ],
+      "tokenCount": 9
+    },
+    {
+      "id": "price-display",
+      "name": "PriceDisplay",
+      "layer": "composite",
+      "category": "display",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/price-display/spec.json",
+      "summary": "The only way to render a fare, fee or total.",
+      "composes": [
+        "text"
+      ],
+      "usedBy": [
+        "booking-summary",
+        "date-field",
+        "date-strip",
+        "destination-card",
+        "fare-options",
+        "flight-result-card",
+        "seat-legend",
+        "sticky-cta-bar"
+      ],
+      "patterns": [
+        "booking-state",
+        "flight-results"
+      ],
+      "tokenCount": 6
+    },
+    {
+      "id": "seat",
+      "name": "Seat",
+      "layer": "composite",
+      "category": "aviation",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/seat/spec.json",
+      "summary": "One seat on any seat map (booking, check-in, Manage Booking).",
+      "composes": [
+        "icon"
+      ],
+      "usedBy": [
+        "seat-legend",
+        "seat-map"
+      ],
+      "patterns": [
+        "booking-state",
+        "seat-selection"
+      ],
+      "tokenCount": 19
+    },
+    {
+      "id": "segmented-control",
+      "name": "SegmentedControl",
+      "layer": "composite",
+      "category": "input",
+      "inDesignSystem": true,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "proposed",
+      "path": "components/segmented-control/spec.json",
+      "summary": "A group of 2–4 options that behaves as a radio group.",
+      "composes": [
+        "button"
+      ],
+      "usedBy": [
+        "date-strip",
+        "flight-search-widget",
+        "passenger-selector"
+      ],
+      "tokenCount": 12
+    },
+    {
+      "id": "airport-option",
+      "name": "AirportOption",
+      "layer": "feature",
+      "category": "flight-search",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Layout and type only."
+        ]
+      },
+      "confidence": "inferred",
+      "path": "components/airport-option/spec.json",
+      "summary": "The option row rendered in Combobox's renderOption slot for airports: bold IATA code, airport name, then city and country.",
+      "composes": [
+        "text"
+      ],
+      "tokenCount": 3
+    },
+    {
+      "id": "booking-summary",
+      "name": "BookingSummary",
+      "layer": "feature",
+      "category": "booking",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "inferred",
+      "path": "components/booking-summary/spec.json",
+      "summary": "The running booking summary: journeys, passengers and the server quote's line items and total.",
+      "composes": [
+        "card",
+        "flight-segment",
+        "price-display",
+        "divider",
+        "text"
+      ],
+      "patterns": [
+        "booking-flow",
+        "booking-state"
+      ],
+      "tokenCount": 3
+    },
+    {
+      "id": "cabin-feature-card",
+      "name": "CabinFeatureCard",
+      "layer": "feature",
+      "category": "content",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Composition only."
+        ]
+      },
+      "confidence": "proposed",
+      "path": "components/cabin-feature-card/spec.json",
+      "summary": "A cabin amenity card: large icon, heading and short text.",
+      "composes": [
+        "card",
+        "icon",
+        "text"
+      ],
+      "patterns": [
+        "cabin-experience",
+        "home-search-hero"
+      ],
+      "tokenCount": 3
+    },
+    {
+      "id": "date-strip",
+      "name": "DateStrip",
+      "layer": "feature",
+      "category": "flight-results",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "One-sentence description only; no props, states or accessibility."
+        ]
+      },
+      "confidence": "inferred",
+      "path": "components/date-strip/spec.json",
+      "summary": "A horizontal row of ±3 days around the searched date, each showing the date and the lowest fare.",
+      "composes": [
+        "price-display",
+        "card",
+        "segmented-control"
+      ],
+      "patterns": [
+        "flight-results"
+      ],
+      "tokenCount": 0
+    },
+    {
+      "id": "destination-card",
+      "name": "DestinationCard",
+      "layer": "feature",
+      "category": "content",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Props documented; no states section."
+        ]
+      },
+      "confidence": "observed",
+      "path": "components/destination-card/spec.json",
+      "summary": "A photo-first destination card: image with bottom gradient, city and country, \"Fares from\" price and a visual CTA.",
+      "composes": [
+        "card",
+        "media",
+        "text",
+        "price-display"
+      ],
+      "patterns": [
+        "destination-grid",
+        "home-search-hero"
+      ],
+      "tokenCount": 4
+    },
+    {
+      "id": "fare-options",
+      "name": "FareOptions",
+      "layer": "feature",
+      "category": "flight-results",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Props and layout documented."
+        ]
+      },
+      "confidence": "inferred",
+      "path": "components/fare-options/spec.json",
+      "summary": "The fare matrix shown when a flight result is expanded: one card per fare family with its price, inclusions and a Choose action.",
+      "composes": [
+        "card",
+        "price-display",
+        "button",
+        "text"
+      ],
+      "usedBy": [
+        "flight-result-card"
+      ],
+      "patterns": [
+        "booking-state",
+        "flight-results"
+      ],
+      "tokenCount": 0
+    },
+    {
+      "id": "flight-result-card",
+      "name": "FlightResultCard",
+      "layer": "feature",
+      "category": "flight-results",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Props, composition and a composition example documented; no dedicated states section."
+        ]
+      },
+      "confidence": "inferred",
+      "path": "components/flight-result-card/spec.json",
+      "summary": "One flight option in the results list: segments, aircraft, from-price, and the expandable fare options.",
+      "composes": [
+        "card",
+        "flight-segment",
+        "badge",
+        "price-display",
+        "accordion",
+        "fare-options",
+        "button",
+        "text"
+      ],
+      "patterns": [
+        "booking-state",
+        "flight-results"
+      ],
+      "tokenCount": 3
+    },
+    {
+      "id": "flight-search-widget",
+      "name": "FlightSearchWidget",
+      "layer": "feature",
+      "category": "flight-search",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Props, composition and responsive layouts documented; no dedicated states or accessibility section (inherits from its parts)."
+        ]
+      },
+      "confidence": "inferred",
+      "path": "components/flight-search-widget/spec.json",
+      "summary": "The flight search form: trip type, From / To with swap, dates, passengers and cabin, and the Search flights button.",
+      "composes": [
+        "segmented-control",
+        "combobox",
+        "button",
+        "date-field",
+        "passenger-selector",
+        "overlay",
+        "card"
+      ],
+      "usedBy": [
+        "hero-banner"
+      ],
+      "patterns": [
+        "booking-state",
+        "flight-results",
+        "home-search-hero"
+      ],
+      "tokenCount": 5
+    },
+    {
+      "id": "global-footer",
+      "name": "GlobalFooter",
+      "layer": "feature",
+      "category": "global-chrome",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Colours and typography only."
+        ]
+      },
+      "confidence": "observed",
+      "path": "components/global-footer/spec.json",
+      "summary": "The black site footer with link columns.",
+      "composes": [
+        "text",
+        "divider"
+      ],
+      "patterns": [
+        "page-shell"
+      ],
+      "tokenCount": 3
+    },
+    {
+      "id": "global-header",
+      "name": "GlobalHeader",
+      "layer": "feature",
+      "category": "global-chrome",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Props, layout and nav-link states documented; no accessibility section beyond the nav-link focus state."
+        ]
+      },
+      "confidence": "observed",
+      "path": "components/global-header/spec.json",
+      "summary": "The black site header bar: logo, primary navigation, region / language / currency selectors and Skywards login.",
+      "composes": [
+        "button",
+        "combobox",
+        "overlay",
+        "divider",
+        "text"
+      ],
+      "patterns": [
+        "page-shell"
+      ],
+      "tokenCount": 10
+    },
+    {
+      "id": "hero-banner",
+      "name": "HeroBanner",
+      "layer": "feature",
+      "category": "content",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Composition only."
+        ]
+      },
+      "confidence": "observed",
+      "path": "components/hero-banner/spec.json",
+      "summary": "Full-bleed hero image with a display headline and an optional overlapping search widget.",
+      "composes": [
+        "media",
+        "text",
+        "flight-search-widget"
+      ],
+      "patterns": [
+        "home-search-hero"
+      ],
+      "tokenCount": 4
+    },
+    {
+      "id": "passenger-selector",
+      "name": "PassengerSelector",
+      "layer": "feature",
+      "category": "flight-search",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Props and composition documented; states and accessibility come from Counter and Overlay."
+        ]
+      },
+      "confidence": "inferred",
+      "path": "components/passenger-selector/spec.json",
+      "summary": "Passenger counters per age band plus cabin choice, inside the search widget.",
+      "composes": [
+        "counter",
+        "segmented-control",
+        "combobox",
+        "button",
+        "overlay"
+      ],
+      "usedBy": [
+        "flight-search-widget"
+      ],
+      "patterns": [
+        "booking-state"
+      ],
+      "tokenCount": 0
+    },
+    {
+      "id": "promo-panel",
+      "name": "PromoPanel",
+      "layer": "feature",
+      "category": "content",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Composition only."
+        ]
+      },
+      "confidence": "observed",
+      "path": "components/promo-panel/spec.json",
+      "summary": "The cream promotional panel: heading, body and an optional secondary button.",
+      "composes": [
+        "card",
+        "text",
+        "button"
+      ],
+      "patterns": [
+        "home-search-hero"
+      ],
+      "tokenCount": 3
+    },
+    {
+      "id": "seat-legend",
+      "name": "SeatLegend",
+      "layer": "feature",
+      "category": "seat-selection",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Content and order documented; no props."
+        ]
+      },
+      "confidence": "proposed",
+      "path": "components/seat-legend/spec.json",
+      "summary": "Shown above the seat map: one row per seat type with its glyph and the price range for the active passenger on this flight, then the statuses.",
+      "composes": [
+        "seat",
+        "text",
+        "price-display"
+      ],
+      "usedBy": [
+        "seat-map"
+      ],
+      "patterns": [
+        "seat-selection"
+      ],
+      "tokenCount": 0
+    },
+    {
+      "id": "seat-map",
+      "name": "SeatMap",
+      "layer": "feature",
+      "category": "seat-selection",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "inferred",
+      "path": "components/seat-map/spec.json",
+      "summary": "The seat map for one segment (one physical flight), drawn from aircraft-configuration data, with a selection panel, a legend and a list-view alternative.",
+      "composes": [
+        "seat",
+        "text",
+        "seat-legend",
+        "overlay",
+        "button"
+      ],
+      "patterns": [
+        "booking-state",
+        "seat-selection"
+      ],
+      "tokenCount": 0
+    },
+    {
+      "id": "step-progress",
+      "name": "StepProgress",
+      "layer": "feature",
+      "category": "booking",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Step names and typography only."
+        ]
+      },
+      "confidence": "proposed",
+      "path": "components/step-progress/spec.json",
+      "summary": "The booking step indicator: Flights · Passengers · Seats · Extras · Payment.",
+      "composes": [
+        "text"
+      ],
+      "patterns": [
+        "booking-flow"
+      ],
+      "tokenCount": 2
+    },
+    {
+      "id": "sticky-cta-bar",
+      "name": "StickyCTABar",
+      "layer": "feature",
+      "category": "booking",
+      "inDesignSystem": false,
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "confidence": "inferred",
+      "path": "components/sticky-cta-bar/spec.json",
+      "summary": "The sticky bottom bar on smaller screens: the current total and the primary action of the booking step.",
+      "composes": [
+        "price-display",
+        "button",
+        "text"
+      ],
+      "patterns": [
+        "booking-flow",
+        "booking-state"
+      ],
+      "tokenCount": 5
+    }
+  ],
+  "aliases": [
+    {
+      "name": "FlightStatusBadge",
+      "target": "badge",
+      "preset": "flight-status",
+      "reason": "Not a separate component: Badge with a status variant: On time / Confirmed → success + check-circle; Delayed / Gate change → warning + clock; Cancelled → error + x-circle; Boarding → info + airplane-takeoff (not red, D6); Departed / Landed → neutral + airplane-in-flight / airplane-landing."
+    },
+    {
+      "name": "AircraftBadge",
+      "target": "badge",
+      "preset": "aircraft",
+      "reason": "Not a separate component: Badge variant=\"neutral\". A custom aircraft silhouette icon is optional (custom icon, not in Phosphor)."
+    },
+    {
+      "name": "TierBadge",
+      "target": "badge",
+      "preset": "tier",
+      "reason": "Not a separate component: Skywards Blue / Silver / Gold / Platinum. Platinum uses variant=\"premium\". Blue, Silver and Gold colours are not defined in any source, so they use neutral until official values exist."
+    },
+    {
+      "name": "LuxuryActionButton",
+      "target": "button",
+      "preset": "luxury-action",
+      "reason": "Not a separate component: Just Button variant=\"premium\" (First Class and Skywards actions)."
+    },
+    {
+      "name": "SwapButton",
+      "target": "button",
+      "preset": "swap",
+      "reason": "Not a separate component: The ⇄ button between From and To in the flight search: a feature-layer Button variant=\"secondary\" size=\"sm\" with icon arrows-left-right. Not part of Combobox."
+    },
+    {
+      "name": "FareOptionsMatrix",
+      "target": "fare-options",
+      "reason": "Alternative name used in the source documents"
+    }
+  ],
+  "notComponents": [
+    {
+      "name": "Logo",
+      "reason": "A brand asset (Official file emirates-logo-badge.svg), not a component. Never drawn from the icon set.",
+      "source": {
+        "doc": "scope-boundaries",
+        "section": "decision-table"
+      }
+    }
+  ]
+}

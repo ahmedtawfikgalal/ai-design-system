@@ -1,0 +1,57 @@
+{
+  "name": "@your-scope/fly-emirates-design-spec",
+  "version": "0.1.0",
+  "description": "Machine-readable specification of the Fly Emirates concept design system (unofficial, not endorsed by Emirates): design tokens, component and pattern specs, layout rules and JSON Schemas, structured for selective retrieval by tools and AI agents.",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "dtcg",
+    "specification",
+    "json-schema",
+    "rtl",
+    "accessibility"
+  ],
+  "files": [
+    "manifest.json",
+    "schemas/",
+    "tokens/",
+    "foundations/",
+    "components/",
+    "patterns/",
+    "layouts/",
+    "accessibility/",
+    "rtl/",
+    "references/",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": "./manifest.json",
+    "./manifest.json": "./manifest.json",
+    "./tokens.json": "./tokens/tokens.json",
+    "./components": "./components/index.json",
+    "./components/*": "./components/*/spec.json",
+    "./patterns": "./patterns/index.json",
+    "./patterns/*": "./patterns/*.json",
+    "./layouts": "./layouts/layouts.json",
+    "./references": "./references/sources.json",
+    "./schemas/*": "./schemas/*",
+    "./foundations/*": "./foundations/*",
+    "./accessibility/*": "./accessibility/*",
+    "./rtl/*": "./rtl/*",
+    "./package.json": "./package.json",
+    "./tokens/values.json": "./tokens/values.json",
+    "./tokens.css": "./tokens/tokens.css",
+    "./fonts.css": "./tokens/fonts.css"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate.mjs",
+    "check": "node scripts/build.mjs --check && node scripts/validate.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1"
+  }
+}

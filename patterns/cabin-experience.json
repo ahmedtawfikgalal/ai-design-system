@@ -1,0 +1,66 @@
+{
+  "$schema": "../schemas/pattern.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "cabin-experience",
+  "name": "Cabin Experience Page",
+  "kind": "page",
+  "description": "A cabin page: hero, feature cards, specs table and a CTA band, for First, Business, Premium Economy and Economy.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Structure and accent rules only; the specs table and CTA band are not specified."
+    ]
+  },
+  "provenance": {
+    "tag": "Four cabins: Official. Premium accents: A · unverified. Premium Economy / Economy accents: Rec.",
+    "confidence": "official",
+    "mixed": true
+  },
+  "structure": "[Hero: cabin photography + display-lg title]\n[Feature row: CabinFeatureCard ×3–4 (icon --icon-size-lg + heading-3 + body-sm)]\n[Specs table: seat pitch, width, screen]\n[CTA band]",
+  "regions": [
+    {
+      "name": "Hero",
+      "description": "Cabin photography + display-lg title.",
+      "components": [
+        "media",
+        "text"
+      ]
+    },
+    {
+      "name": "Feature row",
+      "description": "CabinFeatureCard ×3–4 (icon --icon-size-lg + heading-3 + body-sm).",
+      "components": [
+        "cabin-feature-card"
+      ],
+      "tokens": [
+        "--icon-size-lg"
+      ]
+    },
+    {
+      "name": "Specs table",
+      "description": "Seat pitch, width, screen."
+    },
+    {
+      "name": "CTA band",
+      "description": "Call to action."
+    }
+  ],
+  "rules": [
+    "Four cabins (Official): First, Business, Premium Economy, Economy. File A lists only three.",
+    "First Class pages may use --color-border-premium and gold fills (A · unverified). Business uses --color-border-premium-strong (bronze, A · unverified). Premium Economy and Economy use the standard red system (Rec; no source for Premium Economy).",
+    "Full cabin theming (including File A's First Class dark mode) is out of scope."
+  ],
+  "tokens": [
+    "--color-border-premium",
+    "--color-border-premium-strong"
+  ],
+  "sources": [
+    {
+      "doc": "patterns",
+      "section": "pattern-6--cabin-experience-page"
+    }
+  ]
+}

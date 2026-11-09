@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "hero-banner",
+  "name": "HeroBanner",
+  "category": "content",
+  "description": "Full-bleed hero image with a display headline and an optional overlapping search widget.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Composition only."
+    ]
+  },
+  "provenance": {
+    "tag": "Live (Heroic-Medium 120px hero headline). Font falls back per D7.",
+    "confidence": "observed",
+    "mixed": true,
+    "decisions": [
+      "D7"
+    ]
+  },
+  "rules": [
+    "Media ratio=\"21:9\" radius=\"none\" overlay=\"bottom-gradient\" + Text variant=\"display-xl\" + optional search widget overlap.",
+    "display-xl applies from lg; below lg the headline uses display-lg."
+  ],
+  "responsive": [
+    {
+      "breakpoint": "lg+",
+      "behavior": "display-xl (120/112)."
+    },
+    {
+      "breakpoint": "below-lg",
+      "behavior": "display-lg."
+    }
+  ],
+  "composes": [
+    "media",
+    "text",
+    "flight-search-widget"
+  ],
+  "tokens": [
+    "--display-xl-size",
+    "--display-lg-size",
+    "--radius-none",
+    "--color-overlay-image"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "herobanner"
+    },
+    {
+      "doc": "patterns",
+      "section": "pattern-1--home--search-hero"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "Live uses the proprietary Heroic-Medium font for the hero; this system uses the base stack (D7). The Media ratio for heroes (21:9) is Rec.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "herobanner"
+        },
+        {
+          "doc": "tier-1-primitives",
+          "section": "media"
+        }
+      ]
+    }
+  ]
+}

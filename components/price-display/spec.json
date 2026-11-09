@@ -1,0 +1,131 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "price-display",
+  "name": "PriceDisplay",
+  "layer": "composite",
+  "category": "display",
+  "inDesignSystem": true,
+  "description": "The only way to render a fare, fee or total. Displays amounts given to it; never calculates them.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Rec; currency-code format and \"Fares from\" prefix: A · unverified; Cash+Miles and free seat selection: Official",
+    "confidence": "proposed",
+    "mixed": true,
+    "decisions": [
+      "D15",
+      "D16"
+    ]
+  },
+  "props": [
+    {
+      "name": "amount",
+      "type": "Money | null",
+      "required": true,
+      "description": "{ amountMinor, currency }, the same type as the quote. Minor units avoid floating-point errors; decimals come from the ISO 4217 currency (JPY 0, USD 2, KWD 3). null with free set."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "required": true,
+      "description": "Formatted with Intl.NumberFormat(locale, { style: 'currency', currencyDisplay: 'code', numberingSystem: 'latn' }). Shows the currency code, e.g. \"USD 899\". Latin digits in every language (D15).",
+      "source": {
+        "tag": "A · unverified (currency code display); Latin digits: Rec (D15)",
+        "confidence": "inferred",
+        "mixed": true,
+        "decisions": [
+          "D15"
+        ]
+      }
+    },
+    {
+      "name": "prefix",
+      "type": "string | null",
+      "description": "E.g. \"Fares from\".",
+      "source": {
+        "tag": "A · unverified, destination cards",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "originalAmount",
+      "type": "Money | null",
+      "description": "Shown with strikethrough in --color-text-subtle. Screen readers hear \"was USD 1,099\" (visually hidden text)."
+    },
+    {
+      "name": "miles",
+      "type": "number | null",
+      "description": "Adds \"+ 12,500 Miles\" for Cash+Miles.",
+      "source": {
+        "tag": "Official: seats can be paid with Cash+Miles",
+        "confidence": "official"
+      }
+    },
+    {
+      "name": "free",
+      "type": "boolean",
+      "description": "Shows \"Free\" in --color-text-success.",
+      "source": {
+        "tag": "Official: some fares include free seat selection",
+        "confidence": "official"
+      }
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "description": "Amount: body-sm / heading-3 / heading-2. Prefix and currency: caption / body-sm."
+    },
+    {
+      "name": "align",
+      "type": "'start' | 'end'",
+      "description": "Fares on result cards align end."
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "Reads as one phrase: \"Fares from USD 899\".",
+      "The struck-through original price gets visually hidden text, \"was USD 1,099\", because strikethrough is not announced."
+    ],
+    "wcag": [
+      "1.3.1"
+    ]
+  },
+  "rtl": [
+    "Intl.NumberFormat places the currency code on the correct side; wrap the output in <bdi> inside Arabic text.",
+    "Latin digits (numberingSystem 'latn') in all languages (Rec, configurable per market)."
+  ],
+  "composes": [
+    "text"
+  ],
+  "tokens": [
+    "--color-text-subtle",
+    "--color-text-success",
+    "--body-sm-size",
+    "--heading-3-size",
+    "--heading-2-size",
+    "--caption-size"
+  ],
+  "rules": [
+    "Amounts are always tabular numerals.",
+    "Never compute an amount: it comes from the server quote or offer data (D16)."
+  ],
+  "sources": [
+    {
+      "doc": "tier-2-composites",
+      "section": "pricedisplay"
+    },
+    {
+      "doc": "accessibility",
+      "section": "badge--pricedisplay"
+    },
+    {
+      "doc": "rtl-and-arabic",
+      "section": "4-numbers-dates-prices"
+    }
+  ]
+}

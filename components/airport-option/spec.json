@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "airport-option",
+  "name": "AirportOption",
+  "category": "flight-search",
+  "description": "The option row rendered in Combobox's renderOption slot for airports: bold IATA code, airport name, then city and country.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Layout and type only."
+    ]
+  },
+  "provenance": {
+    "tag": "A · unverified (\"airport name, city, country, and bold IATA code\")",
+    "confidence": "inferred"
+  },
+  "rules": [
+    "Layout:\n[DXB]  Dubai International\n       Dubai, United Arab Emirates",
+    "IATA: body-md 700. Name: body-md. City and country: body-sm in --color-text-subtle.",
+    "Combobox getOptionLabel must return the plain-text equivalent (\"Dubai International, DXB, Dubai, United Arab Emirates\")."
+  ],
+  "rtl": [
+    "The IATA code is wrapped in <bdi dir=\"ltr\">."
+  ],
+  "composes": [
+    "text"
+  ],
+  "tokens": [
+    "--body-md-size",
+    "--body-sm-size",
+    "--color-text-subtle"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "airportoption"
+    },
+    {
+      "doc": "accessibility",
+      "section": "combobox"
+    }
+  ]
+}

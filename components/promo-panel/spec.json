@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "promo-panel",
+  "name": "PromoPanel",
+  "category": "content",
+  "description": "The cream promotional panel: heading, body and an optional secondary button.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Composition only."
+    ]
+  },
+  "provenance": {
+    "tag": "Live (cream card: #FEF8D5, 0 radius, 20px padding)",
+    "confidence": "observed"
+  },
+  "rules": [
+    "Card variant=\"warm\" padding=\"md\" with a heading, body and optional Button variant=\"secondary\"."
+  ],
+  "composes": [
+    "card",
+    "text",
+    "button"
+  ],
+  "tokens": [
+    "--color-bg-accent-warm",
+    "--radius-panel",
+    "--space-5"
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "promopanel"
+    }
+  ]
+}

@@ -1,0 +1,386 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "button",
+  "name": "Button",
+  "layer": "primitive",
+  "category": "action",
+  "inDesignSystem": true,
+  "description": "The single action primitive. One Button with variants replaces the primary CTA, secondary button, luxury action button, \"Modify search\" and Skywards login.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Live (primary, secondary), A · unverified (premium), Rec (ghost, link, inverse; sizes, states)",
+    "confidence": "observed",
+    "mixed": true,
+    "decisions": [
+      "D20",
+      "D23",
+      "D24"
+    ]
+  },
+  "variants": [
+    {
+      "name": "primary",
+      "description": "Red fill, white uppercase Helvetica Neue Bold 16px label.",
+      "tokens": [
+        "--color-action-primary",
+        "--color-action-primary-hover",
+        "--color-action-primary-pressed",
+        "--color-text-on-brand"
+      ],
+      "source": {
+        "tag": "Live (#D71921 fill, white uppercase Helvetica Neue Bold 16px)",
+        "confidence": "observed"
+      }
+    },
+    {
+      "name": "secondary",
+      "description": "White fill, #333 text, #A9A9A9 border.",
+      "tokens": [
+        "--color-action-secondary",
+        "--color-action-secondary-hover",
+        "--color-action-secondary-text",
+        "--color-action-secondary-border"
+      ],
+      "source": {
+        "tag": "Live",
+        "confidence": "observed"
+      }
+    },
+    {
+      "name": "premium",
+      "description": "Gold fill, black text, for First Class and Skywards.",
+      "tokens": [
+        "--color-action-premium",
+        "--color-action-premium-hover",
+        "--color-action-premium-pressed",
+        "--color-text-on-premium"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "ghost",
+      "description": "Transparent fill and border, --color-text-default. For tertiary actions such as \"Modify search\".",
+      "tokens": [
+        "--color-text-default"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "link",
+      "description": "No box; terracotta underlined text. Uses body-md in sentence case, not button-label.",
+      "tokens": [
+        "--color-text-link",
+        "--color-text-link-hover"
+      ],
+      "source": {
+        "tag": "Colour: Live. Variant: Rec.",
+        "confidence": "observed",
+        "mixed": true
+      }
+    },
+    {
+      "name": "inverse",
+      "description": "White outline on black, for nav and footer actions.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "'primary' | 'secondary' | 'premium' | 'ghost' | 'link' | 'inverse'",
+      "default": "primary"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "Heights --control-height-sm/md/lg: 40 / 48 / 56. The same scale as TextField, so a button and a field of the same size line up in one row. Live's 60px button is reduced to 56px to match the 56px hero field.",
+      "source": {
+        "tag": "Rec · approved (D23)",
+        "confidence": "proposed",
+        "approved": true,
+        "decisions": [
+          "D23"
+        ]
+      }
+    },
+    {
+      "name": "fullWidth",
+      "type": "boolean",
+      "default": false,
+      "description": "true in the mobile sticky CTA bar and in overlays"
+    },
+    {
+      "name": "iconStart",
+      "type": "IconName | null",
+      "default": null,
+      "description": "--icon-size-sm. Start follows the reading direction, so it swaps sides in Arabic."
+    },
+    {
+      "name": "iconEnd",
+      "type": "IconName | null",
+      "default": null,
+      "description": "--icon-size-sm. End follows the reading direction, so it swaps sides in Arabic."
+    },
+    {
+      "name": "iconOnly",
+      "type": "IconName | null",
+      "default": null,
+      "description": "Renders a square button with just this icon (sm 40×40, md 48×48). Requires label. Used by Counter, the swap button and close buttons."
+    },
+    {
+      "name": "label",
+      "type": "string | null",
+      "default": null,
+      "description": "Accessible name. Required with iconOnly; otherwise the visible text is the name."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Prefer leaving the button enabled and explaining what's missing on press (see StickyCTABar)."
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "default": false,
+      "description": "Spinner replaces the label; the width stays the same. Sets aria-busy=\"true\" and keeps focus on the button."
+    },
+    {
+      "name": "as",
+      "type": "'button' | 'a'",
+      "default": "button",
+      "description": "Use a only for navigation (it has an href). disabled is not allowed with as=\"a\"."
+    }
+  ],
+  "states": [
+    {
+      "name": "default",
+      "appliesTo": "primary / secondary / premium",
+      "visual": "primary: --color-action-primary fill, white label. secondary: white fill, #333 label, #A9A9A9 1px border. premium: --color-action-premium fill, black label.",
+      "source": {
+        "tag": "Live (primary, secondary) · A · unverified (premium)",
+        "confidence": "observed",
+        "mixed": true
+      }
+    },
+    {
+      "name": "hover",
+      "visual": "primary: --color-action-primary-hover (#B8141A). secondary: --color-action-secondary-hover fill. premium: --color-action-premium-hover (--gold-500).",
+      "tokens": [
+        "--color-action-primary-hover",
+        "--color-action-secondary-hover",
+        "--color-action-premium-hover"
+      ],
+      "source": {
+        "tag": "A · unverified (primary hover) · Rec",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    },
+    {
+      "name": "pressed",
+      "visual": "primary: --color-action-primary-pressed. secondary: --color-bg-muted fill. premium: --color-action-premium-pressed (--gold-600 bronze). Each premium state is one step darker: gold → #B08F52 → bronze; black text stays ≥ 5.3:1.",
+      "tokens": [
+        "--color-action-primary-pressed",
+        "--color-bg-muted",
+        "--color-action-premium-pressed"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed",
+        "decisions": [
+          "D24"
+        ]
+      }
+    },
+    {
+      "name": "focus-visible",
+      "visual": "Focus ring: --focus-ring-width --focus-ring-color outline at --focus-ring-offset, on every variant. A dark ring stays visible on red and gold fills.",
+      "tokens": [
+        "--focus-ring-color",
+        "--focus-ring-width",
+        "--focus-ring-offset"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed",
+        "decisions": [
+          "D20"
+        ]
+      }
+    },
+    {
+      "name": "disabled",
+      "visual": "--color-action-disabled fill, --color-action-disabled-text; secondary also uses --color-border-subtle.",
+      "tokens": [
+        "--color-action-disabled",
+        "--color-action-disabled-text",
+        "--color-border-subtle"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "loading",
+      "visual": "Spinner (--icon-size-sm) replaces the label; width stays the same.",
+      "tokens": [
+        "--icon-size-sm"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "link: default → hover → focus-visible → visited",
+      "appliesTo": "link variant and inline links",
+      "visual": "Terracotta with underline (1px, text-underline-offset 0.2em) → --color-text-link-hover, underline 2px → focus ring → visited same as default. The underline is required: terracotta vs body text #333 is only 2.53:1 (WCAG 1.4.1).",
+      "tokens": [
+        "--color-text-link",
+        "--color-text-link-hover"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed",
+        "decisions": [
+          "D20"
+        ]
+      }
+    }
+  ],
+  "presets": [
+    {
+      "id": "luxury-action",
+      "name": "LuxuryActionButton",
+      "description": "Just Button variant=\"premium\" (First Class and Skywards actions).",
+      "props": {
+        "variant": "premium"
+      },
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "id": "swap",
+      "name": "SwapButton",
+      "description": "The ⇄ button between From and To in the flight search: a feature-layer Button variant=\"secondary\" size=\"sm\" with icon arrows-left-right. Not part of Combobox.",
+      "props": {
+        "variant": "secondary",
+        "size": "sm",
+        "iconOnly": "arrows-left-right"
+      },
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "<button type=\"button\"> by default; <a href> when as=\"a\".",
+      "iconOnly requires label, which becomes aria-label. The icon is aria-hidden.",
+      "loading: aria-busy=\"true\", focus stays on the button, and a polite live region announces the result (\"Seats updated\").",
+      "Use aria-pressed only for true on/off toggles (e.g. \"Show prices in Miles\"). A fare \"Choose\" button is an action: it gets a specific name (\"Choose Economy Flex, USD 899\"), and once chosen the card shows \"Selected\" text instead of the button.",
+      "disabled: use the native attribute so the button leaves the tab order. Where the user needs to know why they can't continue (CTA bars), keep the button enabled and explain on press instead."
+    ],
+    "wcag": [
+      "4.1.2",
+      "2.5.3",
+      "2.4.7",
+      "1.4.1"
+    ]
+  },
+  "rtl": [
+    "iconStart / iconEnd follow the reading direction and swap sides in Arabic.",
+    "In Arabic, button-label drops text-transform and letter spacing (--text-transform-caps: none, letter spacing 0)."
+  ],
+  "tokens": [
+    "--color-action-primary",
+    "--color-action-primary-hover",
+    "--color-action-primary-pressed",
+    "--color-text-on-brand",
+    "--color-action-secondary",
+    "--color-action-secondary-hover",
+    "--color-action-secondary-text",
+    "--color-action-secondary-border",
+    "--color-action-premium",
+    "--color-action-premium-hover",
+    "--color-action-premium-pressed",
+    "--color-text-on-premium",
+    "--color-text-default",
+    "--color-text-link",
+    "--color-text-link-hover",
+    "--color-action-disabled",
+    "--color-action-disabled-text",
+    "--color-border-subtle",
+    "--color-bg-muted",
+    "--radius-control",
+    "--border-width-1",
+    "--button-label-size",
+    "--button-label-line-height",
+    "--button-label-weight",
+    "--text-transform-caps",
+    "--space-2",
+    "--space-4",
+    "--space-6",
+    "--space-8",
+    "--icon-size-sm",
+    "--control-height-sm",
+    "--control-height-md",
+    "--control-height-lg",
+    "--focus-ring-color",
+    "--focus-ring-width",
+    "--focus-ring-offset"
+  ],
+  "rules": [
+    "border-radius --radius-control (4px); border-width --border-width-1.",
+    "font: button-label 16/24, 700, UPPERCASE (Live). Uppercase is CSS text-transform only; source strings stay sentence case.",
+    "padding-inline: sm --space-4 · md --space-6 · lg --space-8; icon ↔ label gap --space-2.",
+    "File A's hover motion (scale(1.02) / translateY(-2px)) is not included: motion is out of scope."
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "button"
+    },
+    {
+      "doc": "states",
+      "section": "button"
+    },
+    {
+      "doc": "accessibility",
+      "section": "button"
+    },
+    {
+      "doc": "typography",
+      "section": "special-treatments"
+    },
+    {
+      "doc": "scope-boundaries",
+      "section": "decision-table"
+    },
+    {
+      "doc": "tier-2-composites",
+      "section": "combobox"
+    }
+  ]
+}

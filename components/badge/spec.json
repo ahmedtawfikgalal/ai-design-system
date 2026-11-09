@@ -1,0 +1,242 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "badge",
+  "name": "Badge",
+  "layer": "primitive",
+  "category": "display",
+  "inDesignSystem": true,
+  "description": "A compact label that is not interactive. Replaces the flight status badge, aircraft badge and tier badge.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "A · unverified (neutral, success, warning, error, premium), Rec (info, brand)",
+    "confidence": "inferred",
+    "mixed": true,
+    "decisions": [
+      "D6"
+    ]
+  },
+  "variants": [
+    {
+      "name": "neutral",
+      "description": "--color-bg-muted background, --color-text-default text, no border. Example: \"Airbus A380-800\".",
+      "tokens": [
+        "--color-bg-muted",
+        "--color-text-default"
+      ],
+      "source": {
+        "tag": "A · unverified (grey pill aircraft badge)",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "success",
+      "description": "Example: \"On time\", \"Confirmed\".",
+      "tokens": [
+        "--color-bg-success",
+        "--color-text-success",
+        "--color-border-success"
+      ],
+      "source": {
+        "tag": "A · unverified (green)",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "warning",
+      "description": "Example: \"Delayed\", \"Gate change\".",
+      "tokens": [
+        "--color-bg-warning",
+        "--color-text-warning",
+        "--color-border-warning"
+      ],
+      "source": {
+        "tag": "A · unverified (amber)",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "error",
+      "description": "Example: \"Cancelled\".",
+      "tokens": [
+        "--color-bg-error",
+        "--color-text-error",
+        "--color-border-error"
+      ],
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "info",
+      "description": "Example: \"Boarding\". File A uses brand red; remapped per D6 because status colours never use brand red.",
+      "tokens": [
+        "--color-bg-info",
+        "--color-text-info",
+        "--color-border-info"
+      ],
+      "source": {
+        "tag": "Rec. File A uses brand red; remapped per D6.",
+        "confidence": "proposed",
+        "mixed": true,
+        "decisions": [
+          "D6"
+        ]
+      }
+    },
+    {
+      "name": "brand",
+      "description": "--color-bg-brand background, --color-text-on-brand text, no border. Example: \"Best fare\".",
+      "tokens": [
+        "--color-bg-brand",
+        "--color-text-on-brand"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "premium",
+      "description": "--color-bg-premium background, --color-text-on-premium text, no border. Example: \"First\", \"Platinum\".",
+      "tokens": [
+        "--color-bg-premium",
+        "--color-text-on-premium"
+      ],
+      "source": {
+        "tag": "A · unverified (gold)",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "'neutral' | 'success' | 'warning' | 'error' | 'info' | 'brand' | 'premium'",
+      "default": "neutral"
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md'",
+      "default": "sm",
+      "description": "sm: caption (12px). md: body-sm (14px)."
+    },
+    {
+      "name": "icon",
+      "type": "IconName | null",
+      "default": null,
+      "description": "--icon-size-xs. Required for success, warning, error and info, so status never relies on colour alone. The icon is decorative; the badge text carries the meaning."
+    }
+  ],
+  "presets": [
+    {
+      "id": "flight-status",
+      "name": "FlightStatusBadge",
+      "description": "Badge with a status variant: On time / Confirmed → success + check-circle; Delayed / Gate change → warning + clock; Cancelled → error + x-circle; Boarding → info + airplane-takeoff (not red, D6); Departed / Landed → neutral + airplane-in-flight / airplane-landing.",
+      "source": {
+        "tag": "A · unverified (green, amber, error red); Rec (Boarding remapped per D6; Departed / Landed)",
+        "confidence": "inferred",
+        "mixed": true,
+        "decisions": [
+          "D6"
+        ]
+      }
+    },
+    {
+      "id": "aircraft",
+      "name": "AircraftBadge",
+      "description": "Badge variant=\"neutral\". A custom aircraft silhouette icon is optional (custom icon, not in Phosphor).",
+      "props": {
+        "variant": "neutral"
+      },
+      "source": {
+        "tag": "A · unverified (grey pill aircraft badge)",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "id": "tier",
+      "name": "TierBadge",
+      "description": "Skywards Blue / Silver / Gold / Platinum. Platinum uses variant=\"premium\". Blue, Silver and Gold colours are not defined in any source, so they use neutral until official values exist.",
+      "source": {
+        "tag": "A · unverified (Platinum premium); Blue, Silver, Gold colours: no source",
+        "confidence": "inferred",
+        "mixed": true
+      }
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "Badges are plain text. Status meaning is in the text (\"Delayed\"), not just the colour or icon."
+    ],
+    "wcag": [
+      "1.4.1"
+    ]
+  },
+  "tokens": [
+    "--color-bg-muted",
+    "--color-text-default",
+    "--color-bg-success",
+    "--color-text-success",
+    "--color-border-success",
+    "--color-bg-warning",
+    "--color-text-warning",
+    "--color-border-warning",
+    "--color-bg-error",
+    "--color-text-error",
+    "--color-border-error",
+    "--color-bg-info",
+    "--color-text-info",
+    "--color-border-info",
+    "--color-bg-brand",
+    "--color-text-on-brand",
+    "--color-bg-premium",
+    "--color-text-on-premium",
+    "--radius-badge",
+    "--space-1",
+    "--space-2",
+    "--border-width-1",
+    "--icon-size-xs",
+    "--caption-size",
+    "--body-sm-size"
+  ],
+  "rules": [
+    "Shape: --radius-badge (pill). Padding --space-1 × --space-2. Border --border-width-1.",
+    "Status badges never use brand red (D6)."
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "badge"
+    },
+    {
+      "doc": "states",
+      "section": "badge--flight-status"
+    },
+    {
+      "doc": "accessibility",
+      "section": "badge--pricedisplay"
+    },
+    {
+      "doc": "inventory",
+      "section": "category-7--primitives--atoms-reference"
+    }
+  ],
+  "ambiguities": [
+    {
+      "description": "Skywards Blue, Silver and Gold tier colours are not defined in any source; TierBadge uses neutral for them until official values exist.",
+      "refs": [
+        {
+          "doc": "inventory",
+          "section": "category-7--primitives--atoms-reference"
+        }
+      ]
+    }
+  ]
+}

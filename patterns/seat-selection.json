@@ -1,0 +1,116 @@
+{
+  "$schema": "../schemas/pattern.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "seat-selection",
+  "name": "Seat Selection",
+  "kind": "flow",
+  "description": "Choosing seats per flight and passenger: segment tabs, passenger selector, legend with prices, seat map and selection panel, with a list-view alternative.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Split screen and mobile overlay: A · unverified. Seat types: Official. Per-segment tabs, legend-first, preview/confirm, list view: Rec (D17, D18).",
+    "confidence": "inferred",
+    "mixed": true,
+    "decisions": [
+      "D17",
+      "D18"
+    ]
+  },
+  "structure": "[Segment tabs — one per flight: DXB → MXP | MXP → JFK | JFK → DXB]\n[Passenger selector: whose seat]\n[SeatLegend: types with glyphs + price range for this passenger · \"List view\" toggle]\n[SeatMap — cabin grid]                 [Selection panel: seat, type, position, price, Confirm seat]   ← lg+: split screen (A)",
+  "regions": [
+    {
+      "name": "Segment tabs",
+      "description": "One tab per physical flight (not per journey). Each tab shows its progress (\"2 of 3 seats\").",
+      "source": {
+        "tag": "Rec (D17)",
+        "confidence": "proposed",
+        "decisions": [
+          "D17"
+        ]
+      }
+    },
+    {
+      "name": "Passenger selector",
+      "description": "Whose seat is being picked (activePassengerId)."
+    },
+    {
+      "name": "SeatLegend",
+      "description": "Types with glyphs + price range for this passenger, and a \"List view\" toggle. Sits above the map.",
+      "components": [
+        "seat-legend"
+      ],
+      "source": {
+        "tag": "Rec (D18)",
+        "confidence": "proposed",
+        "decisions": [
+          "D18"
+        ]
+      }
+    },
+    {
+      "name": "SeatMap + selection panel",
+      "description": "Cabin grid; selection panel shows seat, type, position, price and Confirm seat.",
+      "components": [
+        "seat-map",
+        "seat",
+        "overlay",
+        "button"
+      ],
+      "source": {
+        "tag": "A · unverified (split screen on lg+)",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "lg+",
+      "behavior": "Split screen: map + selection panel.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "breakpoint": "below-lg",
+      "behavior": "The seat map is a full-screen overlay and the selection panel is a bottom sheet.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "rules": [
+    "Seat configurations by aircraft (A · unverified): A380 Economy 3-4-3; 777 Business 1-2-1 or 2-3-2; A380 First 1-1-1.",
+    "Seat types (Official): Regular, Preferred, Twin, Extra Legroom.",
+    "The seat map is drawn from aircraft configuration data; seat layouts are never hardcoded.",
+    "Tap previews a seat; Confirm seat commits it (SELECT_SEAT, server first). A seat conflict keeps the passenger's previous seat and shows a message.",
+    "Prices come from the seat-map API per passenger; never shown only on hover; never computed on the client."
+  ],
+  "patterns": [
+    "booking-state",
+    "booking-flow"
+  ],
+  "sources": [
+    {
+      "doc": "patterns",
+      "section": "pattern-4--seat-selection"
+    },
+    {
+      "doc": "states",
+      "section": "seat"
+    },
+    {
+      "doc": "accessibility",
+      "section": "seat--seatmap"
+    },
+    {
+      "doc": "state-architecture",
+      "section": "domain-model--journey-vs-segment-d17"
+    }
+  ]
+}

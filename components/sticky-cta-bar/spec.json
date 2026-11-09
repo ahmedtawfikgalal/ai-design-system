@@ -1,0 +1,160 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "layer": "feature",
+  "inDesignSystem": false,
+  "id": "sticky-cta-bar",
+  "name": "StickyCTABar",
+  "category": "booking",
+  "description": "The sticky bottom bar on smaller screens: the current total and the primary action of the booking step.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "A · unverified (sticky bottom action bar on mobile); states: Rec",
+    "confidence": "inferred",
+    "mixed": true,
+    "decisions": [
+      "D16",
+      "D21"
+    ]
+  },
+  "props": [
+    {
+      "name": "total",
+      "type": "Money",
+      "required": true,
+      "description": "quote.total. PriceDisplay size=\"md\"."
+    },
+    {
+      "name": "quoteStatus",
+      "type": "'pending' | 'fresh' | 'stale' | 'error'",
+      "required": true,
+      "description": "Drives the updating, quote-error and price-changed states."
+    },
+    {
+      "name": "actionLabel",
+      "type": "string",
+      "required": true,
+      "description": "\"Continue\", \"Pay now\"."
+    },
+    {
+      "name": "missing",
+      "type": "string | null",
+      "description": "From canContinue(step). When set, the button stays enabled and pressing it leads the user to the missing item."
+    },
+    {
+      "name": "onAction",
+      "type": "function",
+      "required": true
+    }
+  ],
+  "states": [
+    {
+      "name": "ready",
+      "visual": "Primary Button enabled; total from a fresh quote.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "incomplete",
+      "visual": "Button stays enabled, with a hint in caption (\"Select seats for 1 more passenger\"). Pressing it scrolls to and focuses the first missing item and announces what's missing. A disabled button would hide the reason.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "updating",
+      "appliesTo": "quoteStatus: pending",
+      "visual": "The previous total stays visible with a skeleton in --color-bg-muted; the button shows loading.",
+      "tokens": [
+        "--color-bg-muted"
+      ],
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "quote-error",
+      "visual": "Inline error with a Retry button; the primary button is disabled until a quote succeeds.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "name": "price-changed",
+      "visual": "The new total is shown next to the struck-through old total; continuing opens a confirm dialog.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "A region named \"Booking total\".",
+      "It must not cover the focused element: use scroll-padding-bottom equal to its height.",
+      "When the step is incomplete, the button stays enabled; pressing it moves focus to the first missing item and announces what's missing."
+    ],
+    "wcag": [
+      "2.4.11",
+      "3.3.1",
+      "4.1.3"
+    ]
+  },
+  "responsive": [
+    {
+      "breakpoint": "below-lg",
+      "behavior": "Shown below lg (sm and md).",
+      "source": {
+        "tag": "A · unverified (mobile); moved to below lg per D21",
+        "confidence": "inferred",
+        "mixed": true,
+        "decisions": [
+          "D21"
+        ]
+      }
+    }
+  ],
+  "composes": [
+    "price-display",
+    "button",
+    "text"
+  ],
+  "tokens": [
+    "--color-bg-surface",
+    "--elevation-1-up",
+    "--space-3",
+    "--space-4",
+    "--color-bg-muted"
+  ],
+  "rules": [
+    "--color-bg-surface, --elevation-1-up, padding --space-3 / --space-4, safe-area bottom inset."
+  ],
+  "sources": [
+    {
+      "doc": "inventory",
+      "section": "stickyctabar"
+    },
+    {
+      "doc": "states",
+      "section": "stickyctabar"
+    },
+    {
+      "doc": "accessibility",
+      "section": "stickyctabar"
+    },
+    {
+      "doc": "patterns",
+      "section": "pattern-3--booking-flow-passengers--seats--extras--payment"
+    }
+  ]
+}

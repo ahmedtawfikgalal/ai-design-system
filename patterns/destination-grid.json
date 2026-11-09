@@ -1,0 +1,77 @@
+{
+  "$schema": "../schemas/pattern.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "destination-grid",
+  "name": "Destination Grid",
+  "kind": "section",
+  "description": "A responsive grid of destination cards: 1 / 2 / 4 columns.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Live (4 columns on desktop); A · unverified (2-column grid); Rec (1 column on sm)",
+    "confidence": "observed",
+    "mixed": true
+  },
+  "regions": [
+    {
+      "name": "Grid",
+      "description": "DestinationCard: photo-first, 4:3 (A), --radius-card, bottom gradient overlay, city in heading-2 (Live: 22px), country, \"Fares from\" price, CTA.",
+      "components": [
+        "destination-card"
+      ],
+      "tokens": [
+        "--radius-card"
+      ]
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "sm",
+      "behavior": "1 column, gap --space-4.",
+      "source": {
+        "tag": "Rec",
+        "confidence": "proposed"
+      }
+    },
+    {
+      "breakpoint": "md",
+      "behavior": "2 columns, gap --space-6.",
+      "source": {
+        "tag": "A · unverified (2-column grid)",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "breakpoint": "lg",
+      "behavior": "4 columns, gap --space-6.",
+      "source": {
+        "tag": "Live (4 columns on desktop)",
+        "confidence": "observed"
+      }
+    },
+    {
+      "breakpoint": "xl",
+      "behavior": "4 columns, gap --space-8.",
+      "source": {
+        "tag": "Live (4 columns on desktop)",
+        "confidence": "observed"
+      }
+    }
+  ],
+  "tokens": [
+    "--space-4",
+    "--space-6",
+    "--space-8",
+    "--radius-card"
+  ],
+  "sources": [
+    {
+      "doc": "patterns",
+      "section": "pattern-5--destination-grid"
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "$schema": "../schemas/manifest.schema.json#/$defs/patternIndex",
+  "schemaVersion": "1.0.0",
+  "patterns": [
+    {
+      "id": "booking-flow",
+      "name": "Booking Flow",
+      "kind": "flow",
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "path": "patterns/booking-flow.json",
+      "summary": "The step layout for passengers → seats → extras → payment: step header, step content, and the booking summary as a sticky sidebar (lg+) or a collapsible block plus sticky CTA bar (below lg).",
+      "components": [
+        "booking-summary",
+        "step-progress",
+        "sticky-cta-bar"
+      ],
+      "patterns": [
+        "booking-state",
+        "seat-selection"
+      ]
+    },
+    {
+      "id": "booking-state",
+      "name": "Booking State Model",
+      "kind": "state-model",
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "path": "patterns/booking-state.json",
+      "summary": "Feature-layer state shared by results, passengers, seat map, summary and CTA bar: one client state object for selections, and a server-owned quote for every price.",
+      "components": [
+        "booking-summary",
+        "counter",
+        "fare-options",
+        "flight-result-card",
+        "flight-search-widget",
+        "passenger-selector",
+        "price-display",
+        "seat",
+        "seat-map",
+        "sticky-cta-bar"
+      ],
+      "patterns": [
+        "booking-flow",
+        "seat-selection",
+        "flight-results"
+      ]
+    },
+    {
+      "id": "cabin-experience",
+      "name": "Cabin Experience Page",
+      "kind": "page",
+      "status": {
+        "specification": "partial",
+        "designed": false,
+        "implemented": false,
+        "tested": false,
+        "evidence": [
+          "Structure and accent rules only; the specs table and CTA band are not specified."
+        ]
+      },
+      "path": "patterns/cabin-experience.json",
+      "summary": "A cabin page: hero, feature cards, specs table and a CTA band, for First, Business, Premium Economy and Economy.",
+      "components": [
+        "cabin-feature-card",
+        "media",
+        "text"
+      ]
+    },
+    {
+      "id": "destination-grid",
+      "name": "Destination Grid",
+      "kind": "section",
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "path": "patterns/destination-grid.json",
+      "summary": "A responsive grid of destination cards: 1 / 2 / 4 columns.",
+      "components": [
+        "destination-card"
+      ]
+    },
+    {
+      "id": "flight-results",
+      "name": "Flight Results",
+      "kind": "page",
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "path": "patterns/flight-results.json",
+      "summary": "Search summary with Modify, a ±3-day date strip, and the list of flight result cards with expandable fare options.",
+      "components": [
+        "badge",
+        "button",
+        "date-strip",
+        "fare-options",
+        "flight-result-card",
+        "flight-search-widget",
+        "flight-segment",
+        "price-display"
+      ],
+      "patterns": [
+        "booking-state"
+      ]
+    },
+    {
+      "id": "home-search-hero",
+      "name": "Home / Search Hero",
+      "kind": "page",
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "path": "patterns/home-search-hero.json",
+      "summary": "The home page: full-bleed hero with headline and the flight search widget overlapping its bottom, then destinations, cabin highlights and a promo panel.",
+      "components": [
+        "cabin-feature-card",
+        "destination-card",
+        "flight-search-widget",
+        "hero-banner",
+        "promo-panel"
+      ],
+      "patterns": [
+        "destination-grid",
+        "page-shell"
+      ]
+    },
+    {
+      "id": "page-shell",
+      "name": "Page Shell",
+      "kind": "page",
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "path": "patterns/page-shell.json",
+      "summary": "The frame of every page: sticky black GlobalHeader, main content in the centred container, black GlobalFooter.",
+      "components": [
+        "global-footer",
+        "global-header"
+      ]
+    },
+    {
+      "id": "seat-selection",
+      "name": "Seat Selection",
+      "kind": "flow",
+      "status": {
+        "specification": "complete",
+        "designed": false,
+        "implemented": false,
+        "tested": false
+      },
+      "path": "patterns/seat-selection.json",
+      "summary": "Choosing seats per flight and passenger: segment tabs, passenger selector, legend with prices, seat map and selection panel, with a list-view alternative.",
+      "components": [
+        "button",
+        "overlay",
+        "seat",
+        "seat-legend",
+        "seat-map"
+      ],
+      "patterns": [
+        "booking-state",
+        "booking-flow"
+      ]
+    }
+  ]
+}

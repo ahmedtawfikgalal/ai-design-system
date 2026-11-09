@@ -1,0 +1,84 @@
+{
+  "$schema": "../../schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "media",
+  "name": "Media",
+  "layer": "primitive",
+  "category": "media",
+  "inDesignSystem": true,
+  "description": "A fixed-ratio image container with an optional bottom gradient overlay. Used for destination photography, hero imagery and cabin photography.",
+  "status": {
+    "specification": "partial",
+    "designed": false,
+    "implemented": false,
+    "tested": false,
+    "evidence": [
+      "Props documented; no states section (not interactive)."
+    ]
+  },
+  "provenance": {
+    "tag": "A · unverified (4:3 and 16:9 ratios, gradient overlay), Rec (21:9, radius, objectFit)",
+    "confidence": "inferred",
+    "mixed": true
+  },
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "alt",
+      "type": "string",
+      "required": true,
+      "description": "Required; can be \"\" for decorative images."
+    },
+    {
+      "name": "ratio",
+      "type": "'1:1' | '4:3' | '16:9' | '21:9'",
+      "default": "4:3",
+      "description": "4:3 and 16:9: A · unverified (destination cards). 21:9: Rec (heroes)."
+    },
+    {
+      "name": "overlay",
+      "type": "'none' | 'bottom-gradient'",
+      "default": "none",
+      "description": "linear-gradient(to top, var(--color-overlay-image), transparent): 0→75% black from the bottom.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    },
+    {
+      "name": "radius",
+      "type": "'none' | 'card'",
+      "default": "card",
+      "description": "Heroes use none."
+    },
+    {
+      "name": "objectFit",
+      "type": "'cover' | 'contain'",
+      "default": "cover",
+      "description": "Photography fills the frame. Use contain for aircraft or seat diagrams."
+    }
+  ],
+  "accessibility": {
+    "requirements": [
+      "alt is required; use \"\" only when the image is decorative."
+    ],
+    "wcag": [
+      "1.1.1"
+    ]
+  },
+  "tokens": [
+    "--color-overlay-image",
+    "--radius-card",
+    "--radius-none"
+  ],
+  "sources": [
+    {
+      "doc": "tier-1-primitives",
+      "section": "media"
+    }
+  ]
+}

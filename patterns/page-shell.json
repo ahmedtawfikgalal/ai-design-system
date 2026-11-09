@@ -1,0 +1,100 @@
+{
+  "$schema": "../schemas/pattern.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "page-shell",
+  "name": "Page Shell",
+  "kind": "page",
+  "description": "The frame of every page: sticky black GlobalHeader, main content in the centred container, black GlobalFooter.",
+  "status": {
+    "specification": "complete",
+    "designed": false,
+    "implemented": false,
+    "tested": false
+  },
+  "provenance": {
+    "tag": "Live (black 48px header, black footer with white 14px text). File A's white 80px header is not used (D1).",
+    "confidence": "observed",
+    "mixed": true,
+    "decisions": [
+      "D1"
+    ]
+  },
+  "structure": "[GlobalHeader — black bar, 48px, sticky]                       ← Live (black, 48px). File A's white 80px is not used (D1).\n[Main — --color-bg-page]\n  └─ [Container: content up to 1280px, centred, padding-inline --page-margin]\n       └─ [Page content]\n[GlobalFooter — black, white 14px text]                        ← Live\n\nGlobalHeader layout:\n[Logo (bilingual lockup)] [Primary nav links ............] [Region/Language] [Currency] [Skywards login]",
+  "regions": [
+    {
+      "name": "GlobalHeader",
+      "description": "Black bar, 48px, sticky. --elevation-1 on scroll (Rec).",
+      "components": [
+        "global-header"
+      ],
+      "tokens": [
+        "--color-bg-inverse",
+        "--elevation-1"
+      ],
+      "source": {
+        "tag": "Live",
+        "confidence": "observed"
+      }
+    },
+    {
+      "name": "Main",
+      "description": "--color-bg-page. Container: content up to 1280px, centred, padding-inline --page-margin.",
+      "tokens": [
+        "--color-bg-page",
+        "--container-max",
+        "--page-margin"
+      ],
+      "source": {
+        "tag": "Rec · approved (D12, D22)",
+        "confidence": "proposed",
+        "approved": true,
+        "decisions": [
+          "D12",
+          "D22"
+        ]
+      }
+    },
+    {
+      "name": "GlobalFooter",
+      "description": "Black, white 14px text.",
+      "components": [
+        "global-footer"
+      ],
+      "tokens": [
+        "--color-bg-inverse",
+        "--color-text-inverse"
+      ],
+      "source": {
+        "tag": "Live",
+        "confidence": "observed"
+      }
+    }
+  ],
+  "responsive": [
+    {
+      "breakpoint": "below-lg",
+      "behavior": "Header links collapse into a menu toggle; the menu opens as a drawer.",
+      "source": {
+        "tag": "A · unverified",
+        "confidence": "inferred"
+      }
+    }
+  ],
+  "rtl": [
+    "Utility selectors sit at the end of the bar (right in English, left in Arabic); the logo moves to the right in Arabic."
+  ],
+  "rules": [
+    "Nav items \"Book, Manage, Where We Fly, Experience, Skywards\": A · unverified.",
+    "Active link: 3px bottom bar in --color-action-primary (--border-width-3): A · unverified."
+  ],
+  "sources": [
+    {
+      "doc": "patterns",
+      "section": "page-shell"
+    },
+    {
+      "doc": "patterns",
+      "section": "globalheader-layout"
+    }
+  ]
+}
