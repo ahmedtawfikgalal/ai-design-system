@@ -1,9 +1,9 @@
 {
   "$schema": "./schemas/manifest.schema.json",
   "schemaVersion": "1.0.0",
-  "name": "@your-scope/fly-emirates-design-spec",
+  "name": "@ahmed.tawfik.galal/ai-design-system",
   "version": "0.1.0",
-  "description": "Machine-readable specification of the Fly Emirates concept design system (unofficial, not endorsed by Emirates): design tokens, component and pattern specs, layout rules and JSON Schemas, structured for selective retrieval by tools and AI agents.",
+  "description": "An AI-ready design system specification: 223 design tokens, 34 component specs and 8 UX patterns in machine-readable JSON, with source attribution, WCAG 2.2 AA accessibility and Arabic/RTL rules. Built on an unofficial Fly Emirates concept.",
   "disclaimer": "Unofficial concept. Emirates brand guidelines are not public; the logo and typefaces are proprietary. Nothing here is endorsed by Emirates. Only values with confidence \"official\" come from Emirates sources; \"observed\" values were read from the live site by a third party; \"inferred\" values are unverified; \"proposed\" values are design-system recommendations.",
   "vocabulary": {
     "confidence": {

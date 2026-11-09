@@ -2,6 +2,8 @@
 
 ## 0.1.0 (2026-11-09)
 
+First public release as `@ahmed.tawfik.galal/ai-design-system` (MIT).
+
 Initial specification package, generated from `design-system/` with decisions D1–D24 agreed.
 
 - 223 design tokens (W3C DTCG) with CSS output, breakpoint (md / lg / xl) and Arabic values, per-token source attribution and component usage. `tokens.css` is identical to `design-system/tokens/tokens.css`.

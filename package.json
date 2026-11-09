@@ -1,19 +1,39 @@
 {
-  "name": "@your-scope/fly-emirates-design-spec",
+  "name": "@ahmed.tawfik.galal/ai-design-system",
   "version": "0.1.0",
-  "description": "Machine-readable specification of the Fly Emirates concept design system (unofficial, not endorsed by Emirates): design tokens, component and pattern specs, layout rules and JSON Schemas, structured for selective retrieval by tools and AI agents.",
-  "private": true,
-  "license": "UNLICENSED",
-  "type": "module",
+  "description": "An AI-ready design system specification: 223 design tokens, 34 component specs and 8 UX patterns in machine-readable JSON, with source attribution, WCAG 2.2 AA accessibility and Arabic/RTL rules. Built on an unofficial Fly Emirates concept.",
   "keywords": [
     "design-system",
     "design-tokens",
     "dtcg",
-    "specification",
+    "ai",
+    "llm",
+    "mcp",
+    "ai-agents",
     "json-schema",
+    "specification",
+    "accessibility",
+    "wcag",
     "rtl",
-    "accessibility"
+    "arabic",
+    "ux",
+    "airline",
+    "figma-tokens"
   ],
+  "author": {
+    "name": "Ahmed Tawfik Galal",
+    "url": "https://github.com/ahmedtawfikgalal"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ahmedtawfikgalal/ai-design-system#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmedtawfikgalal/ai-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahmedtawfikgalal/ai-design-system/issues"
+  },
+  "type": "module",
   "files": [
     "manifest.json",
     "schemas/",
@@ -46,10 +66,14 @@
     "./tokens.css": "./tokens/tokens.css",
     "./fonts.css": "./tokens/fonts.css"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "node scripts/build.mjs",
     "validate": "node scripts/validate.mjs",
-    "check": "node scripts/build.mjs --check && node scripts/validate.mjs"
+    "check": "node scripts/build.mjs --check && node scripts/validate.mjs",
+    "prepublishOnly": "node scripts/validate.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1"

@@ -9,7 +9,7 @@
 // references/sources.json, manifest.json.
 // Repository-only tool: not included in the published package.
 
-import { readFile, writeFile, readdir, mkdir, copyFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir, mkdir, copyFile, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -507,6 +507,10 @@ function manifest(pkg, counts) {
 
 // ---------------------------------------------------------------- run
 
+if (!(await stat(DS).then(() => true, () => false))) {
+  console.error('npm run build needs the full project workspace (../design-system). Use npm run validate to check this package on its own.');
+  process.exit(1);
+}
 const outputs = new Map(); // abs path -> string | Buffer (copy)
 const { components, patterns } = await loadSpecs();
 const { tokensJson, valuesJson, count, unattributed } = await buildTokens(components);
